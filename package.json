@@ -1,6 +1,9 @@
 {
   "name": "Salesforce Explore Metadata",
   "version": "1.0.0",
+  "engines": {
+    "node": "8.9.1"
+  },
   "description": "Explore Salesforce Metadata",
   "main": "serverMain.js",
   "scripts": {
