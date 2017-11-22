@@ -1,9 +1,9 @@
 var http = require('http');
 var url = require('url');
 var eo = require('./ExploreObject'),
-    ep = require('./ExploreProfile'),
-    eps = require('./ExplorePermissionSet');
-    
+  ep = require('./ExploreProfile'),
+  eps = require('./ExplorePermissionSet');
+
 // http://localhost:8080/exploreObject/?object=Case
 
 var server = http.createServer().listen(8080);
@@ -17,6 +17,10 @@ server.on('request', function (req, res) {
     //    console.log('query: ' + JSON.stringify(query));
     //    console.log('object: ' + query.object);
     switch (url_parts.pathname) {
+      case '/':
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end('<html><h1>Salesforce Metadata Explorer</h1></html>');
+        break;
       case '/exploreObject':
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Request-Method', '*');
@@ -35,7 +39,7 @@ server.on('request', function (req, res) {
         var out = JSON.stringify(ep.exploreProfile(query.profile));
         res.end(out.substring(1, out.length - 1));
         break;
-        case '/explorePermissionset':
+      case '/explorePermissionset':
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Request-Method', '*');
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
