@@ -12,7 +12,9 @@
   },
   "keywords": [
     "example",
-    "heroku"
+    "heroku",
+    "salesforce",
+    "metadata"
   ],
   "author": "Sriram Venkatraman",
   "license": "MIT"
