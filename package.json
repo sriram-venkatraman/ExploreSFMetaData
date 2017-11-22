@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "xml2json": "^0.11.0"
+    "xml2json": "*"
   },
   "keywords": [
     "example",
