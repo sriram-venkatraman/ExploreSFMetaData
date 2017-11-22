@@ -19,7 +19,7 @@ server.on('request', function (req, res) {
     switch (url_parts.pathname) {
       case '/':
         res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end('<html><h1>Salesforce Metadata Explorer</h1></html>');
+        res.end('Salesforce Metadata Explorer');
         break;
       case '/exploreObject':
         res.setHeader('Access-Control-Allow-Origin', '*');
