@@ -16,6 +16,7 @@ server.on('request', function (req, res) {
     //    console.log('pathname: ' + query.pathname);
     //    console.log('query: ' + JSON.stringify(query));
     //    console.log('object: ' + query.object);
+    console.log('You entered: ' + url_parts.pathname);
     switch (url_parts.pathname) {
       case '/':
         res.writeHead(200, { 'Content-Type': 'text/html' });
