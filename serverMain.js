@@ -2,7 +2,8 @@ var http = require('http');
 var url = require('url');
 var eo = require('./ExploreObject'),
   ep = require('./ExploreProfile'),
-  eps = require('./ExplorePermissionSet');
+  eps = require('./ExplorePermissionSet'),
+  au = require('./ExploreAura');
 
 // http://localhost:8080/exploreObject/?object=Case
 
@@ -19,8 +20,12 @@ server.on('request', function (req, res) {
     console.log('You entered: ' + url_parts.pathname);
     switch (url_parts.pathname) {
       case '/':
-        res.writeHead(200, { 'Content-Type': 'text/html' });
-        res.end('Salesforce Metadata Explorer');
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Request-Method', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+        res.setHeader('Access-Control-Allow-Headers', '*');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ name: 'Salesforce Metadata Explorer', children: [] }));
         break;
       case '/exploreObject':
         res.setHeader('Access-Control-Allow-Origin', '*');
@@ -49,20 +54,17 @@ server.on('request', function (req, res) {
         var out = JSON.stringify(eps.explorePermissionset(query.permissionset));
         res.end(out.substring(1, out.length - 1));
         break;
+      case '/exploreAura':
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Access-Control-Request-Method', '*');
+        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
+        res.setHeader('Access-Control-Allow-Headers', '*');
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        var out = JSON.stringify(au.exploreAura(query.aura));
+        res.end(out.substring(1, out.length - 1));
+        break;
     }
   }
-  /*
-    req.on('data', function (data) {
-      body += data;
-    });
-  
-    req.on('end', function () {
-      var post = querystring.parse(body);
-      console.log(post);
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end('Hello World\n');
-    });
-  */
 });
 
 console.log('Listening on port 8080');
