@@ -26,10 +26,7 @@ var methods = {
             obj = JSON.parse(data);
             var keys = Object.keys(result);
             var last = keys[keys.length - 1];
-            //   console.log("JSON $$ " + JSON.stringify(last));
             this.traverse(obj, process, result);
-            //        var finalResult = { name: parentObjName, children: result };
-            //        console.log(JSON.stringify(finalResult));
             callback(result);
         });
     },
@@ -38,7 +35,7 @@ var methods = {
         for (var i in o) {
             switch (typeof (o[i])) {
                 case "object":
-                    if (o[i] != null /*&& o[i].length > 0 && !this.isEmpty(o[i])*/) {
+                    if (o[i] != null) {
                         var children = [];
                         this.traverse(o[i], func, children);
                         if (children.length > 0) {
@@ -46,7 +43,12 @@ var methods = {
                             if (!isNaN(name)) {
                                 name = this.getName(children);
                             }
-                            r.push({ name: (name == "" ? i : name) + " (" + children.length + ")", children: children });
+//                            r.push({ name: (name == "" ? i : name) + " (" + children.length + ")", children: children });
+                            if (Object.prototype.toString.call(children) === '[object Array]') {
+                                r.push({ name: (name == "" ? i : name) + " (" + children.length + ")", children: children });
+                            } else {
+                                r.push({ name: (name == "" ? i : name), children: children });
+                            }
                         }
                     }
                     break;
@@ -71,73 +73,91 @@ var methods = {
     getName: function (obj) {
         var retVal = "";
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
+            if ((obj[i].name).toLowerCase().startsWith("c:")) {
+                retVal = obj[i].value;
+            }
+        }
+
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
+            if ((obj[i].name).toLowerCase() == "event") {
+                retVal = obj[i].value;
+            }
+        }
+
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/label/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/name/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
+            if ((obj[i].name).toLowerCase().endsWith(":id")) {
+                retVal = obj[i].value;
+            }
+        }
+
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/field/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/picklist/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/relatedList/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/application/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/apexclass/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/object/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/apexpage/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/layout/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/recordtype/i)) {
                 retVal = obj[i].value;
             }
         }
 
-        for (i = 0; (retVal == "" || typeof(retVal) == "undefined") && i < obj.length; i++) {
+        for (i = 0; (retVal == "" || typeof (retVal) == "undefined") && i < obj.length; i++) {
             if ((obj[i].name).match(/tab/i)) {
                 retVal = obj[i].value;
             }
