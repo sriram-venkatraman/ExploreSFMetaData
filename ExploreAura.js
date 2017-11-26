@@ -5,7 +5,8 @@ var fs = require('fs'),
     c2D3js = require('./convert2D3JSON'),
     outJson = [];
 
-var limitElements = ["aura:component",
+var limitElements = ["aura:application",
+    "aura:component",
     "controller",
     "implements",
     "access",
