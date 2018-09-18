@@ -7,7 +7,7 @@ var fs = require('fs'),
 
 var methods = {
     exploreObject: function (objName) {
-        var data = fs.readFileSync('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/objects/' + objName + '.object');
+        var data = fs.readFileSync('./data/src/objects/' + objName + '.object');
         var json = parser.toJson(data);
         var d3j = c2D3js.convert2D3JSONSync(json);
         d3j[0].name = objName;
@@ -20,7 +20,7 @@ var methods = {
     },
 
     addWorkflows: function (objName) {
-        var data = fs.readFileSync('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/workflows/' + objName + '.workflow');
+        var data = fs.readFileSync('./data/src/workflows/' + objName + '.workflow');
         var json = parser.toJson(data);
         var d3j = c2D3js.convert2D3JSONSync(json);
         var d3js = JSON.stringify(d3j);
@@ -28,7 +28,7 @@ var methods = {
     },
 
     addLayouts: function (objName) {
-        var inPath = '/Users/sriram.venkatraman/Documents/workspace/TestCo/src/layouts';
+        var inPath = './data/src/layouts';
         var outLayoutJson = [];
         var files = fs.readdirSync(inPath);
         var data, json, d3j, d3js;
@@ -55,7 +55,7 @@ var methods = {
     },
 
     addTriggers: function (objName) {
-        var inPath = '/Users/sriram.venkatraman/Documents/workspace/TestCo/src/triggers';
+        var inPath = './data/src/triggers';
         var outTriggerJson = [];
         var files = fs.readdirSync(inPath);
         var data, json, d3j, d3js, src, whatTrigger;
@@ -85,7 +85,7 @@ var methods = {
     },
 
     addQuickAction: function (objName) {
-        var inPath = '/Users/sriram.venkatraman/Documents/workspace/TestCo/src/quickActions';
+        var inPath = './data/src/quickActions';
         var outQuickActionJson = [];
         var files = fs.readdirSync(inPath);
         var data, json, d3j, d3js, src;

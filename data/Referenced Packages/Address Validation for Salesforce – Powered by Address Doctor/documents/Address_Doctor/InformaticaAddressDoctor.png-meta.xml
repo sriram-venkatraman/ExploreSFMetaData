@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>ADPOE Application Logo</description>
+    <internalUseOnly>false</internalUseOnly>
+    <keywords>ADPOE</keywords>
+    <name>Informatica Address Doctor</name>
+    <public>true</public>
+</Document>

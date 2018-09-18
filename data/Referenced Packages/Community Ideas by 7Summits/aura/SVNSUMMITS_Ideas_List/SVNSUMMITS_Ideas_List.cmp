@@ -1,0 +1,250 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaListController" implements="forceCommunity:availableForAllPageTypes" access="global">
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+	<!-- jQuery, Moment.js, Semantic UI -->
+	<ltng:require scripts="/resource/CCIDEASLC__jquery_2_2_0_min,/resource/CCIDEASLC__MomentJS/Moment.js/dist/moment-with-locales.min.js?v=2.11.2,/resource/CCIDEASLC__SemanticUI/dist/semantic.min.js?v=2.1.7"
+	    styles="/resource/CCIDEASLC__SemanticUI/dist/semantic.min.css?v=2.1.7" />
+    
+    
+    <!-- SVG Icon fix for IE11 may remove this when SF drops support for IE 11 later this year (Francois Korb 20160525) -->
+    <ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+    
+	<aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="displayMode" type="String" default="Full" required="true" access="global"/>
+	<aura:attribute name="title" type="String" default="Ideas" access="global"/>
+	<aura:attribute name="viewMoreLabel" type="String" default="More Ideas" access="global"/>
+	<aura:attribute name="zoneid" type="String" default="" access="global"/>
+	<aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+    <aura:attribute name="disableDownVoting" type="Boolean" default="false" description="test" access="global"/>
+	<aura:attribute name="authenticatedOnly" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="listSize" type="Integer" default="50" access="global"/>
+	<aura:attribute name="sortBy" default="Popular Ideas" type="String" access="global"/>
+	<aura:attribute name="newIdeaLabel" type="String" default="Submit New Idea" access="global"/>
+	<aura:attribute name="newIdeaURL" type="String" default="/new-idea/" access="global"/>
+	<aura:attribute name="ideasListURL" type="String" default="/ideas/" access="global"/>
+	<aura:attribute name="ideaDetailURL" type="String" default="/idea/" access="global"/>
+	<aura:attribute name="ideaImageURL" type="String" default="/servlet/fileField?field=AttachmentBody" access="global"/>
+	<aura:attribute name="userProfileURL" type="String" default="/profile/" access="global"/>
+	<aura:attribute name="spinnerImageUrl" default="/resource/CCIDEASLC__slds0102/assets/images/spinners/slds_spinner.gif" type="String" required="false" access="global"/>
+	<aura:attribute name="allowVoting" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="limitVoteToEmailDomain" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="iconPath" default="/resource/CCIDEASLC__slds0102/assets/icons/standard-sprite/svg/symbols.svg#solution" type="String" access="global"/>
+	<aura:attribute name="iconCategory" default="standard" type="String" access="global"/>
+	<aura:attribute name="iconSize" default="large" type="String" access="global"/>
+	<aura:attribute name="iconName" default="solution" type="String" access="global"/>
+	<aura:attribute name="showCategoryFilter" type="Boolean" default="true" access="global"/>
+	<aura:attribute name="filterOn" type="String" default="None" required="true" access="global"/>
+	<aura:attribute name="voteIconPath" default="/resource/CCIDEASLC__slds0102/assets/icons/utility-sprite/svg/symbols.svg#like" type="String" access="global"/>
+	<aura:attribute name="voteIconCategory" default="utility" type="String" access="global"/>
+	<aura:attribute name="voteIconName" default="like" type="String" access="global"/>
+	<aura:attribute name="topicValue" type="String" access="global"/>
+	<aura:attribute name="searchTermValue" type="String" access="global"/>
+	<aura:attribute name="categories" type="String" access="global"/>
+	<aura:attribute name="categoriesSelected" default="" type="Set" access="global"/>
+	<aura:attribute name="categoriesSet" type="Set" access="global"/>
+	<aura:attribute name="isAuthenticated" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="ideaListWrapper" type="CCIDEASLC.SVNSUMMITS_ideaListWrapper" access="global"/>
+	<aura:attribute name="userId" type="String" access="global"/>
+    <aura:attribute name="isNicknameDisplayEnabled" type="Boolean" default="true" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+	<aura:attribute name="currentURL" type="String" access="global"/>
+    
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:if isTrue="{! and(or( and(v.authenticatedOnly, v.isAuthenticated), !v.authenticatedOnly ),v.zoneid != '') }">
+		<div class="{!'slds ' + (v.displayMode == 'Compact' ? 'compact' : 'cozy')}">
+			<aura:if isTrue="{!v.displayMode == 'Full'}">
+				<div class="slds-page-header" role="banner">
+					<div class="slds-grid">
+						<div class="slds-media">
+							<div class="slds-media__figure">
+								<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.iconPath}" category="{!v.iconCategory}" size="{!v.iconSize}" name="{!v.iconName}"/>
+							</div>
+						</div>
+						<div class="slds-col slds-has-flexi-truncate">
+							<div class="slds-grid">
+								<div class="slds-grid slds-type-focus slds-no-space">
+									<h1 class="slds-text-heading--medium slds-truncate" title="All Ideas">{!v.ideaListWrapper.totalResults || 0} Ideas</h1>
+								</div>
+							</div>
+							<p class="slds-text-body--small">Sorted by {!v.sortBy}</p>
+						</div>
+						<aura:if isTrue="{!v.isAuthenticated}">
+							<div class="slds-col slds-no-flex slds-align-bottom">
+								<div class="slds-grid">
+									<div class="slds-button-group" role="group">
+										<ui:outputURL class="slds-button slds-button slds-button--brand" value="{!v.sitePath + v.newIdeaURL}" label="{!v.newIdeaLabel}" />
+									</div>
+								</div>
+								<br/>
+								<div class="slds-grid">
+									<ui:inputSelect aura:id="sortByInput" multiple="false" class="slds-input" change="{!c.handleSortChange}">
+										<ui:inputSelectOption text="Popular Ideas" Label="Popular Ideas" Value="{!if(v.sortBy == 'Popular Ideas','true','false')}"/>
+										<ui:inputSelectOption text="Recent Ideas" Label="Recent Ideas" Value="{!if(v.sortBy == 'Recent Ideas','true','false')}"/>
+										<ui:inputSelectOption text="Top All-Time" Label="Top All-Time" Value="{!if(v.sortBy == 'Top All-Time','true','false')}"/>
+										<ui:inputSelectOption text="Recent Comments" Label="Recent Comments" Value="{!if(v.sortBy == 'Recent Comments','true','false')}"/>
+									</ui:inputSelect>
+								</div>
+							</div>
+						</aura:if>
+					</div>
+				</div>
+				<br/>
+				<aura:if isTrue="{!v.showCategoryFilter}">
+					<ui:inputSelect aura:id="categoriesFilter" multiple="true" class="slds-input slds-input-select slds-hide fluid dropdown" change="{!c.updateCategories}" blur="{!c.deactivateCategoriesList}">
+						<aura:iteration items="{!v.categoriesSet}" var="category">
+							<ui:inputSelectOption text="{!category}" label="{!category}"/>
+						</aura:iteration>
+					</ui:inputSelect>
+				</aura:if>
+				<br/>
+			</aura:if>
+			<div aura:id="spinner">
+				<div class="slds-spinner--large" >
+					<img src="{!v.sitePrefix + v.spinnerImageUrl}" alt="Loading..." />
+				</div>
+			</div>
+			<aura:if isTrue="{!v.displayMode == 'Compact'}">
+				<p class="slds-text-heading--small slds-text-heading--weighted">{!v.title}</p>
+			</aura:if>
+			<ul class="{!'ideas-list slds-list--vertical slds-has-divider slds-has-selection ' + (v.displayMode == 'Compact' ? 'slds-m-vertical--medium' : 'slds-m-top--medium')}">
+				<aura:iteration items="{!v.ideaListWrapper.ideaList}" var="idea">
+					<li class="{!'slds-list__item ' + (v.displayMode == 'Full' ? 'slds-has-divider--bottom-space' : 'slds-m-top--small')}">
+						<div class="slds-media slds-tile">
+							<div class="{!'vote-block slds-card slds-text-align--center ' + (v.displayMode == 'Full' ? 'slds-p-around--small slds-m-horizontal--medium' : 'slds-p-around--x-small slds-m-right--medium')}">
+								
+								<!--
+									In compact mode? Use a small header. Otherwise, use large if
+									the vote total is less than 1,000, or medium if it isn't.
+								-->
+								<div class="{!'points ' + if(v.displayMode == 'Compact', 'slds-text-heading--small', if(idea.VoteTotal lt 1000, 'slds-text-heading--large', 'slds-text-heading--medium'))}">
+									{!idea.VoteTotal}
+								</div>
+								<aura:if isTrue="{!v.displayMode == 'Full'}">
+									<hr class="slds-m-around--xx-small slds-m-bottom--small"/>
+									<p class="comments">
+										<span title="{!idea.NumComments + ' ' + if(!idea.NumComments != 1, 'comments', 'comment')}">
+											<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + '/resource/CCIDEASLC__slds0102/assets/icons/utility-sprite/svg/symbols.svg#comments'}" category="utility" size="x-small" name="Comments"/>
+											<!-- &nbsp; needed because the  -->
+											&nbsp;
+											{!idea.NumComments}
+										</span>
+									</p>
+								</aura:if>
+                                <div class="slds-card__body">
+									<aura:if isTrue="{!v.allowVoting}">
+										<aura:if isTrue="{!idea.Votes[0]}">
+											<div class="slds-m-horizontal--large">
+                                                <span title="{!if(and(idea.Votes[0].Type == 'Down', not(v.disableDownVoting)),'Downvoted!','Upvoted!')}">
+													<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.voteIconPath}" category="{!v.voteIconCategory}" size="x-small" name="{!v.voteIconName}" class="{!if(and(idea.Votes[0].Type == 'Down', not(v.disableDownVoting)),'upsideDown')}"/>
+                                                </span>
+                                            </div>
+											<aura:set attribute="else">
+												<div id="{!idea.Id+'votebuttons'}" class="slds-m-horizontal--xx-small slds-p-horizontal--xx-small">
+													<center><span title="Upvote" class="slds-button slds-button--brand vote-button">
+                                                    	<center><a href="javascript:void(0);" onmouseup="{!c.handle_VoteUp}" data-recordid="{!idea.Id}" class="slds-m-horizontal--xx-small">
+															<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.voteIconPath}" category="{!v.voteIconCategory}" size="x-small" name="{!v.voteIconName}" class="green"/>
+                                                        </a></center>
+                                                    </span>
+                                                    
+                                                    <aura:if isTrue="{!not(v.disableDownVoting)}">	
+                                                    	<span title="Downvote" class="slds-button slds-button--brand vote-button voteSecondary">
+                                                        	<center><a href="javascript:void(0);" onmouseup="{!c.handle_VoteDown}" data-recordid="{!idea.Id}" class="slds-m-horizontal--xx-small">
+																<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.voteIconPath}" category="{!v.voteIconCategory}" size="x-small" name="{!v.voteIconName}" class="green upsideDown"/>
+                                                           	</a></center>
+                                                        </span>
+                                                    </aura:if>
+                                                    </center>
+												</div>
+											</aura:set>
+										</aura:if>
+                    
+									</aura:if>
+								</div> 
+							</div>
+							<div class="{!'slds-media__body ' + (v.displayMode == 'Full' ? 'slds-p-vertical--small' : 'slds-p-vertical--x-small')}">
+								<aura:if isTrue="{!and(idea.AttachmentName, v.displayMode == 'Full')}">
+									<img class="attachment" src="{!v.sitePrefix + v.ideaImageURL + '&amp;entityId=' + idea.Id}"/>
+								</aura:if>
+
+								<aura:if isTrue="{!idea.Status}">
+									<p class="slds-text-heading--label slds-m-bottom--small">
+										{!idea.Status}
+									</p>
+								</aura:if>
+								<p class="{!(v.displayMode == 'Full' ? 'slds-text-heading--medium  slds-m-bottom--xx-small' : 'slds-text-heading--small' ) + ' slds-truncate'}">
+									<a href="{!v.sitePath + v.ideaDetailURL + idea.Id}">{!idea.Title}</a>
+								</p>
+								<aura:if isTrue="{!v.displayMode == 'Full'}">
+
+									<!-- Render this idea's assigned categories -->
+									<aura:if isTrue="{!idea.Categories.length >0}">
+										<p class="slds-text-heading--small">
+											<aura:iteration items="{!idea.Categories}" var="item" indexVar="i">
+												<aura:if isTrue="{! i >0}">,</aura:if>
+												<ui:outputText value="{!item}" />
+											</aura:iteration>
+										</p>
+									</aura:if>
+
+									<aura:if isTrue="{!v.sortBy == 'Recent Comments'}">
+										<ul class="slds-tile__detail slds-list--horizontal slds-has-dividers slds-text-body--small">
+											<aura:if isTrue="{!idea.Status}">
+												<li class="slds-truncate slds-list__item">{!idea.Status}</li>
+											</aura:if>
+											<li class="slds-truncate slds-list__item">Last Comment By
+												<a href="{!v.sitePath + v.userProfileURL + idea.LastComment.CreatedBy.Id}">{!if(v.isNicknameDisplayEnabled,idea.LastComment.CreatedBy.CommunityNickname, idea.LastComment.CreatedBy.Name)}</a>
+												<!--<ui:outputDateTime format="{!$Locale.datetimeFormat}" value="{!idea.LastComment.CreatedDate}"/>-->
+                                                <ui:outputText value="{!' ' + idea.LastComment.fromNow}"/>
+											</li>
+										</ul>
+										<aura:unescapedHtml value="{!idea.LastComment.CommentBody}"/>
+										<aura:set attribute="else">
+											<ul class="slds-tile__detail slds-list--horizontal slds-has-dividers slds-text-body--small">
+												<li class="slds-truncate slds-list__item">
+													<!--<ui:outputDateTime format="{!$Locale.datetimeFormat}" value="{!idea.CreatedDate}"/>-->
+                                                    <ui:outputText value="{!idea.fromNow}"/>
+													by
+													<a href="{!v.sitePath + v.userProfileURL + idea.CreatedBy.Id}">{!if(v.isNicknameDisplayEnabled, idea.CreatedBy.CommunityNickname, idea.CreatedBy.Name)}</a>
+												</li>
+												<aura:if isTrue="{!idea.CCIDEASLC__Related_Topic_Name__c}">
+													<li>Topic:
+														<CCIDEASLC:SVNSUMMITS_Ideas_TopicURL topicName="{!idea.CCIDEASLC__Related_Topic_Name__c}" topicNameToId="{!v.ideaListWrapper.topicNameToId}" sitePath="{!v.sitePath}" debugMode="{!v.debugMode}"/>
+													</li>
+												</aura:if>
+											</ul>
+										</aura:set>
+									</aura:if>
+								</aura:if>
+							</div>
+						</div>
+					</li>
+				</aura:iteration>
+			</ul>
+			<aura:if isTrue="{!v.displayMode == 'Full'}">
+				<!-- Display pagination controls if we have the real estate for it. -->
+				<div class="slds-x-small-buttons--horizontal">
+					<aura:if isTrue="{!equals(v.ideaListWrapper.hasPreviousSet, true)}">
+						<ui:button class="slds-button slds-button--neutral" label="Previous" press="{!c.getPreviousPage}"/>
+					</aura:if>
+					<aura:if isTrue="{!equals(v.ideaListWrapper.hasNextSet , true)}">
+						<ui:button class="slds-button slds-button--neutral" label="Next" press="{!c.getNextPage}"/>
+					</aura:if>
+					<span class="slds-badge slds-theme--default">Page
+						<ui:outputText aura:id="pageNumber" value="{!v.ideaListWrapper.pageNumber}"/> / {!v.ideaListWrapper.totalPages}
+					</span>
+				</div>
+				<aura:set attribute="else">
+					<!-- Show a view more button if compactMode is true. -->
+					<ui:outputURL class="slds-button slds-button--neutral slds-max-small-button--stretch" label="{!v.viewMoreLabel}" value="{! v.sitePath + v.ideasListURL}"/>
+				</aura:set>
+			</aura:if>
+		</div>
+		<aura:set attribute="else">
+			<div class="slds">
+				<ui:outputURL class="slds-button slds-button--neutral" label="Login to view" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/>
+				<!-- TODO - hardcoded -->
+			</div>
+		</aura:set>
+	</aura:if>
+</aura:component>

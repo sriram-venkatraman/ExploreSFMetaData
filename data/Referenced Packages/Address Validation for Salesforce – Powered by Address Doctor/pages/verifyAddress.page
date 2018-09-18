@@ -1,0 +1,251 @@
+<apex:page controller="INFA_AV.verifyAddCtlr"  standardStylesheets="true" showheader="false" id="verifyPage" >
+
+<style type="text/css"> 
+table.imagetable {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    color:#333333;
+    border-width: 1px; 
+    border-color: #999999;
+    border-collapse: collapse;
+}
+table.imagetable th {
+   // background:#b5cfd2 url('cell-blue.jpg');
+    background:#d5eaf2 url('cell-blue.jpg');
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+table.imagetable td {
+    //background:#dcddc0 url('cell-grey.jpg');
+    background:#f7f7f7 url('cell-grey.jpg');
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #999999;
+}
+
+.btn
+{
+color: #333;
+border: 1px solid #B5B5B5;
+border-bottom-color: #7F7F7F;
+background: #E8E8E9 url('/img/alohaSkin/btn_sprite.png') repeat-x right top;
+font-weight: bold;
+font-size: .9em;
+-webkit-border-radius: 3px;
+border-radius: 3px;
+}
+
+button.buttonstyle
+{   
+}
+</style>
+<apex:form >
+    <div align="center">
+       <!-- <image src="{!URLFOR($Resource.AddressDoctor,'SR/images/cloud.png')}"  align="left" alt="Informatica Cloud" height="80px"  />
+        &nbsp; -->
+        <!-- image style="margin:20px 0 0 0" src="{!URLFOR($Resource.AddressDoctor,'SR/images/cloud_logo1.jpg')}"  align="left" alt="Informatica Cloud" height="65px" width="220px"  / -->
+        
+    </div>
+</apex:form>
+<apex:form id="theform">
+
+<apex:includeScript value="{!$Resource.INFA_AV__Jquerymin}" />
+ 
+<div align="center">
+    <!--<image src="{!URLFOR($Resource.AddressDoctor,'SR/images/cloud.png')}"  align="left" alt="Informatica Cloud" height="80px"  />
+   &nbsp;
+   <image style="margin:20px 0 0 0" src="{!URLFOR($Resource.AddressDoctor,'SR/images/Cloud_logo.png')}"  align="left" alt="Informatica Cloud" height="35px"  />
+   -->
+   <br/>
+ <apex:pageBlock >
+
+   <table class="list" id="theTable" cellpadding="0" cellspacing="0" border="0">
+   
+     <apex:repeat value="{!wrapOutput}"  var="wrapOut" id="theInnerTable" rendered="{!if(wrapOutput.size>0,true,false)}">
+                
+                <tr class="headerRow">
+                    <td colspan="9" align="left" ><font size="2">{!wrapOut.addressType}</font></td>
+                 </tr>
+                <tr class="headerRow">
+                    <td colspan="2" align="center" class=" zen-deemphasize" scope="col">House Number</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Building</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Street</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Postal Code</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Province</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">County</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Locality</td>
+                    <td align="center" class=" zen-deemphasize" scope="col">Country</td>
+                </tr>
+               <tr class="dataRow">
+                   <td class=" dataCell "></td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.HouseNumber}</td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.Building}</td>                  
+                   <td align="center" class=" dataCell ">{!BLANKVALUE(wrapOut.inputAddress.Street, '')}   </td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.PostalCode}    </td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.Province}    </td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.County}  </td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.Locality}    </td>
+                   <td align="center" class=" dataCell ">{!wrapOut.inputAddress.Country}     </td>
+              </tr>
+              <tr>
+                    <td colspan="9" align="left" style="font-size:16px;color:#105075;">{!validationMsg}</td>
+              </tr>
+              <!-- tr>
+                    <td colspan="9" align="left" style="font-size:16px;color:#105075;">{!if(wrapOut.outputAddress.size>0,validationMsg, 'No suggestion available for the entered address')} </td>
+              </tr -->
+              <tr class="headerRow" onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" style="display:{!if(wrapOut.outputAddress.size>0,'','none')}">
+                <td colspan="9" class="headerRow" align="left"><strong>Suggested Address By AddressDoctor</strong></td>
+              </tr>
+            
+                    <apex:variable value="{!1}" var="rowNo"/>
+                    
+                    <!-- 
+                    <apex:outputPanel rendered="{!NOT(if(wrapOut.outputAddress.size>0,true,false))}">
+                      <tr  >
+                            <td colspan="6" align="left" style="font-size:16px;color:#70D3E4;"> Entered address is correct and valid. </td>
+                      </tr>
+                      </apex:outputPanel> --> 
+                   <apex:repeat value="{!wrapOut.outputAddress}" var="outputAdd" id="theSubInnerTable" rendered="{!if(wrapOut.outputAddress.size>0,true,false)}">
+                      <tr class="{!if(mod(rowNo,2)=0,'dataRow even','dataRow odd')}" onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" >
+                            <td>
+                             <input type="radio" name="{!wrapOut.row}" value='{!wrapOut.row};{!outputAdd.row};{!outputAdd.addressRec.HouseNumber}' />
+                            </td>    
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.HouseNumber}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.Building}</td>                          
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.DeliveryAddressLines}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.PostalCode}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.Province}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.County}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.Locality}</td>
+                          <td align="center" class=" dataCell ">{!outputAdd.addressRec.Country}</td> 
+                         <apex:variable value="{!rowNo+1}" var="rowNo"/>
+                     </tr>
+                   </apex:repeat>
+                 
+             
+               <tr height="33px">   
+                     <td colspan="9" > </td>  
+               
+                </tr>
+                <tr>
+            <td colspan="9" align="center">
+               <apex:outputPanel rendered="{!if(wrapOut.outputAddress.size>0,true,false)}"><input type="button" value="Done" onclick="SelectedRows();" class="btn"/></apex:outputPanel>     &nbsp; &nbsp;<input type="button" value="Cancel" onclick="cancel();" class="btn"/></td>
+       </tr>
+       </apex:repeat>
+       
+  </table>
+ 
+ 
+ </apex:pageBlock>
+    
+</div>
+ 
+ <script>
+   var $j=jQuery.noConflict();
+   function SelectedRows()
+   {
+     
+        var selectedRadio,houseNumber;
+        var totalRadio = $j("input:radio").length;
+        var selectdRadio = $j("input:radio:checked").length;
+      $j("input:radio:checked").each(function()
+       {
+           selectedRadio=$j(this).val();
+        
+       });;
+       if(selectedRadio!=null)
+       {
+           houseNumber=selectedRadio.split(';');
+           
+           if(houseNumber[2].indexOf('-') != -1)
+           {
+             var temp = houseNumber[2].split('-');
+             var min = eval(temp[0]);
+             var max = eval(temp[1]);
+             var newHouse=prompt('Enter Exact House Number ranging in ('+houseNumber[2]+')');
+             //alert(newHouse);
+             try{
+             if(newHouse)
+             {
+                 //if(eval(newHouse)>=min&&newHouse<=max)
+                 if(newHouse>=min && newHouse<=max)
+                 {
+                     //alert(newHouse);
+                      runSaveCtlr(selectedRadio,newHouse);
+                  
+                 }
+                 else
+                 {
+                     alert("Entered Value does not belongs to range ! click on done and try again.");
+                 }
+             }
+             }
+             catch(e){
+             alert('----Enter valid Number--');
+             }
+           }
+           else {
+           
+              runSaveCtlr(selectedRadio,"");
+              return true;
+           }
+           
+       }
+       else
+       {
+          if(totalRadio>0&&selectdRadio<1){
+              alert("Please Choose address");
+          }
+          //window.top.close();
+          return false;
+       }
+ 
+   
+   
+   }
+   
+   function closeWindow()
+   {       
+       
+       if("{!check}"=='false')
+       {   
+        
+        window.top.returnValue=1;        
+        window.opener.location.href="/{!$CurrentPage.parameters.id}";
+        window.top.close();
+        
+       }
+        return true;
+       
+   }
+   function closeWindow2()
+   {       
+       
+       //if("{!check}"=='false')
+       {   
+        
+        window.top.returnValue=1;        
+        window.opener.location.href="/{!$CurrentPage.parameters.id}";
+        window.top.close();
+        
+       }
+        return true;
+       
+   }
+      
+</script>
+     
+     <apex:actionFunction name="runSaveCtlr" action="{!savesobject}" reRender="theform" oncomplete="javascript:closeWindow();">
+        <apex:param name="key" value="key" assignTo="{!selectedKey}"/>   
+       <apex:param name="newHouse" value="newHouse" assignTo="{!newHouseNumber}"/> 
+     </apex:actionFunction>
+     <apex:actionFunction name="cancel" action="{!cancel}" oncomplete="javascript:closeWindow2();"/>
+  <apex:pageMessages escape="false" />   
+ </apex:form>
+ 
+
+
+</apex:page>

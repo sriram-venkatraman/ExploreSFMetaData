@@ -1,0 +1,15 @@
+<apex:page controller="AccountRemoter" sidebar="false" showHeader="false">
+    <script type="text/javascript">
+    function getRemoteAccount(acctSearch, clientFunc) {
+        alert("from VF");
+        var accountName = acctSearch;
+
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.AccountRemoter.getAccount}',
+            accountName, 
+            clientFunc, 
+            {escape: true}
+        );
+    }
+    </script>
+</apex:page>

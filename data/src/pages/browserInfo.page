@@ -1,0 +1,127 @@
+<apex:page >
+
+<script src="/soap/ajax/29.0/connection.js"></script>
+<script src="/soap/ajax/29.0/plsoql.js"></script>
+<script src="/soap/ajax/29.0/functions.js"></script>
+<script src="/soap/ajax/29/apex.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script> 
+
+
+<div id="browserid"></div>
+<div id="geoid"></div>
+
+<script type="text/javascript">
+
+txt = "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
+txt+= "<p>Browser Name: " + navigator.appName + "</p>";
+txt+= "<p>Browser Version: " + navigator.appVersion + "</p>";
+txt+= "<p>Cookies Enabled: " + navigator.cookieEnabled + "</p>";
+txt+= "<p>Platform: " + navigator.platform + "</p>";
+txt+= "<p>Geo: " + navigator.geolocation + "</p>";
+txt+= "<p>User-agent header: " + navigator.userAgent + "</p>";
+txt+= "<p>Language: " + navigator.language + "</p>";
+txt+= "<p>Session: '{!GETSESSIONID()}' </p>";
+
+document.getElementById("browserid").innerHTML=txt;
+
+var pos = {};
+var geocoder;
+
+
+function success(position) {
+  pos = position.coords;
+  console.log(pos);
+  document.getElementById("geoid").innerHTML="Latitude: " + pos.latitude + " Longitude: " + pos.longitude;
+
+    sforce.connection.sessionId = '{!$Api.Session_ID}';
+    var c = new sforce.SObject("Plot__c"); 
+    
+  c.Plot_Geolocation__Latitude__s=pos.latitude;
+  c.Plot_Geolocation__Longitude__s=pos.longitude;
+  
+  
+  sforce.connection.create([c]);
+  
+  codeLatLng(pos.latitude, pos.longitude)
+
+    var perfData = window.performance.timing; 
+    var pageLoadTime = perfData.loadEventEnd - perfData.loadEventStart;
+    document.getElementById("browserid").innerHTML += "<p>Load Time: " + pageLoadTime + " loadEventStart: " + perfData.loadEventStart + " loadEventEnd: " + perfData.loadEventEnd + "</p>"
+
+    window.performance = window.performance || window.mozPerformance || window.msPerformance || window.webkitPerformance || {};
+    var timing = performance.timing || {};
+    var parseTime = timing.loadEventEnd - timing.responseEnd;
+    document.getElementById("browserid").innerHTML += "<p>Load Time: " + parseTime + " Response End: " + timing.responseEnd + " End Load: " + timing.loadEventEnd + "</p>"
+    console.log('Parsetime: ', parseTime);
+
+}
+
+function error(msg) {
+ console.log(msg);
+  switch(msg.code) {
+    case msg.UNKNOWN_ERROR:
+      alert("Error! Unknown error");
+    break;
+    case msg.PERMISSION_DENIED:
+      alert("Error! Permission Denied");
+    break;
+    case msg.POSITION_UNAVAILABLE:
+      alert("Error! Position not available");
+    break;
+    case msg.TIMEOUT:
+      alert("Error! Time out");
+    break;
+  }
+}
+
+window.onload = function() {
+    if (navigator.geolocation) {
+        initialize();
+        navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy:true,timeout:10000});    
+    } else {
+        error('not supported');
+    }
+}
+
+function initialize() {
+    geocoder = new google.maps.Geocoder();
+}
+
+  function codeLatLng(lat, lng) {
+
+    var latlng = new google.maps.LatLng(lat, lng);
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+      console.log(results)
+        if (results[1]) {
+         //formatted address
+         document.getElementById("browserid").innerHTML += "<p>Your Address: " + results[0].formatted_address + "</p>";
+         //alert(results[0].formatted_address)
+        //find country name
+             for (var i=0; i<results[0].address_components.length; i++) {
+            for (var b=0;b<results[0].address_components[i].types.length;b++) {
+
+            //there are different types that might hold a city admin_area_lvl_1 usually does in come cases looking for sublocality type will be more appropriate
+                if (results[0].address_components[i].types[b] == "administrative_area_level_1") {
+                    //this is the object you are looking for
+                    city= results[0].address_components[i];
+                    break;
+                }
+            }
+        }
+        //city data
+        //alert(city.short_name + " " + city.long_name)
+         document.getElementById("browserid").innerHTML += "<p>City, State: " + city.short_name + " " + city.long_name + "</p>";
+
+
+        } else {
+          alert("No results found");
+        }
+      } else {
+        alert("Geocoder failed due to: " + status);
+      }
+    });
+  }
+
+</script>
+</apex:page>

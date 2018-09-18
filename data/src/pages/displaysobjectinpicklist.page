@@ -1,0 +1,25 @@
+<apex:page controller="displaysobjectinpicklist" >
+<script>
+function callactionfunction(val)
+{
+   
+}
+</script>
+   <apex:form >
+ <Apex:outputLabel ><b>Object Name </b> : </Apex:outputLabel> <apex:SelectList value="{!val}" size="1">
+ 
+      <apex:selectOptions value="{!Name}"></apex:selectOptions>
+ <apex:actionSupport event="onchange" reRender="pgblok" action="{!createquery}"/>
+    </apex:SelectList>
+ 
+    <apex:pageBlock id="pgblok" >
+       
+    <apex:pageBlockTable value="{!objectforquery}" var="displaydata">
+        <apex:repeat value="{!fieldapiname}" var="displayfieldname">
+        <apex:column value="{!displaydata[displayfieldname]}"/>
+        </apex:repeat>
+   
+    </apex:pageBlockTable>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

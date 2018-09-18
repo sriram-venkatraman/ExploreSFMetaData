@@ -1,0 +1,65 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaViewController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+    
+     <!-- SVG Icon fix for IE11 -->
+    <ltng:require scripts="/resource/svg4everybodyMod" />
+    
+	<aura:attribute name="debugMode" type="Boolean" default="false" description="test" access="global"/>
+	<aura:attribute name="recordId" type="String" default="{!recordId}" access="global"/>
+	<aura:attribute name="sObjectName" type="String" access="global"/> <!-- doesn't work :/ -->
+	<aura:attribute name="zoneId" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+    <aura:attribute name="disableDownVoting" type="Boolean" default="false" description="test" access="global"/>
+    <aura:attribute name="isAuthenticated" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="idea" type="Idea" access="global"/>
+	<aura:attribute name="currentVote" type="Vote" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+	<aura:attribute name="currentURL" type="String" access="global"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" access="global"/>
+
+	<aura:if isTrue="{!and(v.isAuthenticated,v.idea.Id,v.zoneId != '')}">
+		<div class="slds">
+			<div class="slds-box slds-theme--shade slds-text-align--center">
+				<h2 class="slds-text-heading--large">{!v.idea.VoteTotal}</h2>
+				<div class="slds-col slds-no-flex">
+					<aura:if isTrue="{!v.isAuthenticated}">
+						<aura:if isTrue="{!v.currentVote.Id}">
+							<ui:button class="{!'slds-button slds-button--brand' + if(and(v.currentVote.Type == 'Down', not(v.disableDownVoting)),' upsideDown')}" disabled="true">
+								<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + '/resource/CCIDEASLC__slds0102/assets/icons/utility-sprite/svg/symbols.svg#like'}" containerClass="slds-button__icon" size="small" assistiveText="Vote"/>
+							</ui:button>
+							<aura:set attribute="else">
+								<ui:button class="brand2 slds-button slds-button--brand" press="{!c.voteUp}">
+									<span title="Upvote">	
+                                    	<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + '/resource/CCIDEASLC__slds0102/assets/icons/utility-sprite/svg/symbols.svg#like'}" containerClass="slds-button__icon" size="small" assistiveText="Vote"/>
+                                    </span>	
+                                </ui:button>
+                                
+                                <aura:if isTrue="{!not(v.disableDownVoting)}">
+                                	<ui:button class="brand2 slds-button slds-button--brand upsideDown voteSecondary" press="{!c.voteDown}">
+										<span title="Downvote">
+                                        	<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + '/resource/CCIDEASLC__slds0102/assets/icons/utility-sprite/svg/symbols.svg#like'}" containerClass="slds-button__icon" size="small" assistiveText="Vote"/>
+                                        </span>
+                                    </ui:button>
+                                </aura:if>
+                                
+							</aura:set>
+						</aura:if>
+
+						<aura:set attribute="else">
+							<ui:outputURL class="slds-button slds-button--neutral" label="Login to vote" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/> <!-- TODO - hardcoded -->
+						</aura:set>
+					</aura:if>
+				</div>
+		    </div>
+        </div>
+        <aura:set attribute="else">
+			<div class="slds">	
+            	<ui:outputURL class="slds-button slds-button--neutral" label="Login to vote" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/> <!-- TODO - hardcoded -->
+            </div>
+        </aura:set>
+	</aura:if>
+
+</aura:component>

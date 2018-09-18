@@ -1,0 +1,60 @@
+<aura:component implements="force:appHostable" controller="FieldSetController">
+    <aura:attribute name="values" type="Object[]"/>
+    <aura:attribute name="form" type="Aura.Component[]"/>
+    <aura:attribute name="types" type="String[]"/>
+    <aura:attribute name="type" type="String" default="NA"/>
+    <aura:attribute name="fsNames" type="String[]"/>
+    <aura:attribute name="fsName" type="String" default="NA"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <div class="container">
+        <div class="row">
+            <div class="section">
+                <div class="title">
+                    <a href="javascript:void(0);" onclick="{!c.doGetTypeNames}" class="refresh">&#x21bb;</a>
+                    SObjects with FieldSets
+                </div>
+                <dl class="cell list">
+                    <aura:iteration items="{!v.types}" var="type">
+                        <dd><a href="javscript:void(0);" onclick="{!c.doSelectType}" name="{!type}">{!type}</a></dd>
+                    </aura:iteration>
+                </dl>
+            </div>
+            <div class="section">
+                <div class="title">
+                    FieldSet Names for {!v.type}
+                </div>
+                <dl class="cell list">
+                    <aura:iteration items="{!v.fsNames}" var="name">
+                        <dd><a href="javscript:void(0);" onclick="{!c.doSelectFieldSet}" name="{!name}">{!name}</a></dd>
+                    </aura:iteration>
+                </dl>
+            </div>
+        </div>
+        <div class="row">
+            <div class="section">
+                <div class="title">
+                    Form for {!v.type} with {!v.fsName} fieldset
+                </div>
+                <div class="controls">
+                    <ui:button label="Test Submit" press="{!c.doSubmit}"/>
+                </div>
+                <div class="cell form">
+                    {!v.form}                    
+                </div>
+            </div>
+            <div class="section">
+                <div class="title">
+                    Data Binding for {!v.type} with {!v.fsName} fieldset
+                </div>
+                <div class="cell test">
+                    <aura:iteration items="{!v.values}" var="item">
+                        <div>
+                            <span>{!item.name}</span>: <span>{!item.value}</span>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </div>
+        </div>        
+    </div>
+</aura:component>

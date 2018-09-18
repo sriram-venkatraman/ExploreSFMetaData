@@ -1,0 +1,39 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaListController" access="global">
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+    
+    <!-- SVG Icon fix for IE11 -->
+    <ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+
+	<aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="recordId" type="String" default="{!recordId}" access="global"/>
+	<aura:attribute name="zoneid" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+	<aura:attribute name="description" type="String" default="Submitted Ideas" access="global"/>
+	<aura:attribute name="linkToURL" type="String" default="/my-ideas/" access="global"/>
+	<aura:attribute name="doNotLink" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="type" type="String" default="My Ideas" access="global"/>
+	<aura:attribute name="userId" type="String" access="global"/>
+	<aura:attribute name="count" type="Integer" default="0" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+    
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:if isTrue="{! and(v.userId, v.recordId, v.zoneId != '') }">
+		<a aura:id="myIdeasLink" class="slds-text-align--center" style="text-decoration: none;">
+			<div class="slds">
+				<div class="slds-grid">
+					<div class="slds-col slds-has-flexi-truncate">
+						<h1 class="slds-text-heading--medium slds-truncate">{!v.count}</h1>
+						<div class="slds-grid ">
+							<div class="slds-grid slds-no-space">
+								<h3 class="slds-text-heading--smaller slds-truncate" title="{!v.description}">{!v.description}</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+	</aura:if>
+
+</aura:component>

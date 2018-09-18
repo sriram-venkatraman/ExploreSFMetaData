@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <choices>
+        <name>isStudent</name>
+        <choiceText>YES</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>notStudent</name>
+        <choiceText>NO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_coupleCoverage</name>
+        <choiceText>COUPLE / COMPANION</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>cplCoverage</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_familyCoverage</name>
+        <choiceText>FAMILY</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>fmlyCoverage</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_indivividualCoverage</name>
+        <choiceText>INDIVIDUAL</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>indCoverage</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_NO_MULTI_TRIP</name>
+        <choiceText>NO</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>No</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_X3</name>
+        <choiceText>3</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>3</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_X4</name>
+        <choiceText>4</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>4</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_X5</name>
+        <choiceText>5</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>5</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>Trigger_YES_MULTI_TRIP</name>
+        <choiceText>YES</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>Yes</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X10_Days</name>
+        <choiceText>10 Days</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>X18_Days</name>
+        <choiceText>18 Days</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>X2</name>
+        <choiceText>2</choiceText>
+        <dataType>Number</dataType>
+        <value>
+            <numberValue>2.0</numberValue>
+        </value>
+    </choices>
+    <choices>
+        <name>X30_Days</name>
+        <choiceText>30 Days</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <choices>
+        <name>X4_Days</name>
+        <choiceText>4 Days</choiceText>
+        <dataType>String</dataType>
+    </choices>
+    <constants>
+        <name>STUDENT</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>ARE YOU A STUDENT?</stringValue>
+        </value>
+    </constants>
+    <decisions>
+        <name>COVERME_TRIP_TYPE_SELECTOR</name>
+        <label>COVERME TRIP TYPE SELECTOR</label>
+        <locationX>319</locationX>
+        <locationY>679</locationY>
+        <defaultConnector>
+            <targetReference>TRAVELLER_INFO_SINGLE_TRIP</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>SINGLE</defaultConnectorLabel>
+        <rules>
+            <name>COUPLE</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>coverageType_COL6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Trigger_coupleCoverage</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TRAVELLER_INFO_COUPLE_TRIP</targetReference>
+            </connector>
+            <label>COUPLE</label>
+        </rules>
+        <rules>
+            <name>FAMILY_TRIP</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>coverageType_COL6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Trigger_familyCoverage</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>TRAVELLER_INFO_FAMILY_COL6</targetReference>
+            </connector>
+            <label>FAMILY</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>FAMILY_SIZE</name>
+        <label>FAMILY SIZE</label>
+        <locationX>760</locationX>
+        <locationY>800</locationY>
+        <defaultConnector>
+            <targetReference>FAMILY_OF_3</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>FAMILY OF 3</defaultConnectorLabel>
+        <rules>
+            <name>FAMILY_SIZE_4</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NUMBER_OF_FAMILY_MEMBERS_COL6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>4</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FAMILY_OF_4</targetReference>
+            </connector>
+            <label>FAMILY OF 4</label>
+        </rules>
+        <rules>
+            <name>FAMILY_SIZE_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>NUMBER_OF_FAMILY_MEMBERS_COL6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>5</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>FAMILY_OF_5</targetReference>
+            </connector>
+            <label>FAMILY OF 5</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>MULTIPLE_OR_SINGLE</name>
+        <label>MULTIPLE OR SINGLE</label>
+        <locationX>194</locationX>
+        <locationY>270</locationY>
+        <defaultConnector>
+            <targetReference>SINGLE_TRIP_INFO</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>SINGLE TRIP</defaultConnectorLabel>
+        <rules>
+            <name>MULTI_TRIP</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>MULTIPLE_TRIP_COL6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <elementReference>Trigger_YES_MULTI_TRIP</elementReference>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>MULTI_TRIP_INFO</targetReference>
+            </connector>
+            <label>MULTI TRIP</label>
+        </rules>
+    </decisions>
+    <description>New version to test multiple columns and mobile responsiveness; All dates are required fields</description>
+    <label>CoverMe_Travel4</label>
+    <recordCreates>
+        <name>Creat_Quote_Line_Items_Couple</name>
+        <label>Creat Quote Line Items</label>
+        <locationX>326</locationX>
+        <locationY>906</locationY>
+        <inputAssignments>
+            <field>Birthdate__c</field>
+            <value>
+                <elementReference>PRIMARY_TRAVELLER_COUPLE_COL6</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>QuickQuote__c</field>
+            <value>
+                <elementReference>quickQuote_Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Quote_Line_Items__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Quote_Line_Items_Single_Trip</name>
+        <label>Create Quote Line Items</label>
+        <locationX>164</locationX>
+        <locationY>903</locationY>
+        <inputAssignments>
+            <field>Birthdate__c</field>
+            <value>
+                <elementReference>PRIMARY_TRAVELLER_SINGLE_COL6</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>QuickQuote__c</field>
+            <value>
+                <elementReference>quickQuote_Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Quote_Line_Items__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>crQuickQuote</name>
+        <label>CREATE QUICK QUOTE</label>
+        <locationX>315</locationX>
+        <locationY>580</locationY>
+        <assignRecordIdToReference>quickQuote_Id</assignRecordIdToReference>
+        <connector>
+            <targetReference>COVERME_TRIP_TYPE_SELECTOR</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Name</field>
+        </inputAssignments>
+        <object>Quote__c</object>
+    </recordCreates>
+    <screens>
+        <name>FAMILY_OF_3</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>662</locationX>
+        <locationY>954</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <fields>
+            <name>FO3_BIRTHDATES</name>
+            <fieldText>PLEASE ENTER TRAVELLER BIRTH DATES:</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>PRIMARY_TRAVELLER_FO3_COL4</name>
+            <dataType>Date</dataType>
+            <fieldText>PRIMARY TRAVELLER:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_2_FO3_COL4</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 2:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_3_FO3_COL4</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 3:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>FAMILY_OF_4</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>762</locationX>
+        <locationY>1036</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <fields>
+            <name>FO4_BIRTHDATES</name>
+            <fieldText>PLEASE ENTER TRAVELLER BIRTH DATES:</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>PRIMARY_TRAVELLER_FO4_COL3</name>
+            <dataType>Date</dataType>
+            <fieldText>PRIMARY TRAVELLER:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_2_FO4_COL3</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 2:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_3_FO4_COL3</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 3:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_4_FO4_COL3</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 4:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>FAMILY_OF_5</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>880</locationX>
+        <locationY>1114</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <fields>
+            <name>FO5_BIRTHDATES</name>
+            <fieldText>PLEASE ENTER TRAVELLER BIRTH DATES:</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>PRIMARY_TRAVELLER_FO5_COL2</name>
+            <dataType>Date</dataType>
+            <fieldText>PRIMARY TRAVELLER:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_2_FO5_COL2</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 2:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_3_FO5_COL2</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 3:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_4_FO5_COL2</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 4:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_5_FO5_COL2</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELLER # 5:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>MULTI_TRIP_INFO</name>
+        <label>TRIP INFO</label>
+        <locationX>193</locationX>
+        <locationY>384</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>New_TRAVELLER_INFO</targetReference>
+        </connector>
+        <fields>
+            <name>EFFECTIVE_DATE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>EFFECTIVE DATE:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRIP_DURATION_CHOICES_COL6</name>
+            <choiceReferences>X4_Days</choiceReferences>
+            <choiceReferences>X10_Days</choiceReferences>
+            <choiceReferences>X18_Days</choiceReferences>
+            <choiceReferences>X30_Days</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>TRIP DURATION:</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>New_TRAVELLER_INFO</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>318</locationX>
+        <locationY>485</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>crQuickQuote</targetReference>
+        </connector>
+        <fields>
+            <name>coverageType_COL6</name>
+            <choiceReferences>Trigger_indivividualCoverage</choiceReferences>
+            <choiceReferences>Trigger_coupleCoverage</choiceReferences>
+            <choiceReferences>Trigger_familyCoverage</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>COVERAGE TYPE:</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>SINGLE_TRIP_INFO</name>
+        <label>TRIP INFO</label>
+        <locationX>424</locationX>
+        <locationY>275</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>New_TRAVELLER_INFO</targetReference>
+        </connector>
+        <fields>
+            <name>SINGLE_TRIP_LABEL</name>
+            <fieldText>TRIP DURATION:</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>DEPARTURE_DATE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>DEPARTURE DATE:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>RETURN_DATE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>RETURN DATE:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>TRAVELLER_INFO_COUPLE_TRIP</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>321</locationX>
+        <locationY>802</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>Creat_Quote_Line_Items_Couple</targetReference>
+        </connector>
+        <fields>
+            <name>COUPLE_BRITHDATES</name>
+            <fieldText>PLEASE ENTER TRAVELLER BIRTH DATES:</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>PRIMARY_TRAVELLER_COUPLE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>PRIMARY TRAVELLER:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>TRAVELLER_2_COUPLE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>TRAVELER #2:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>TRAVELLER_INFO_FAMILY_COL6</name>
+        <label>TRAVELLER INFO.</label>
+        <locationX>483</locationX>
+        <locationY>800</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>FAMILY_SIZE</targetReference>
+        </connector>
+        <fields>
+            <name>NUMBER_OF_FAMILY_MEMBERS_COL6</name>
+            <choiceReferences>Trigger_X3</choiceReferences>
+            <choiceReferences>Trigger_X4</choiceReferences>
+            <choiceReferences>Trigger_X5</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>NUMBER OF FAMILY MEMBERS:</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>TRAVELLER_INFO_SINGLE_TRIP</name>
+        <label>TRAVELLER INFO</label>
+        <locationX>161</locationX>
+        <locationY>806</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>Create_Quote_Line_Items_Single_Trip</targetReference>
+        </connector>
+        <fields>
+            <name>PRIMARY_TRAVELLER_SINGLE_COL6</name>
+            <dataType>Date</dataType>
+            <fieldText>BIRTH DATE:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <screens>
+        <name>TRIP_INFO</name>
+        <label>TRIP INFO</label>
+        <locationX>195</locationX>
+        <locationY>157</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <connector>
+            <targetReference>MULTIPLE_OR_SINGLE</targetReference>
+        </connector>
+        <fields>
+            <name>NEWROW_CITY_OF_RESIDENCE_COL6</name>
+            <dataType>String</dataType>
+            <fieldText>CITY OF RESIDENCE:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>DESTINATION_COL6</name>
+            <dataType>String</dataType>
+            <fieldText>DESTINATION:</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>NEWROW_isStudent_flag_COL6</name>
+            <choiceReferences>isStudent</choiceReferences>
+            <choiceReferences>notStudent</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>ARE YOU A STUDENT?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>MULTIPLE_TRIP_COL6</name>
+            <choiceReferences>Trigger_YES_MULTI_TRIP</choiceReferences>
+            <choiceReferences>Trigger_NO_MULTI_TRIP</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>IS THIS A MULTIPLE TRIP?</fieldText>
+            <fieldType>RadioButtons</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+    </screens>
+    <startElementReference>TRIP_INFO</startElementReference>
+    <variables>
+        <name>quickQuote_Id</name>
+        <dataType>String</dataType>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>vaPrmTravellerBDate</name>
+        <dataType>String</dataType>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

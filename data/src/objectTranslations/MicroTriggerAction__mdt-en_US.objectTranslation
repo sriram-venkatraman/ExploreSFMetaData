@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>MicroTrigger Action</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>MicroTrigger Actions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Apex Class --></label>
+        <name>ApexClass__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- MicroTrigger --></label>
+        <name>MicroTrigger__c</name>
+        <relationshipLabel><!-- MicroTrigger Actions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Order Of Execution --></label>
+        <name>OrderOfExecution__c</name>
+    </fields>
+    <layouts>
+        <layout>MicroTrigger Action Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

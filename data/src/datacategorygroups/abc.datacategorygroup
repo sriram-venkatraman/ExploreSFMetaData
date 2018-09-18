@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataCategoryGroup xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <dataCategory>
+        <dataCategory>
+            <label>123</label>
+            <name>X123</name>
+        </dataCategory>
+        <dataCategory>
+            <label>345</label>
+            <name>X345</name>
+        </dataCategory>
+        <dataCategory>
+            <label>567</label>
+            <name>X567</name>
+        </dataCategory>
+        <label>All</label>
+        <name>All</name>
+    </dataCategory>
+    <label>abc</label>
+    <objectUsage/>
+</DataCategoryGroup>

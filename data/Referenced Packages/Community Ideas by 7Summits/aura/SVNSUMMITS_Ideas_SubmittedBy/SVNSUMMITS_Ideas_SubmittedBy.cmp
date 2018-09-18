@@ -1,0 +1,62 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaViewController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+    
+    <!-- SVG Icon fix for IE11 -->
+    <ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+
+	<aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="recordId" type="String" default="{!recordId}" access="global"/>
+	<aura:attribute name="sObjectName" type="String" access="global"/> <!-- doesn't work :/ -->
+	<aura:attribute name="zoneId" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+	<aura:attribute name="isAuthenticated" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="authenticatedOnly" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="idea" type="Idea" access="global"/>
+	<aura:attribute name="currentURL" type="String" access="global"/>
+    <aura:attribute name="isNicknameDisplayEnabled" type="Boolean" default="true" access="global"/>
+	<aura:attribute name="userProfileURL" type="String" default="/profile/" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:if isTrue="{!
+		and(
+			v.idea.Id,
+            v.zoneId != '',
+			or(
+				and(v.authenticatedOnly, v.isAuthenticated),
+				!v.authenticatedOnly
+			)
+		)
+	 }">
+
+	 <div class="slds">
+
+	 	<h3 class="slds-text-heading--small slds-text-heading--weighted">
+	 		Submitted
+	 		<ui:outputDateTime value="{!v.idea.CreatedDate}" format="MMMM d, y"/>
+	 		by
+	 	</h3>
+
+	 	<div class="slds-m-vertical--medium slds-text-align--center">
+			<a href="{! v.sitePath + v.userProfileURL + v.idea.CreatedById}" title="{!v.idea.CreatedBy.Name}">
+				<img class="slds-avatar--circle slds-avatar--large" src="{!v.idea.CreatorSmallPhotoUrl}" alt="{!v.idea.CreatedBy.Name}" />
+			</a>
+
+			<div class="">
+		 		<h2 class="slds-text-heading--small">
+		 			<ui:outputText value="{!if(v.isNicknameDisplayEnabled,v.idea.CreatedBy.CommunityNickname,v.idea.CreatedBy.Name)}"/>
+		 		</h2>
+		 		<br/>
+		 		<div class="slds-text-heading--label">
+		 			Community Member Since:
+		 		</div>
+		 		<div>
+		 			<ui:outputDateTime value="{!v.idea.CreatedBy.CreatedDate}" format="MMMM d, y"/>
+		 		</div>
+		 	</div>
+	 	</div>
+	 </div>
+	</aura:if>
+</aura:component>

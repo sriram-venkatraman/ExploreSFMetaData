@@ -1,0 +1,66 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaVotersController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+    
+    <!-- SVG Icon fix for IE11 -->
+    <ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+
+
+	<aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="recordId" type="String" default="{!recordId}" access="global"/>
+
+	<aura:attribute name="voters" type="User[]" access="global"/>
+
+	<aura:attribute name="title" type="String" default="Following" access="global"/>
+	<aura:attribute name="zoneId" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+	<aura:attribute name="authenticatedOnly" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="numResults" type="Integer" default="12" access="global"/>
+	<aura:attribute name="totalVoterCount" type="Integer" access="global"/>
+	<aura:attribute name="isAuthenticated" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="isValidIdeaId" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="userProfileURL" type="String" default="/profile/" access="global"/>
+    <aura:attribute name="isNicknameDisplayEnabled" type="Boolean" default="true" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+	<aura:attribute name="currentURL" type="String" access="global"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:if isTrue="{!
+		and(
+			v.isValidIdeaId,
+            v.zoneId != '',
+			or(
+				and(
+					v.authenticatedOnly,
+					v.isAuthenticated
+				),
+				!v.authenticatedOnly
+			)
+		)
+	}">
+		<div class="slds">
+			<h3 class="slds-text-heading--small slds-text-heading--weighted">
+				{!v.title + '  '}
+			</h3>
+			<div class="slds-grid slds-wrap slds-text-align--center">
+				<aura:iteration items="{!v.voters}" var="voter">
+					<div class="slds-col slds-m-top--x-small">
+						<a href="{! v.sitePath + v.userProfileURL + voter.Id}" title="{!if(v.isNicknameDisplayEnabled,voter.CommunityNickname,voter.Name)}">
+							<img class="slds-avatar slds-avatar--circle slds-avatar--large" src="{!voter.SmallPhotoUrl}" alt="{!if(v.isNicknameDisplayEnabled,voter.CommunityNickname,voter.Name)}" />
+						</a>
+					</div>
+				</aura:iteration>
+			</div>
+			<aura:if isTrue="{!(v.totalVoterCount - v.numResults) > 0}">
+				+ {!v.totalVoterCount - v.numResults} More
+			</aura:if>
+		</div>
+		<aura:set attribute="else">
+			<div class="slds">
+				<ui:outputURL class="slds-button slds-button--neutral" label="Login to view" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/> <!-- TODO - hardcoded -->
+			</div>
+		</aura:set>
+	</aura:if>
+</aura:component>

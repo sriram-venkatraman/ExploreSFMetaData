@@ -1,0 +1,30 @@
+<design:component>
+    
+	<design:attribute name="debugMode" label="Debug Mode" description="Enable/disable debug mode" required="true"/>
+	<design:attribute name="authenticatedOnly" label="Show for Authenticated Users Only" description="Only render component for logged in users" />
+	<design:attribute name="showCategoryFilter" label="Show Category Filter" description="Show Category Filter" />
+	<design:attribute name="allowVoting" label="Allow Voting" description="Displays voting options from list view" />
+	<design:attribute name="disableDownVoting" label="Disable Downvoting" description="Enable/disable Downvoting"/>
+    <design:attribute name="limitVoteToEmailDomain" label="Limit Voting to 1 per email domain" description="Checking this option will limit voting to 1 vote per email domain per idea" />
+    
+    <design:attribute name="displayMode" datasource="Full,Compact" label="Display Mode" description="Select full to display all information or compact to minimize the amount of information displayed (great for sidebars)" />
+	<design:attribute name="sortBy" datasource="Popular Ideas, Recent Ideas, Top All-Time, Recent Comments" label="Sort By" description="Sort By" required="true"/>
+   	<design:attribute name="filterOn" datasource="None,Topic, Search Term, My Ideas, My Voted On Ideas" label="Filter On" description="Select a filter based on where component is being used" />
+
+    <design:attribute name="title" label="Title" description="Title of section" />
+	<design:attribute name="viewMoreLabel" label="View More Label" description="Text of 'view more' button" />
+	<design:attribute name="zoneName" label="Zone Name" description="Ideas Zone Name" required="true"/>
+	<design:attribute name="listSize" label="Number of Ideas Per Page" description="Number of ideas to show in list" />
+	<design:attribute name="newIdeaURL" label="New Idea URL" description="URL for New Idea page" />
+	<design:attribute name="ideasListURL" label="Ideas List URL" description="URL for Ideas List page" />
+	<design:attribute name="ideaDetailURL" label="Idea Detail URL" description="URL for Idea detail page" />
+	<design:attribute name="userProfileURL" label="User Profile URL" description="URL for User Profile page" />
+	<design:attribute name="spinnerImageUrl" label="Spinner Image Url" description="Url for spinner image" required="false"/>
+	<design:attribute name="iconPath" label="Icon Path" description="SVG Path for icon" />
+	<design:attribute name="iconCategory" label="Icon Category" description="SVG Icon Category" />
+	<design:attribute name="iconSize" label="Icon Size" description="SVG Icon Size" />
+	<design:attribute name="iconName" label="Icon Name" description="SVG Icon Name" />
+	<design:attribute name="voteIconPath" label="Vote Icon Path" description="SVG Path for icon" />
+	<design:attribute name="voteIconCategory" label="Vote Icon Category" description="SVG Icon Category" />
+	<design:attribute name="voteIconName" label="Vote Icon Name" description="SVG Icon Name" />
+</design:component>

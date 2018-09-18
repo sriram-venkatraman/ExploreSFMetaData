@@ -1,0 +1,14 @@
+<design:component>
+	<design:attribute name="debugMode" label="Debug Mode" description="Enable/disable debug mode" required="true"/>
+    <design:attribute name="zoneName" label="Zone Name" description="Ideas Zone Name" required="true"/>
+    <design:attribute name="recordId" default="{!recordId}" label="Record Id" description="Idea Record Id. Use {!recordId} to pass the record Id from the page url" required="true"/>
+    <design:attribute name="authenticatedOnly" label="Show for authenticated users only" description="Only render component for logged in users"/>
+    <design:attribute name="title" label="Title" description="Title to display on component"/>
+    <design:attribute name="listSize" label="Number of Ideas to display" description="Number of Ideas to display" required="true"/>
+  	<design:attribute name="ideaDetailURL" label="Idea Detail URL" description="URL for Idea detail page" />
+    <design:attribute name="ideasListURL" label="Ideas List URL" description="URL for Ideas List page" />
+	<design:attribute name="voteIconPath" label="Vote Icon Path" description="SVG Path for icon" />
+	<design:attribute name="voteIconCategory" label="Vote Icon Category" description="SVG Icon Category" />
+	<design:attribute name="voteIconName" label="Vote Icon Name" description="SVG Icon Name" />
+
+</design:component>

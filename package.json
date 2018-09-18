@@ -21,6 +21,6 @@
   "author": "Sriram Venkatraman",
   "license": "MIT",
   "dependencies": {
-    "xml2json": "^0.11.0"
+    "xml2json": "^0.11.2"
   }
 }

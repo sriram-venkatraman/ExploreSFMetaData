@@ -1,0 +1,14 @@
+.THIS .upsideDown {
+    transform: rotateX(180deg);
+}
+
+.THIS .voteSecondary {
+    background-color: rgba(0, 112, 210, 0.2);
+}
+
+.THIS .brand2 {
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto;
+    margin-top: 5px;
+}

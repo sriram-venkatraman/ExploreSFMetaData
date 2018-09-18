@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CaseSettings xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAssignNotificationTemplate>unfiled$public/SUPPORTNewassignmentnotificationSAMPLE</caseAssignNotificationTemplate>
+    <caseCloseNotificationTemplate>unfiled$public/SUPPORTCaseResponsewithSolutionSAMPLE</caseCloseNotificationTemplate>
+    <caseCreateNotificationTemplate>unfiled$public/SUPPORTWebtoCaseemailresponseSAMPLE</caseCreateNotificationTemplate>
+    <closeCaseThroughStatusChange>false</closeCaseThroughStatusChange>
+    <defaultCaseOwner>sriram.venkatraman@testco.com</defaultCaseOwner>
+    <defaultCaseOwnerType>User</defaultCaseOwnerType>
+    <defaultCaseUser>sriram.venkatraman@testco.com</defaultCaseUser>
+    <emailToCase>
+        <enableEmailToCase>true</enableEmailToCase>
+        <enableHtmlEmail>true</enableHtmlEmail>
+        <enableOnDemandEmailToCase>false</enableOnDemandEmailToCase>
+        <enableThreadIDInBody>true</enableThreadIDInBody>
+        <enableThreadIDInSubject>true</enableThreadIDInSubject>
+        <notifyOwnerOnNewCaseEmail>true</notifyOwnerOnNewCaseEmail>
+    </emailToCase>
+    <enableCaseFeed>true</enableCaseFeed>
+    <enableDraftEmails>false</enableDraftEmails>
+    <enableEarlyEscalationRuleTriggers>true</enableEarlyEscalationRuleTriggers>
+    <enableNewEmailDefaultTemplate>false</enableNewEmailDefaultTemplate>
+    <enableSuggestedSolutions>true</enableSuggestedSolutions>
+    <keepRecordTypeOnAssignmentRule>true</keepRecordTypeOnAssignmentRule>
+    <notifyContactOnCaseComment>false</notifyContactOnCaseComment>
+    <notifyDefaultCaseOwner>false</notifyDefaultCaseOwner>
+    <notifyOwnerOnCaseComment>false</notifyOwnerOnCaseComment>
+    <notifyOwnerOnCaseOwnerChange>false</notifyOwnerOnCaseOwnerChange>
+    <useSystemEmailAddress>true</useSystemEmailAddress>
+    <webToCase>
+        <caseOrigin>Web</caseOrigin>
+        <defaultResponseTemplate>unfiled$public/SUPPORTWebtoCaseemailresponseSAMPLE</defaultResponseTemplate>
+        <enableWebToCase>true</enableWebToCase>
+    </webToCase>
+</CaseSettings>

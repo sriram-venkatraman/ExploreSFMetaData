@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Line Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Line Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Invoice --></label>
+        <name>Invoice__c</name>
+        <relationshipLabel><!-- Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Line Item Total --></label>
+        <name>Line_Item_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Merchandise --></label>
+        <name>Merchandise__c</name>
+        <relationshipLabel><!-- Line Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quantity --></label>
+        <name>Quantity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unit Price --></label>
+        <name>Unit_Price__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You must order at least one item --></errorMessage>
+        <name>Validate_Quantity</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Territory xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseAccessLevel>None</caseAccessLevel>
+    <contactAccessLevel>Edit</contactAccessLevel>
+    <description>Regional Sales Manager EMEA</description>
+    <mayForecastManagerShare>false</mayForecastManagerShare>
+    <name>Regional Sales Manager EMEA</name>
+    <opportunityAccessLevel>None</opportunityAccessLevel>
+    <parentTerritory>Director_of_Sales</parentTerritory>
+</Territory>

@@ -1,0 +1,5 @@
+Opportunity Name: {!Opportunity.Name}
+Account Name: {!Opportunity.Account}
+Owner: {!Opportunity.OwnerFullName}
+Stage: {!Opportunity.StageName}
+Amount: {!Opportunity.Amount} {!Opportunity.CurrencyIsoCode}

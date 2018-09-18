@@ -1,0 +1,117 @@
+<aura:component controller="CCIDEASLC.SVNSUMMITS_IdeaViewController" implements="forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+    
+    <CCIDEASLC:SVNSUMMITS_LDS_Includes />
+    <ltng:require scripts="/resource/CCIDEASLC__jquery_2_2_0_min"/>
+    
+    <!-- SVG Icon fix for IE11 -->
+    <ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+    
+    <aura:attribute name="debugMode" type="Boolean" default="false" access="global" description="Enable for debugging"/>
+    <aura:attribute name="recordId" type="String" default="{!recordId}" access="global" description="Current idea record ID"/>
+    
+    <aura:attribute name="sObjectName" type="String" access="global"/> <!-- doesn't work :/ -->
+    <aura:attribute name="zoneId" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+    <aura:attribute name="authenticatedOnly" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="displayComments" type="Boolean" default="true" access="global"/>
+    <aura:attribute name="commentsPointsText" type="String" default="Points" access="global"/>
+    <aura:attribute name="ideasListURL" type="String" default="/ideas/" access="global"/>
+    <aura:attribute name="ideaImageURL" type="String" default="/servlet/fileField?field=AttachmentBody" access="global"/>
+    <aura:attribute name="userProfileURL" type="String" default="/profile/" access="global"/>
+    <aura:attribute name="iconPath" default="/resource/CCIDEASLC__slds0102/assets/icons/standard-sprite/svg/symbols.svg#solution" type="String" access="global"/>
+    <aura:attribute name="iconCategory" default="standard" type="String" access="global"/>
+    <aura:attribute name="iconSize" default="large" type="String" access="global"/>
+    <aura:attribute name="iconName" default="solution" type="String" access="global"/>
+    
+    <aura:attribute name="idea" type="Idea" access="global"/>
+    <aura:attribute name="isAuthenticated" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="sitePath" type="String" access="global"/>
+    <aura:attribute name="sitePrefix" type="String" access="global"/>
+    <aura:attribute name="currentURL" type="String" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{! and (v.idea.Id, v.zoneId != '', or ( and (v.authenticatedOnly, v.isAuthenticated), !v.authenticatedOnly))}">
+        <div class="slds">
+            <div class="slds-page-header" role="banner">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.iconPath}" category="{!v.iconCategory}" size="{!v.iconSize}" name="{!v.iconName}"/>
+                    </div>
+                    <div class="slds-media__body">
+                        <p class="slds-page-header__title slds-truncate slds-align-middle slds-text-heading--medium" title="{!v.idea.Title}">{!v.idea.Title}</p>
+                        <aura:if isTrue="{!v.ideasListURL}">
+                            <p class="slds-text-body--small">Explore other <ui:outputURL value="{!v.sitePath + v.ideasListURL}" label="ideas"/></p>
+                        </aura:if>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slds-grid">
+                <div class="slds-tabs--default">
+                    <ul aura:id="ideaViewTabNav" class="slds-tabs--default__nav" role="tablist">
+                        <li aura:id="tab-overview-li" class="slds-tabs--default__item slds-text-heading--label slds-active" title="Idea Overview" role="presentation" onclick="{!c.handleTabClick}">
+                            <a class="slds-tabs--default__link" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-overview">
+                                Idea Overview
+                            </a>
+                        </li>
+                        <aura:if isTrue="{!v.displayComments}">
+                            <li aura:id="tab-comments-li" class="slds-tabs--default__item slds-text-heading--label" title="{!v.idea.NumComments + ' Comments'}" role="presentation" onclick="{!c.handleTabClick}">
+                                <a class="slds-tabs--default__link" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-comments">
+                                    {!v.idea.NumComments} Comments
+                                </a>
+                            </li>
+                        </aura:if>
+                    </ul>
+                    <div aura:id="tab-overview-div" id="tab-default-1" class="slds-tabs--default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+                        <div class="slds-col slds-has-flexi-truncate slds-p-around--medium">
+                            
+                            <aura:if isTrue="{!v.idea.Categories}">
+                                <aura:iteration items="{!v.idea.Categories}" var="category">
+                                    <span class="slds-pill">
+                                        <span class="slds-pill__label">
+                                            <ui:outputText value="{!category}"/>
+                                        </span>
+                                    </span>
+                                </aura:iteration>
+                            </aura:if>
+                            
+                            <div class="slds-m-top--medium">
+                                <ui:outputRichText value="{!v.idea.Body}"/> <!-- doesn't seem to support strikethrough -->
+                            </div>
+                            
+                            <aura:if isTrue="{!v.idea.CCIDEASLC__Related_Topic_Name__c}">
+                                <div class="slds-text-heading--label slds-m-top--medium">
+                                    <ui:outputText value="{!v.idea.CCIDEASLC__Related_Topic_Name__c}"/>
+                                </div>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!v.idea.AttachmentName}">
+                                <div class="slds-m-top--medium">
+                                    <img src="{!v.sitePrefix + v.ideaImageURL + '&amp;entityId=' + v.idea.Id}"/>
+                                </div>
+                            </aura:if>
+                        </div>
+                    </div>
+                    <aura:if isTrue="{!v.displayComments}">
+                        <div aura:id="tab-comments-div" id="tab-default-2" class="slds-tabs--default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+                            <div class="slds-col slds-has-flexi-truncate slds-p-around--medium">
+                                <CCIDEASLC:SVNSUMMITS_Ideas_Comments debugMode="{!v.debugMode}"
+                                                                     zoneName="{!v.zoneName}" recordId="{!v.recordId}"
+                                                                     authenticatedOnly="{!v.authenticatedOnly}" userProfileURL="{!v.userProfileURL}"
+                                                                     pointsText="{!v.commentsPointsText}"
+                                                                     >
+                                </CCIDEASLC:SVNSUMMITS_Ideas_Comments>
+                            </div>
+                        </div>
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <div class="slds">
+                <ui:outputURL class="slds-button slds-button--neutral" label="Login to view" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/> <!-- TODO - hardcoded -->
+            </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

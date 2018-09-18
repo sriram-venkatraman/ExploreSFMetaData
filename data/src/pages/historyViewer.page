@@ -1,0 +1,30 @@
+<apex:page controller="historyViewer">
+    <apex:sectionHeader title="History"/>
+    <apex:form >
+        <apex:outputPanel id="historylist"> 
+            <apex:outputPanel rendered="{!if(setHistory==null,false,true)}">
+                <apex:pageBlock title="Possible Duplicates">
+                    <apex:pageBlockTable value="{!histories[0].histories}" var="a">
+                        <apex:column value="{!a.CreatedById}" headerValue="User"/>
+                        <apex:column value="{!a.CreatedDate}" headervalue="Date"/>
+                        <apex:column value="{!a.Field}" headervalue="Old"/>
+                        <apex:column value="{!a.OldValue}" headervalue="Old"/>
+                        <apex:column value="{!a.NewValue}" headervalue="New"/>
+                    </apex:pageBlockTable>
+                   
+                    <apex:commandLink rendered="{!setHistory.hasPrevious}" value="First" action="{!setHistory.first}" reRender="historylist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setHistory.hasPrevious}" value="Previous" action="{!setHistory.previous}" reRender="historylist"/>
+                    &nbsp;
+                    <apex:outputText rendered="{!if(setHistory==null,false,(setHistory.pageNumber * setHistory.pageSize) < setHistory.ResultSize)}" value="{!setHistory.pageNumber * setHistory.pageSize} Of {!setHistory.ResultSize}"></apex:outputText>
+                    <apex:outputText rendered="{!if(setHistory==null,false,(setHistory.pageNumber * setHistory.pageSize) >= setHistory.ResultSize)}" value="{!setHistory.ResultSize} Of {!setHistory.ResultSize}"></apex:outputText>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setHistory.hasNext}" value="Next" action="{!setHistory.next}" reRender="historylist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setHistory.hasNext}" value="Last" action="{!setHistory.last}" reRender="historylist"/>
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:outputPanel> 
+
+    </apex:form>
+</apex:page>

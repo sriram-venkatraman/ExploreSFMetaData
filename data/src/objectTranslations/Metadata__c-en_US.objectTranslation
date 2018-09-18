@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Metadata</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Metadata</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SOR --></label>
+        <name>SOR__c</name>
+        <picklistValues>
+            <masterLabel>Allant</masterLabel>
+            <translation><!-- Allant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>CRPS</masterLabel>
+            <translation><!-- CRPS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GNA</masterLabel>
+            <translation><!-- GNA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IDN</masterLabel>
+            <translation><!-- IDN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>InfoGroup</masterLabel>
+            <translation><!-- InfoGroup --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OPENforce</masterLabel>
+            <translation><!-- OPENforce --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>iCLIC</masterLabel>
+            <translation><!-- iCLIC --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Security Classification --></label>
+        <name>Security_Classification__c</name>
+        <picklistValues>
+            <masterLabel>Internal</masterLabel>
+            <translation><!-- Internal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Public</masterLabel>
+            <translation><!-- Public --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Restricted</masterLabel>
+            <translation><!-- Restricted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Field</masterLabel>
+            <translation><!-- Field --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Object</masterLabel>
+            <translation><!-- Object --></translation>
+        </picklistValues>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

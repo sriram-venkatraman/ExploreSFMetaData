@@ -1,0 +1,11 @@
+<apex:page standardStylesheets="false" >
+<apex:stylesheet value="{!URLFOR($Resource.customStyleSheets, 'input_style.css')}" />
+
+
+<flow:interview name="Quoting_Process">
+<apex:param name="varDistributorId" value="001j000000AzO1z"/>
+</flow:interview>
+
+<apex:includeScript loadOnReady="true" value="{!$Resource.MyJavascriptFile}"/>
+
+</apex:page>

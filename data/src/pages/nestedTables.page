@@ -1,0 +1,65 @@
+<apex:page tabstyle="Account" controller="nestedqueryexample" showheader="false">
+<script>
+        function switchMenu(obj,obj1,obj2) 
+        {
+            var el = document.getElementById(obj);                                       
+            if ( el.style.display != 'none' ) {
+            el.style.display = 'none';
+            }
+            else {
+            el.style.display = '';
+            }
+            var e2 = document.getElementById(obj1);                                       
+            if ( e2.style.display != 'none' ) {
+            e2.style.display = 'none';
+            }
+            else {
+            e2.style.display = '';
+            }
+             var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+            e3.style.display = 'none';
+            }
+            else {
+            e3.style.display = '';
+            }
+
+        }
+</script>
+    <apex:pageblock >     
+        <apex:pageblocktable value="{!accsandtmember}"  var="accdet">
+            <apex:column headervalue="Account Name">
+                    <apex:outputtext value="{!accdet.Name}"/>
+            </apex:column>
+            <apex:column headervalue="Billing Country">
+                    <apex:outputtext value="{!accdet.BillingCountry}"/>
+            </apex:column>
+            <apex:column >
+                   <apex:facet name="header">                                        
+                         Team Members                                                                               
+                    </apex:facet>
+                    <apex:outputpanel id="plusimage">
+                          <apex:image url="{!$Resource.Plus_Image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.minusimage}','{!$Component.plusimage}')" title="Expand - Team Member's"/> 
+                    </apex:outputpanel>
+                    <apex:outputpanel id="minusimage" style="display:none;">
+                          <apex:image url="{!$Resource.Minus_Image}" onclick="switchMenu('{!$Component.inlinetablesec}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Team Member's"/>
+                    </apex:outputpanel>
+                    <apex:outputpanel id="inlinetablesec" style="display:none;">
+                                                <apex:variable value="{!0}" var="rowNum"/>
+                                                <apex:repeat var="count" value="{!accdet.AccountTeamMembers}">
+                                                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                                                </apex:repeat>
+                            <apex:outputText rendered="{!rowNum=0}">  No Team Members  </apex:outputText>
+                        <apex:pageblocktable value="{!accdet.AccountTeamMembers}" var="tm" rendered="{!rowNum>0}">
+                            <apex:column headerValue="Team Member">
+                                   <apex:outputfield value="{!tm.User.Name}"/>
+                             </apex:column>
+                             <apex:column headerValue="Role">
+                                   <apex:outputfield value="{!tm.TeamMemberRole}"/>
+                             </apex:column>                          
+                        </apex:pageblocktable>
+                   </apex:outputpanel>     
+            </apex:column>
+        </apex:pageblocktable>
+    </apex:pageblock>
+</apex:page>

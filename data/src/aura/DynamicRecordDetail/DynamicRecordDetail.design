@@ -1,0 +1,4 @@
+<design:component label="Dynamic Record Detail">
+    <design:attribute name="objectName" label="Object Name" description="Name of the Object to render" />
+    <design:attribute name="fieldList" label="Fields" description="Field Names separated by comma" />
+</design:component>

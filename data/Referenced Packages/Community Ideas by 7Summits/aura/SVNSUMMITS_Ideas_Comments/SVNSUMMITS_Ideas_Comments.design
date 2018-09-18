@@ -1,0 +1,11 @@
+<design:component>
+    <design:attribute name="debugMode" label="Debug Mode" description="Enable/disable debug mode" required="true"/>
+    <design:attribute name="title" label="Title" />
+    <design:attribute name="zoneName" label="Zone Name" description="Ideas Zone Name" required="true"/>
+    <design:attribute name="pointsText" label="Points Label" description="Label for Points" />
+    <design:attribute name="recordId" default="{!recordId}" label="Record Id" description="Set to {!recordId} to pass the page's record Id." required="true"/>
+    <design:attribute name="authenticatedOnly" label="Show for Authenticated Users Only" description="Only render component for logged in users" />
+
+    <design:attribute name="numComments" label="Number of Comments" description="Number of comments to display" />
+    <design:attribute name="allowComment" label="Allow Comment" />
+</design:component>

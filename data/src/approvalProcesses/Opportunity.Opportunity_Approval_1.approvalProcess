@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>false</active>
+    <allowRecall>false</allowRecall>
+    <allowedSubmitters>
+        <type>creator</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <type>owner</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Account</field>
+        <field>Description</field>
+        <field>StageName</field>
+        <field>Owner</field>
+        <field>Amount</field>
+        <field>CurrencyIsoCode</field>
+        <field>CloseDate</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Americas &gt; $100,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;USD 100,000&quot;</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>Standard Opportunity</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Americas &gt; $100,000</label>
+        <name>Americas_GT_100_000</name>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>gross@testco.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Americas &gt; $250,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;USD 250,000&quot;</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>Standard Opportunity</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>Americas &gt; $250,000</label>
+        <name>Americas_GT_250_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>EMEA &gt; €50,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>EMEA Opportunity</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;EUR 50,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>EMEA &gt; €50,000</label>
+        <name>EMEA_GT_50_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>tdata@testco.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>EMEA &gt; €150,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>EMEA Opportunity</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;EUR 150,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>EMEA &gt; €150,000</label>
+        <name>EMEA_GT_150_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>APAC &gt; ¥100,000,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>APAC Opportunity</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;JPY 100,000,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>APAC &gt; ¥100,000,000</label>
+        <name>APAC_GT_100_000_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>tdata@testco.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>APAC &gt; ¥200,000,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.RecordType</field>
+                <operation>equals</operation>
+                <value>APAC Opportunity</value>
+            </criteriaItems>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;JPY 200,000,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>GotoNextStep</ifCriteriaNotMet>
+        <label>APAC &gt; ¥200,000,000</label>
+        <name>APAC_GT_200_000_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <name>eexecutive@testco.com</name>
+                <type>user</type>
+            </approver>
+            <whenMultipleApprovers>Unanimous</whenMultipleApprovers>
+        </assignedApprover>
+        <description>Global &gt; $5,000,000</description>
+        <entryCriteria>
+            <criteriaItems>
+                <field>Opportunity.Amount</field>
+                <operation>greaterThan</operation>
+                <value>&quot;USD 5,000,000&quot;</value>
+            </criteriaItems>
+        </entryCriteria>
+        <ifCriteriaNotMet>ApproveRecord</ifCriteriaNotMet>
+        <label>Global &gt; $5,000,000</label>
+        <name>Global_GT_5_000_000</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <approvalStep>
+        <allowDelegate>false</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>adhoc</type>
+            </approver>
+        </assignedApprover>
+        <description>This step is required since the OOTB functionality auto rejects if none of the step criteria is met. Ideally the process should have auto approved instead.</description>
+        <label>Dummy Step</label>
+        <name>Dummy_Step</name>
+        <rejectBehavior>
+            <type>RejectRequest</type>
+        </rejectBehavior>
+    </approvalStep>
+    <emailTemplate>unfiled$public/Opportunity_Approval_Template</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <criteriaItems>
+            <field>User.UserRole</field>
+            <operation>startsWith</operation>
+            <value>Sales AE</value>
+        </criteriaItems>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Check_Management_Approval_Flag</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Email_Approved_Opportunity</name>
+            <type>Alert</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Email_Rejected_Opportunity</name>
+            <type>Alert</type>
+        </action>
+        <action>
+            <name>Uncheck_Management_Approval_Flag</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <label>Opportunity Approval 1</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <recallActions>
+        <action>
+            <name>Uncheck_Management_Approval_Flag</name>
+            <type>FieldUpdate</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOnly</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

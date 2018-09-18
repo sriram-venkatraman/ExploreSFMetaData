@@ -1,0 +1,6 @@
+Dear {!Receiving_User.FirstName},
+
+Sriram is welcoming you to {!Community_Name}! To get started, go to {!Community_Url}
+
+Thanks,
+{!Organization.Name}

@@ -1,0 +1,138 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="CCIDEASLC.SVNSUMMITS_IdeaNewController" access="global">
+
+	<CCIDEASLC:SVNSUMMITS_LDS_Includes />
+	<ltng:require styles="/resource/CCIDEASLC__SemanticUI/dist/semantic.min.css?v=2.1.7"
+                  scripts="/resource/CCIDEASLC__jquery_2_2_0_min,/resource/CCIDEASLC__SemanticUI/dist/semantic.min.js?v=2.1.7,/resource/CCIDEASLC__forcetk"
+					 />
+    <!-- SVG Icon fix for IE11 -->
+	<ltng:require scripts="/resource/CCIDEASLC__svg4everybodyMod" />
+
+	<aura:attribute name="title" default="New Idea" type="String" access="global"/>
+	<aura:attribute name="zoneid" type="String" default="" access="global"/>
+    <aura:attribute name="zoneName" default="" type="String" required="true" access="global"/>
+    <aura:attribute name="defaultStatus" default="Submitted" type="String" access="global"/>
+	<aura:attribute name="sfInstanceUrl" default="https://na34.force.com" type="String" required="true" access="global"/>
+	<aura:attribute name="simIdeasLimit" default="5" type="Integer" required="true" access="global"/>
+	<aura:attribute name="simIdeasSubtitle" default="Similar Ideas:" type="String" required="false" access="global"/>
+	<aura:attribute name="spinnerImageUrl" default="/resource/CCIDEASLC__slds0102/assets/images/spinners/slds_spinner.gif" type="String" required="false" access="global"/>
+	<aura:attribute name="pathToDetail" default="/idea/" type="String" required="true" access="global"/>
+	<aura:attribute name="currIdea" type="Idea" default="{'sobjectType' : 'Idea'}" access="global"/>
+	<aura:attribute name="isAuthenticated" type="Boolean" default="true" access="global"/>   <!-- TODO - not sure why, but if default false the aura:if never re-evalutes when it becomes true -->
+	<aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+	<aura:attribute name="sessionId" type="String" access="global"/>
+	<aura:attribute name="iconPath" default="/resource/CCIDEASLC__slds0102/assets/icons/standard-sprite/svg/symbols.svg#solution" type="String" access="global"/>
+	<aura:attribute name="iconCategory" default="standard" type="String" access="global"/>
+	<aura:attribute name="iconSize" default="large" type="String" access="global"/>
+	<aura:attribute name="iconName" default="solution" type="String" access="global"/>
+	<aura:attribute name="useTopics" default="false" type="Boolean" access="global"/>
+
+	<aura:attribute name="ideasList" type="idea[]" access="global"/>
+	<aura:attribute name="topicNamesList" type="String[]" access="global"/>
+	<aura:attribute name="sitePath" type="String" access="global"/>
+	<aura:attribute name="sitePrefix" type="String" access="global"/>
+	<aura:attribute name="currentURL" type="String" access="global"/>
+	<aura:attribute name="categoriesSet" type="Set" access="global"/>
+    
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:renderIf isTrue="{!and(v.isAuthenticated,v.zoneid != '')}">
+		<div class="slds">
+            <div class="slds-page-header" role="banner" aura:id="titlebanner">
+                <div class="slds-grid">
+					<div class="slds-media">
+						<div class="slds-media__figure">
+							<aura:if isTrue="{!v.sitePrefix}">
+								<CCIDEASLC:SVNSUMMITS_SVG svgPath="{!v.sitePrefix + v.iconPath}" category="{!v.iconCategory}" size="{!v.iconSize}" name="{!v.iconName}"/>
+							</aura:if>
+						</div>
+					</div>
+					<div class="slds-col slds-has-flexi-truncate">
+						<p class="slds-text-heading--label">{!v.title}</p>
+						<div class="slds-grid">
+							<div class="slds-grid slds-type-focus slds-no-space">
+								<h1 class="slds-text-heading--medium slds-truncate" title="Submit Idea">Submit Idea</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="slds-grid">
+                <div aura:id="spinnerSubmit" id="spinnerSubmit">
+					<div class="slds-spinner--large">
+						<img src="{!v.sitePrefix + v.spinnerImageUrl}" alt="Loading..." />
+					</div>
+				</div>
+				<div class="slds-col slds-has-flexi-truncate" aura:id="newIdeaForm" id="newIdeaForm">
+					<div class="slds-form-element" style="margin-top:20px">
+						<label class="slds-form-element__label" for="title">Title*</label>
+						<div class="slds-form-element__control">
+							<ui:inputText aura:id="title" class="slds-input" blur="{!c.check_DuplicateIdeas}" />
+						</div>
+						<div class="slds-media__body">
+							<div aura:id="spinner">
+								<div class="slds-spinner--small">
+									<img src="{!v.sitePrefix + v.spinnerImageUrl}" alt="Loading..." />
+								</div>
+							</div>
+							<aura:iteration items="{!v.ideasList}" var="idea" indexVar="i">
+								<aura:if isTrue="{!i == 0}"><p class="slds-text-heading--label">{!v.simIdeasSubtitle}</p></aura:if>
+								<p class="slds-tile__title slds-truncate"><a href="{!v.sitePath + v.pathToDetail + idea.Id}">{!idea.Title}</a> - {!idea.VoteTotal} points</p>
+							</aura:iteration>
+						</div>
+					</div>
+
+					<div class="slds-form-element" style="margin-top:20px">
+						<label class="slds-form-element__label" for="description">Description*</label>
+						<div class="slds-form-element__control">
+							<force:inputField aura:id="description" class="slds-input" required="true" Value="{!v.currIdea.Body}"/>
+						</div>
+					</div>
+
+					<div class="slds-form-element" style="margin-top:20px">
+						<label class="slds-form-element__label" for="categories">Categories</label>
+						<div class="slds-form-element__control">
+							<ui:inputSelect aura:id="categories" multiple="true" aura:disabled="false" class="slds-input slds-input-select-multi fluid dropdown" value="{!v.currIdea.Categories}">
+                            	<aura:iteration items="{!v.categoriesSet}" var="category">
+									<ui:inputSelectOption text="{!category}" Label="{!category}"/>
+								</aura:iteration>
+                            </ui:inputSelect>
+						</div>
+					</div>
+
+					<aura:if isTrue="{!v.useTopics}">
+						<div class="slds-form-element" style="margin-top:20px">
+							<label class="slds-form-element__label" for="selectedTopic">Topic</label>
+							<div class="slds-form-element__control">
+								<ui:inputSelect multiple="false" aura:id="selectedTopic" class="slds-input slds-input-select fluid dropdown">
+									<ui:inputSelectOption text="" Label="--None--" class="slds-input"/>
+									<aura:iteration items="{!v.topicNamesList}" var="topic">
+										<ui:inputSelectOption text="{!topic}" Label="{!topic}" class="slds-input"/>
+									</aura:iteration>
+								</ui:inputSelect>
+							</div>
+						</div>
+					</aura:if>
+				
+					<div class="slds-col slds-no-flex slds-align-bottom" style="margin-top:20px">
+						<div class="slds-grid">
+							<div class="slds-button-group" role="group">
+								<ui:button class="slds-button slds-button--neutral" label="Submit" press="{!c.submitIdea}"/>
+							</div>
+						</div>
+                        <div class="slds-grid" aura:id="resultsdiv">
+						<ui:outputRichText value="" aura:id="resultId"/>
+					</div>
+					</div>
+                </div>
+                
+            </div>
+		</div>
+		<aura:set attribute="else">
+			<div class="slds">
+				<ui:outputURL class="slds-button slds-button--neutral" label="Login to view" value="{! v.sitePrefix + '/login/?startURL=' + v.currentURL}"/> <!-- TODO - hardcoded -->
+			</div>
+		</aura:set>
+	</aura:renderIf>
+
+</aura:component>

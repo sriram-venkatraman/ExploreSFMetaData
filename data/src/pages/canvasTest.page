@@ -1,0 +1,74 @@
+<apex:page controller="canvasTest">
+    <apex:slds />
+
+    <script type="text/javascript" src="/canvas/sdk/js/30.0/controller.js" />
+    
+    <script>
+//https://venkatramans-developer-edition.na3.force.com/Catalog/oDataEmployee?Id=x08500000000001
+//https://testco--c.na16.visual.force.com/apex/canvasTest?Id=x08500000000001
+
+/*       Sfdc.canvas.controller.publish({
+            name: 'sriram68.testAction',
+            payload: {
+                status: 'Howdy'
+            }
+        });*/
+    //            alert('Published');
+    </script>
+
+    <!-- Salesforce Classic "Aloha" theme -->
+    <apex:variable var="uiTheme" value="classic2010Theme" 
+        rendered="{!$User.UIThemeDisplayed == 'Theme3'}">
+        <!-- apex:stylesheet value="{!URLFOR($Resource.AppStyles, 'classic-styling.css')}" -->
+    </apex:variable>
+    
+    <!-- Lightning Desktop theme -->
+    <apex:variable var="uiTheme" value="lightningDesktop" 
+        rendered="{!$User.UIThemeDisplayed == 'Theme4d'}">
+        <!-- apex:stylesheet value="{!URLFOR($Resource.AppStyles, 'lightning-styling.css')}" -->
+    </apex:variable>
+    
+    <!-- Salesforce1 mobile theme -->
+    <apex:variable var="uiTheme" value="Salesforce1" 
+        rendered="{!$User.UIThemeDisplayed == 'Theme4t'}">
+        <!-- apex:stylesheet value="{!URLFOR($Resource.AppStyles, 'mobile-styling.css')}" -->
+    </apex:variable>
+
+    <!-- Rest of your page -->
+    
+    <p>
+        Value of $User.UIThemeDisplayed: {! $User.UIThemeDisplayed }
+    </p>
+    <apex:outputPanel rendered="{! $User.UIThemeDisplayed == 'Theme3' }">
+        <apex:outputText value="This is Salesforce Classic."/>
+        <apex:outputText value="These are multiple components wrapped by an outputPanel."/>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{! $User.UIThemeDisplayed == 'Theme4d' }">
+        <apex:outputText value="Everything is simpler in Lightning Experience."/>
+    </apex:outputPanel>
+    
+
+    <apex:canvasApp developerName="My_Developer_Org" parameters="{!getParameters}" border="1" width="100%" height="100%" scrolling="auto"/>
+    
+    <script>
+
+        function testpayload (msg) { 
+
+         Sfdc.canvas.controller.publish({
+             name: 'sriram68.testAction', 
+             payload : {status : msg}
+             }); 
+
+         };
+
+    </script>
+   
+    <apex:form >
+        <apex:commandLink onclick="testpayload('Open')" value="Open" reRender="TestPanel" /><br/>
+        <apex:commandLink onclick="testpayload('Closed')" value="Closed" reRender="TestPanel" />
+        <apex:outputPanel id="TestPanel">
+        </apex:outputPanel>
+    </apex:form>
+
+
+</apex:page>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Audit History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Audit Histories</value>
+    </caseValues>
+    <fields>
+        <label><!-- Change Date Time --></label>
+        <name>Change_Date_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Changed By --></label>
+        <name>Changed_By__c</name>
+        <relationshipLabel><!-- Audit Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Field --></label>
+        <name>Field__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Value --></label>
+        <name>New_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Old Value --></label>
+        <name>Old_Value__c</name>
+    </fields>
+    <fields>
+        <label><!-- Opportunity --></label>
+        <name>Opportunity__c</name>
+        <relationshipLabel><!-- Audit Histories --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

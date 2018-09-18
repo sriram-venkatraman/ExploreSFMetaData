@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Custom Opportunity Team Member</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Custom Opportunity Team Members</value>
+    </caseValues>
+    <fields>
+        <label><!-- Custom Opportunity Team --></label>
+        <name>Custom_Opportunity_Team__c</name>
+        <relationshipLabel><!-- Custom Opportunity Team Members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Team Member --></label>
+        <name>Team_Member__c</name>
+        <relationshipLabel><!-- Custom Opportunity Team Members --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Team Role --></label>
+        <name>Team_Role__c</name>
+        <picklistValues>
+            <masterLabel>Deal Support</masterLabel>
+            <translation><!-- Deal Support --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Custom Opportunity Team Member Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

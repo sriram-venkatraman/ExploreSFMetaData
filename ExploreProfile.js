@@ -7,7 +7,7 @@ var outJson = [];
 
 var methods = {
     exploreProfile: function (profile) {
-        var data = fs.readFileSync('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/profiles/' + profile + '.profile');
+        var data = fs.readFileSync('./data/src/profiles/' + profile + '.profile');
         var json = parser.toJson(data);
         // console.log(json);
         var d3j = c2D3js.convert2D3JSONSync(json);

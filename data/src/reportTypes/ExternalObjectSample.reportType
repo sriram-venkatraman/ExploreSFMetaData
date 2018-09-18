@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Sample__x</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Show simple report on external object &quot;sample&quot;</description>
+    <label>ExternalObjectSample</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CurrencyIsoCode</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>ExternalId</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>DisplayUrl</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Name__c</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Account__c</field>
+            <table>Sample__x</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Opportunity__c</field>
+            <table>Sample__x</table>
+        </columns>
+        <masterLabel>Sample</masterLabel>
+    </sections>
+</ReportType>

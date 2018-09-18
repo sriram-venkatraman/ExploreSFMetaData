@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Community xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <communityFeedPage>Community_Zone_main</communityFeedPage>
+    <description>Exposed to Communities</description>
+    <emailNotificationUrl>https://platform-academy-1478dfae2dc-149e7e8969b.force.com/{!communityUrlPrefix}/Community_Zone_main?id={!entityId}</emailNotificationUrl>
+    <enableChatterAnswers>true</enableChatterAnswers>
+    <enablePrivateQuestions>true</enablePrivateQuestions>
+    <reputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Newbie</name>
+            <value>0</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Smartie</name>
+            <value>500</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>Pro</name>
+            <value>2000</value>
+        </chatterAnswersReputationLevels>
+        <chatterAnswersReputationLevels>
+            <name>All Star</name>
+            <value>5000</value>
+        </chatterAnswersReputationLevels>
+        <ideaReputationLevels>
+            <name>Observer</name>
+            <value>0</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Contributor</name>
+            <value>100</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Influencer</name>
+            <value>400</value>
+        </ideaReputationLevels>
+        <ideaReputationLevels>
+            <name>Thought Leader</name>
+            <value>1500</value>
+        </ideaReputationLevels>
+    </reputationLevels>
+    <showInPortal>false</showInPortal>
+    <site>Sriram_s_Customers_Ideas</site>
+</Community>

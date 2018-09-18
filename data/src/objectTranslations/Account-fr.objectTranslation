@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- Some Help Text --></help>
+        <label>Accès</label>
+        <name>Access__c</name>
+    </fields>
+    <fields>
+        <help><!-- The assigned branch of the account --></help>
+        <label>Branche</label>
+        <name>Branch__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Text --></label>
+        <name>Email_Text_del__c</name>
+    </fields>
+    <fields>
+        <help><!-- Venkatraman: Will contain count of open opportunities for this account record --></help>
+        <label>Opportunités ouvertes</label>
+        <name>Open_Opportunities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tax ID --></label>
+        <name>Tax_ID__c</name>
+    </fields>
+    <fields>
+        <label>étage</label>
+        <name>Tier__c</name>
+        <picklistValues>
+            <masterLabel>Tier 1</masterLabel>
+            <translation><!-- Tier 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tier 2</masterLabel>
+            <translation><!-- Tier 2 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- top level in the partner hierarchy --></help>
+        <label>Haut Niveau</label>
+        <name>Top_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ultimate Parent Level --></label>
+        <name>Ultimate_Parent_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Ultimate Parent --></label>
+        <name>Ultimate_Parent__c</name>
+    </fields>
+    <layouts>
+        <layout>Account Layout</layout>
+        <sections>
+            <label><!-- Account Hierarchy --></label>
+            <section>Account Hierarchy</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Quick Number Add --></label>
+        <name>Quick_Number_Add</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Standard Account --></label>
+        <name>Standard_Account</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- AltavistaNews --></label>
+        <name>AltavistaNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleNews --></label>
+        <name>GoogleNews</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- HooversProfile --></label>
+        <name>HooversProfile</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Launch_Salesforce --></label>
+        <name>Launch_Salesforce</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Show_Opportunities_under_this_Parent --></label>
+        <name>Show_Opportunities_under_this_Parent</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Tip_Calculator --></label>
+        <name>Tip_Calculator</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+</CustomObjectTranslation>

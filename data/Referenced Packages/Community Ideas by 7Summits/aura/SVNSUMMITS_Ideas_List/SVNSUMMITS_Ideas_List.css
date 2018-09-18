@@ -1,0 +1,69 @@
+.THIS .hide {
+	display: none;
+}
+
+/*.THIS .red {
+    background-color: red;
+}
+*/
+.THIS .green {
+    width: 100%;
+}
+
+.THIS .yellow {
+    background-color: yellow;
+}
+
+.THIS .gray {
+    background-color: gray;
+}
+
+.THIS .upsideDown {
+    transform: rotateX(180deg);
+}
+
+.THIS .slds-text-heading--weighted {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.THIS .voteButton {
+    border: none;
+    background: transparent;
+}
+
+.THIS .vote-block {
+	color: DimGray;
+	fill: DimGray;
+}
+
+.THIS.cozy .vote-block {
+	min-width: 100px;
+}
+
+.THIS.compact .vote-block {
+	min-width: 60px;
+}
+
+.THIS .vote-block .slds-icon {
+	fill: inherit;
+}
+
+.THIS .vote-button {
+    display: -webkit-box;
+    margin-left: auto !important;
+    margin-right: auto;
+    margin-top: 5px;
+    fill: white;
+    width: 100%;
+    cursor: pointer;
+}
+
+.THIS .voteSecondary {
+    background-color: rgba(0, 112, 210, 0.2);
+}
+
+.THIS .attachment {
+	float: right;
+	height: 100px;
+}

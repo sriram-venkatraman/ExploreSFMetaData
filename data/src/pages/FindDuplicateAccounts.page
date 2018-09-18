@@ -1,0 +1,101 @@
+<apex:page controller="findDuplicateAccounts">
+    <apex:sectionHeader title="Find Customer"/>
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom" >
+                <apex:outputPanel id="xx">
+                <apex:commandButton action="{!save}" value="Save"  rendered="{! clickedFind && dateMsg == ''}"/>
+                <apex:commandButton value="Find" rerender="accountlist">
+                    <apex:actionSupport event="onclick" rerender="accountlist,xx" status="counterStatus" disabled="{! dateMsg != ''}">
+                        <apex:param name="x" value="true" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                </apex:commandButton>
+                </apex:outputPanel>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection columns="2">
+                <apex:inputText value="{!PersonAccount.firstname}">
+                    <apex:actionSupport event="onchange" rerender="xx">
+                        <apex:param name="x" value="false" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                </apex:inputText>
+
+                <apex:inputText value="{!PersonAccount.lastname}">
+                    <apex:actionSupport event="onchange" rerender="xx">
+                        <apex:param name="x" value="false" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                </apex:inputText>
+
+                <apex:inputField value="{!PersonAccount.SSN__pc}"> 
+                    <apex:actionSupport event="onchange" action="{!doDateValidation}" reRender="dv,xx">
+                        <apex:param name="x" value="false" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                    
+                    <apex:outputPanel id="dv">
+                        <apex:outputText value="{!dateMsg}"/>
+                    </apex:outputPanel>
+                </apex:inputField>
+
+                <apex:inputField value="{!PersonAccount.phone}"> 
+                    <apex:actionSupport event="onchange" rerender="xx">
+                        <apex:param name="x" value="false" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                </apex:inputField>
+
+                <apex:inputField value="{!PersonAccount.personbirthdate}"> 
+                    <apex:actionSupport event="onchange" rerender="xx">
+                        <apex:param name="x" value="false" assignTo="{!clickedFind}"/>
+                    </apex:actionSupport>
+                </apex:inputField>
+
+                <apex:inputField value="{!PersonAccount.Billingpostalcode}">
+                    <apex:actionSupport event="onchange" reRender="adv">
+                        <apex:param name="x" value="" assignTo="{!addressMsg}"/>
+                    </apex:actionSupport>
+                </apex:inputField>
+                
+                <apex:inputField value="{!PersonAccount.billingstate}" >
+                    <apex:actionSupport event="onchange" action="{!doAddressValidation}" reRender="adv"/>
+                    <apex:outputPanel id="adv">
+                        <apex:outputText value="{!addressMsg}"/>
+                    </apex:outputPanel>
+                </apex:inputField>
+
+                <apex:actionStatus id="counterStatus" startText=" (Fetching...)"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:outputPanel id="accountlist"> 
+            <apex:outputPanel rendered="{!if(setAcct==null,false,true)}">
+                <apex:pageBlock title="Possible Duplicates">
+                    <apex:pageBlockTable value="{!accounts}" var="a">
+                        <apex:column >
+                            <apex:commandLink value="Pick" action="{!pickThisAccount}"> 
+                                <apex:param name="x" value="{!a.Id}" assignTo="{!currentAccountId}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                        <apex:column value="{!a.firstname}"/>
+                        <apex:column value="{!a.lastname}"/>
+                        <apex:column value="{!a.SSN__pc}"/>
+                        <apex:column value="{!a.Phone}"/>
+                        <apex:column value="{!a.PersonBirthDate}"/>
+                        <apex:column value="{!a.BillingState}"/>
+                        <apex:column value="{!a.BillingPostalCode}"/>
+                    </apex:pageBlockTable>
+                   
+                    <apex:commandLink rendered="{!setAcct.hasPrevious}" value="First" action="{!setAcct.first}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasPrevious}" value="Previous" action="{!setAcct.previous}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:outputText rendered="{!if(setAcct==null,false,(setAcct.pageNumber * setAcct.pageSize) < setAcct.ResultSize)}" value="{!setAcct.pageNumber * setAcct.pageSize} Of {!setAcct.ResultSize}"></apex:outputText>
+                    <apex:outputText rendered="{!if(setAcct==null,false,(setAcct.pageNumber * setAcct.pageSize) >= setAcct.ResultSize)}" value="{!setAcct.ResultSize} Of {!setAcct.ResultSize}"></apex:outputText>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasNext}" value="Next" action="{!setAcct.next}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasNext}" value="Last" action="{!setAcct.last}" reRender="accountlist"/>
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:outputPanel> 
+
+    </apex:form>
+</apex:page>

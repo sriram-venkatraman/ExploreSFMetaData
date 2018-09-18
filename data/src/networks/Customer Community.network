@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowMembersToFlag>false</allowMembersToFlag>
+    <branding>
+        <loginFooterText>salesforce.com</loginFooterText>
+        <pageHeader>SharedDocuments/Partner_Logo.jpg</pageHeader>
+        <primaryColor>#1B9520</primaryColor>
+        <primaryComplementColor>#FFFFFF</primaryComplementColor>
+        <quaternaryColor>#418544</quaternaryColor>
+        <quaternaryComplementColor>#FFFFFF</quaternaryComplementColor>
+        <secondaryColor>#65B068</secondaryColor>
+        <tertiaryColor>#BBDABC</tertiaryColor>
+        <tertiaryComplementColor>#222222</tertiaryComplementColor>
+        <zeronaryColor>#65B068</zeronaryColor>
+        <zeronaryComplementColor>#222222</zeronaryComplementColor>
+    </branding>
+    <changePasswordTemplate>unfiled$public/CommunityChangePasswordEmailTemplate</changePasswordTemplate>
+    <emailSenderAddress>sriram.venkatraman@salesforce.com</emailSenderAddress>
+    <emailSenderName>Customer Community</emailSenderName>
+    <enableGuestChatter>true</enableGuestChatter>
+    <enableInvitation>false</enableInvitation>
+    <enableKnowledgeable>true</enableKnowledgeable>
+    <enableNicknameDisplay>false</enableNicknameDisplay>
+    <enablePrivateMessages>false</enablePrivateMessages>
+    <enableReputation>true</enableReputation>
+    <forgotPasswordTemplate>unfiled$public/CommunityForgotPasswordEmailTemplate</forgotPasswordTemplate>
+    <networkMemberGroups>
+        <profile>Admin</profile>
+        <profile>Customer Community User</profile>
+    </networkMemberGroups>
+    <selfRegProfile>customer community user</selfRegProfile>
+    <selfRegistration>true</selfRegistration>
+    <sendWelcomeEmail>true</sendWelcomeEmail>
+    <site>Customer_Community</site>
+    <status>DownForMaintenance</status>
+    <tabs>
+        <defaultTab>Account</defaultTab>
+        <standardTab>Account</standardTab>
+        <standardTab>Chatter</standardTab>
+        <standardTab>Contact</standardTab>
+        <standardTab>Case</standardTab>
+        <standardTab>Knowledge</standardTab>
+        <standardTab>Opportunity</standardTab>
+        <standardTab>Solution</standardTab>
+        <standardTab>home</standardTab>
+        <standardTab>Product2</standardTab>
+        <standardTab>Order</standardTab>
+    </tabs>
+    <urlPathPrefix>customers</urlPathPrefix>
+    <welcomeTemplate>unfiled$public/CommunityWelcomeEmailTemplate</welcomeTemplate>
+</Network>

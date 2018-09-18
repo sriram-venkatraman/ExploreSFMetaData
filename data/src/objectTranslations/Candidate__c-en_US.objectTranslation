@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Candidate</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Candidates</value>
+    </caseValues>
+    <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
+        <picklistValues>
+            <masterLabel>Value-001</masterLabel>
+            <translation><!-- Value-001 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-002</masterLabel>
+            <translation><!-- Value-002 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-003</masterLabel>
+            <translation><!-- Value-003 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-004</masterLabel>
+            <translation><!-- Value-004 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-005</masterLabel>
+            <translation><!-- Value-005 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-006</masterLabel>
+            <translation><!-- Value-006 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-007</masterLabel>
+            <translation><!-- Value-007 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-008</masterLabel>
+            <translation><!-- Value-008 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-009</masterLabel>
+            <translation><!-- Value-009 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-010</masterLabel>
+            <translation><!-- Value-010 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-011</masterLabel>
+            <translation><!-- Value-011 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-012</masterLabel>
+            <translation><!-- Value-012 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-013</masterLabel>
+            <translation><!-- Value-013 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-014</masterLabel>
+            <translation><!-- Value-014 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-015</masterLabel>
+            <translation><!-- Value-015 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-016</masterLabel>
+            <translation><!-- Value-016 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-017</masterLabel>
+            <translation><!-- Value-017 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-018</masterLabel>
+            <translation><!-- Value-018 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-019</masterLabel>
+            <translation><!-- Value-019 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-020</masterLabel>
+            <translation><!-- Value-020 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-021</masterLabel>
+            <translation><!-- Value-021 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-022</masterLabel>
+            <translation><!-- Value-022 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-023</masterLabel>
+            <translation><!-- Value-023 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-024</masterLabel>
+            <translation><!-- Value-024 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-025</masterLabel>
+            <translation><!-- Value-025 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-029</masterLabel>
+            <translation><!-- Value-029 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Value-030</masterLabel>
+            <translation><!-- Value-030 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bootcamp --></label>
+        <name>Bootcamp__c</name>
+        <relationshipLabel><!-- Candidates --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Candidates --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Test External Id --></label>
+        <name>Test_External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Week --></label>
+        <name>Week__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

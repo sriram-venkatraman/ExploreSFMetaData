@@ -1,0 +1,11 @@
+.THIS .uiOutputRichText ol {
+    list-style:decimal;
+    padding-left:20px;
+    margin:20px;
+}
+
+.THIS .uiOutputRichText ul {
+    list-style:disc;
+    padding-left:20px;
+    margin:20px;
+}

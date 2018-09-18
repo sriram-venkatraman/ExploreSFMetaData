@@ -1,0 +1,15 @@
+<apex:page controller="ChildRemoteController" >
+    <script type="text/javascript">
+        function sayHello(helloTo) {
+            ChildRemoteController.sayHello(helloTo, function(result, event){
+                if(event.status) {
+                    document.getElementById("result").innerHTML = result;
+                }
+            });
+        }
+    </script>
+
+    <button onclick="sayHello('Jude');">Say Hello</button><br/>
+    <div id="result">[Results]</div>
+    
+</apex:page>

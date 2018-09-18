@@ -9,7 +9,7 @@ var methods = {
 
         var outJson = [];
 
-        fs.readFile('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/objects/' + objName + '.object', function (err, data) {
+        fs.readFile('./data/src/objects/' + objName + '.object', function (err, data) {
             var json = parser.toJson(data);
             // console.log(json);
             var d3json = c2D3js.convert2D3JSON(json, function (d3j) {
@@ -23,7 +23,7 @@ var methods = {
     },
 
     addWorkflows: function (objName) {
-        fs.readFile('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/workflows/' + objName + '.workflow', function (err, data) {
+        fs.readFile('./data/src/workflows/' + objName + '.workflow', function (err, data) {
             var json = parser.toJson(data);
             var d3json = c2D3js.convert2D3JSON(json, function (d3j) {
                 // console.log(JSON.stringify(d3j));
@@ -37,7 +37,7 @@ var methods = {
     },
 
     addLayouts: function (objName) {
-        var inPath = '/Users/sriram.venkatraman/Documents/workspace/TestCo/src/layouts';
+        var inPath = './data/src/layouts';
         var outLayoutJson = [];
         var files = fs.readdirSync(inPath);
         var data, json, d3j, d3js;

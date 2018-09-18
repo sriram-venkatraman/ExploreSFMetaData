@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuthProvider xmlns="http://soap.sforce.com/2006/04/metadata">
+    <authorizeUrl>https://sriramvenkatramansfdc-test.apigee.net/oauth/client_credential/accesstoken</authorizeUrl>
+    <consumerKey>YXA6U7VIxgLCEeeaOArYgfQDvw</consumerKey>
+    <consumerSecret>lwqKqAX6I0SZbu0WL+w9yV9SKok8AOBdixcvXJzsUQM=</consumerSecret>
+    <friendlyName>APIGEE</friendlyName>
+    <providerType>OpenIdConnect</providerType>
+    <tokenUrl>https://sriramvenkatramansfdc-test.apigee.net/oauth/client_credential/accesstoken</tokenUrl>
+</AuthProvider>

@@ -1,0 +1,5 @@
+<apex:page controller="myListViewURLController" >
+    <apex:form >
+        <apex:outputLink value="{!AllAccountsListViewURL}">All Accounts</apex:outputLink> 
+    </apex:form>
+</apex:page>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>ForecastUserId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ParentTerritoryId</fullName>
+        <type>Lookup</type>
+    </fields>
+    <listViews>
+        <fullName>AllTerritories</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+</CustomObject>

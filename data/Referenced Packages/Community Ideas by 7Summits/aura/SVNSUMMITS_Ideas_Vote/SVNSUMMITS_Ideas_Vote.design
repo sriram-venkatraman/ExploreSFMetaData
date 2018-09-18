@@ -1,0 +1,7 @@
+<design:component>
+    <design:attribute name="debugMode" label="Debug Mode" description="Enable/disable debug mode" required="true"/>
+    <design:attribute name="disableDownVoting" label="Disable Downvoting" description="Enable/disable Downvoting"/>
+    <design:attribute name="zoneName" label="Zone Name" description="Ideas Zone Name" required="true"/>
+    <design:attribute name="recordId" default="{!recordId}" label="Record Id" description="Idea Record Id. Use {!recordId} to pass the record Id from the page url" required="true"/>
+
+</design:component>

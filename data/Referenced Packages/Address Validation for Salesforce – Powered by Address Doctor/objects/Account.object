@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Billing_Address_Validation_Status__c</fullName>
+        <defaultValue>&quot;Not Verified&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <encrypted>false</encrypted>
+        <externalId>false</externalId>
+        <label>Billing Address Validation Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Shipping_Address_Validation_Status__c</fullName>
+        <defaultValue>&quot;Not Verified&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <encrypted>false</encrypted>
+        <externalId>false</externalId>
+        <label>Shipping Address Validation Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>Verify_Billing_Address</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify Billing Address</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if((&apos;{!JSENCODE(Account.BillingCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingCountry)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.BillingStreet)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingStreet)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.BillingCity)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingCity)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.BillingState)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingState)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.BillingPostalCode)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingPostalCode)}&apos;==null)) 
+{ 
+var url=&quot;/apex/INFA_AV__selectaddress?id=&quot;+&quot;{!Account.Id}&quot;+&quot;&amp;type=&quot;+&quot;account&quot;+&quot;&amp;mode=1&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100&apos;); 
+//window.top.location.reload(true); 
+} 
+else if(&apos;{!Account.Billing_Address_Validation_Status__c}&apos;!=&apos;Address Verified&apos;) 
+{ 
+if((&apos;{!JSENCODE(Account.BillingCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.BillingCountry)}&apos;==null) &amp;&amp;((&apos;{!JSENCODE(Account.BillingStreet)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.BillingStreet)}&apos;!=null) ||(&apos;{!JSENCODE(Account.BillingCity)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.BillingCity)}&apos;!=null) ||(&apos;{!JSENCODE(Account.BillingState)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.BillingState)}&apos;!=null) ||(&apos;{!JSENCODE(Account.BillingPostalCode)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.BillingPostalCode)}&apos;!=null))) 
+{ 
+alert(&apos;Billing Country is mandatory&apos;); 
+} 
+else 
+{ 
+var url=&quot;/apex/INFA_AV__verifyAddress?id=&quot;+&quot;{!Account.Id}&quot;+&quot;&amp;type=&quot;+&quot;account&quot;+&quot;&amp;mode=1&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100,scrollbars=yes&apos;); 
+//window.top.location.reload(true); 
+} 
+} 
+else if(&apos;{!Account.Billing_Address_Validation_Status__c}&apos;==&apos;Address Verified&apos;) 
+{ 
+alert(&apos;Billing Address is already verified&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Verify_Shipping_Address</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify Shipping Address</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if((&apos;{! JSENCODE(Account.ShippingCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingCountry)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.ShippingStreet)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingStreet)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.ShippingCity)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingCity)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.ShippingState)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingState)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Account.ShippingPostalCode)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingPostalCode)}&apos;==null)) 
+{ 
+var url=&quot;/apex/INFA_AV__selectaddress?id=&quot;+&quot;{!Account.Id}&quot;+&quot;&amp;type=&quot;+&quot;account&quot;+&quot;&amp;mode=2&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100&apos;); 
+//window.top.location.reload(true); 
+} 
+else if(&apos;{!Account.Shipping_Address_Validation_Status__c}&apos;!=&apos;Address Verified&apos;)
+{
+if((&apos;{!JSENCODE(Account.ShippingCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Account.ShippingCountry)}&apos;==null) &amp;&amp;((&apos;{!JSENCODE(Account.ShippingStreet)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.ShippingStreet)}&apos;!=null) ||(&apos;{!JSENCODE(Account.ShippingCity)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.ShippingCity)}&apos;!=null) ||(&apos;{!JSENCODE(Account.ShippingState)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.ShippingState)}&apos;!=null) ||(&apos;{!JSENCODE(Account.ShippingPostalCode)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Account.ShippingPostalCode)}&apos;!=null))) 
+{ 
+alert(&apos;Shipping Country is mandatory&apos;); 
+}
+else
+{
+var url=&quot;/apex/INFA_AV__verifyAddress?id=&quot;+&quot;{!Account.Id}&quot;+&quot;&amp;type=&quot;+&quot;account&quot;+&quot;&amp;mode=2&quot;; 
+var val =window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100,scrollbars=yes&apos;); 
+//window.top.location.reload(true); 
+}
+}
+else if(&apos;{!Account.Shipping_Address_Validation_Status__c}&apos;==&apos;Address Verified&apos;) 
+{ 
+alert(&apos;Shipping Address is already verified&apos;); 
+}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,832 @@
+<apex:page sidebar="false" title="AV Setup" controller="INFA_AV.CVSMasterCtlr" standardStylesheets="false" id="thePage" tabStyle="AV_Setup__tab">
+<style>
+.tooltip { 
+border-bottom: 1px dotted #000000; color: #000000; outline: none; text-decoration: none;
+position: relative; }
+    
+.tooltip span { 
+margin-left: -999em; position: absolute; }
+
+.tooltip:hover span {
+border-radius: 5px 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
+box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); -webkit-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); 
+-moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1); font-family: Calibri, Tahoma, Geneva, sans-serif; 
+position: absolute; left: 1em; top: 2em; z-index: 99; margin-left: 0; width: 150px; 
+}
+
+.classic {background: #FFFFAA; border: 1px solid #FFAD33; }
+
+#wrapper #inner_wrapper #footer #middle_f img{ 
+/*width:180px; 
+height:50px; */
+margin:30px 6px 0px 0; padding:0; float:right}
+
+.bPageBlock .detailList .labelCol  {
+width: 20%;
+}
+.bPageBlock {
+border-top: 4px solid rgb(253, 253, 253)!important;
+}
+ 
+.pbSubheader {
+background-color: rgb(112, 181, 219)!important;
+}
+</style>
+<apex:form id="theForm">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<apex:composition template="INFA_AV__cvstemplate" >
+    <apex:define name="heading"><p>Address Validation Setup</p></apex:define>
+    <apex:define name="image_1"><img src="{!URLFOR($Resource.AddressDoctor,'SR/images/1.jpg')}" border="0" height="45px" width="45px"/></apex:define>
+    <apex:define name="left_middle1"><a href="/apex/CVSMasterPage"><span >Overview</span></a></apex:define>
+    
+    <apex:define name="image_2"><img src="{!URLFOR($Resource.AddressDoctor,'SR/images/2.jpg')}" border="0" height="45px" width="45px"/></apex:define> 
+    <apex:define name="left_middle2"> <apex:commandLink action="{!Login}" value="Login" id="auth" immediate="true"  /></apex:define>
+    
+    
+    <apex:define name="image_3"><img src="{!URLFOR($Resource.AddressDoctor,'SR/images/3.jpg')}" border="0" height="45px" width="45px"/></apex:define>
+    <apex:define name="left_middle3"><apex:commandLink action="{!addressmapping}" value="Field Mapping" id="mapp" immediate="true"  /></apex:define>
+    <apex:define name="rackspace"></apex:define>
+    
+    <apex:define name="image_4"><img src="{!URLFOR($Resource.AddressDoctor,'SR/images/4.jpg')}" border="0" height="45px" width="45px"/></apex:define>
+    <apex:define name="left_middle4"><apex:commandLink action="{!showsetting}" value="Settings" id="set" immediate="true"  /></apex:define>
+    <apex:define name="rackspace"></apex:define>
+    
+    
+    
+    <apex:define name="block_5"></apex:define> 
+    <apex:define name="block_6"></apex:define> 
+    <apex:define name="bottomline"></apex:define>
+    
+    <apex:define name="body">
+        <apex:outputPanel rendered="{!NOT(logpanel)}" id="overviewPanel">
+            
+            <table cellspacing="0" cellpadding="0" style="float:left;margin:10px 10px 6px 10px;width:700px ">
+                <tr>
+                    <td style="height:10px; padding-left:15px; padding-right:10px; padding-top:5px; " valign="top"><font size="2.5" face="Arial" ><b><!--About us--></b></font><br/></td>
+                </tr>
+            </table>
+            <table cellspacing="0" cellpadding="0" style="float:left;margin:10px 0px 6px 10px;width:100% ">
+              
+                <tr>
+                    <td align="left" style="height:30px; padding-left:15px; padding-right:10px; " valign="top">
+                         <image src="{!URLFOR($Resource.AddressDoctor,'SR/images/right.png')}" width="15" height="15"/></td><td style="valign:left; padding-right:10px; " valign="top">
+                         <span><font size="2.5">You can Validate your address in Salesforce.com</font></span>
+                    </td>
+                </tr>                 
+                <tr>
+                    <td align="left" style="height:30px; padding-left:15px; padding-right:10px; " valign="top">
+                         <image src="{!URLFOR($Resource.AddressDoctor,'SR/images/right.png')}" width="15" height="15"/></td><td style="valign:left; padding-right:10px; " valign="top">
+                         <span><font size="2.5">If we don&#39;t find a single unique match, you can choose one from the available suggestions.</font></span>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td align="left" style="height:30px; padding-left:15px; padding-right:10px; " valign="top">
+                         <image src="{!URLFOR($Resource.AddressDoctor,'SR/images/right.png')}" width="15" height="15"/></td><td style="valign:left; padding-right:10px; " valign="top">
+                         <span><font size="2.5">After you select an address, it is committed to Salesforce. </font></span>
+                    </td>
+                </tr>
+                
+            </table>
+        </apex:outputPanel>
+    
+        <apex:outputPanel id="panel1" rendered="{!logpanel2}" >  
+                  
+          <apex:pageMessages escape="false" />       
+            
+                <apex:outputPanel rendered="{!NOT(readMode)}" id="newInformaticaRec"> 
+                      <apex:outputPanel rendered="{!NOT(createAccount)}" id="loginsecPanel">
+                          <table cellpadding="10" cellspacing="15" border="0"  >
+                            <tr>
+                                <td align="center" style="height:30px; padding-left:15px; padding-right:10px;font-weight:bold; ">User Name</td>                                    
+                                <td align="left" colspan="2"  height="2.5px"><apex:inputText value="{!userName}"  id="userId"/> </td>
+                            </tr>
+                            <tr> 
+                                <td align="center" style="font-weight:bold;" >Password</td> 
+                                <td  height="2.5px" colspan="2"><apex:inputSecret value="{!password}"  id="passwordId"/></td>
+                            </tr>
+                            
+                            <tr ><!--reRender="panel1"-->
+                                <td align="right">  <apex:commandButton value=""  id="saveCVS1" styleClass="save" action="{!saveLogin}"  /> </td>
+                                <td > <apex:commandButton value=""  id="cancelCVS1" styleClass="cancel" immediate="true" action="{!cancle}"/></td> 
+                                <td align="left">  
+                                    <apex:commandButton value="" id="autoProvisionCVS2" styleClass="createAccountBtn" immediate="true" 
+                                     action="{!togglecreateAccount}" rendered="{!createButton}" />
+                                </td>
+                            </tr>
+                           </table>
+                       </apex:outputPanel>
+                       <apex:outputPanel rendered="{!createAccount}" id="createAccPanel">
+                            <table cellpadding="4" cellspacing="6" border="0" width="100%"  >
+                                <tr>
+                                    <td colspan="4" align="center" style="font-weight:bold; font-size:18px; "> <font color="red"> {!errorMsg} </font></td>
+                                </tr>
+                               
+                            
+                              
+                              
+                              <tr>
+                                <th>    Contact Information</th>
+                              </tr>
+                              
+                              <tr> 
+                                <td   nowrap="nowrap">First Name<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!conInfo.FirstName}"/></td>
+                                <td   nowrap="nowrap">Last Name<font color="red">*</font></td>
+                                <td  height="2.5px" ><apex:inputText value="{!conInfo.LastName}"/> </td>
+                              </tr>
+                              
+                              <tr> 
+                                <td  >Email<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!conInfo.Email}" id="inputEmail"/> </td>
+                                <td  >Gender  <font color="red">*</font></td>
+                                <td  height="2.5px">
+                                    <apex:selectList value="{!conInfo.Gender}" multiselect="false" size="1">
+                                         <apex:selectOption itemLabel="--None--" itemValue=""/>
+                                        <apex:selectOption itemLabel="Male" itemValue="Male"/>
+                                        <apex:selectOption itemLabel="Female" itemValue="Female"/>
+                                    </apex:selectList>
+                                </td>
+                              </tr>
+                              
+                              <tr> 
+                                <td  >Job Function</td>
+                                <td  height="2.5px"><apex:inputText value="{!conInfo.JobFunction}"/> </td>
+                                <td  >Language<font color="red">*</font></td>
+                                <td  height="2.5px">
+                                    <apex:selectList value="{!conInfo.Language}" size="1" multiselect="false"> 
+                                        <apex:selectOption itemLabel="--None--" itemValue=""/>
+                                        <apex:selectOption itemLabel="Abkhazian" itemValue="ab"/>
+                                        <apex:selectOption itemLabel="Afar" itemValue="aa"/>
+                                        <apex:selectOption itemLabel="Afrikaans" itemValue="af"/>
+                                        <apex:selectOption itemLabel="Albanian" itemValue="sq"/>
+                                        <apex:selectOption itemLabel="Amharic" itemValue="am"/>
+                                        <apex:selectOption itemLabel="Arabic" itemValue="ar"/>
+                                        <apex:selectOption itemLabel="Aragonese" itemValue="an"/>
+                                        <apex:selectOption itemLabel="Armenian" itemValue="hy"/>
+                                        <apex:selectOption itemLabel="Assamese" itemValue="as"/>
+                                        <apex:selectOption itemLabel="Aymara" itemValue="ay"/>
+                                        <apex:selectOption itemLabel="Azerbaijani" itemValue="az"/>
+                                        <apex:selectOption itemLabel="Bashkir" itemValue="ba"/>
+                                        <apex:selectOption itemLabel="Basque" itemValue="eu"/>
+                                        <apex:selectOption itemLabel="Bengali " itemValue="bn"/>
+                                        <apex:selectOption itemLabel="Bhutani" itemValue="dz"/>
+                                        <apex:selectOption itemLabel="Bihari" itemValue="bh"/>
+                                        <apex:selectOption itemLabel="Bislama" itemValue="bi"/>
+                                        <apex:selectOption itemLabel="Bulgarian" itemValue="bg"/>
+                                        <apex:selectOption itemLabel="Burmese" itemValue="my"/>
+                                        <apex:selectOption itemLabel="Byelorussian " itemValue="be"/>
+                                        <apex:selectOption itemLabel="Cambodian" itemValue="km"/>
+                                        <apex:selectOption itemLabel="Catalan" itemValue="ca"/>
+                                        <apex:selectOption itemLabel="Chinese " itemValue="zh"/>
+                                        <apex:selectOption itemLabel="Corsican" itemValue="co"/>
+                                        <apex:selectOption itemLabel="Croatian" itemValue="hr"/>
+                                        <apex:selectOption itemLabel="Czech" itemValue="cs"/>
+                                        <apex:selectOption itemLabel="Danish" itemValue="da"/>
+                                        <apex:selectOption itemLabel="Dutch" itemValue="nl"/>
+                                        <apex:selectOption itemLabel="English" itemValue="en"/>
+                                        <apex:selectOption itemLabel="Esperanto" itemValue="eo"/>
+                                        <apex:selectOption itemLabel="Estonian" itemValue="et"/>
+                                        <apex:selectOption itemLabel="Faeroese" itemValue="fo"/>
+                                        <apex:selectOption itemLabel="Farsi" itemValue="fa"/>
+                                        <apex:selectOption itemLabel="Fiji" itemValue="fj"/>
+                                        <apex:selectOption itemLabel="Finnish" itemValue="fi"/>
+                                        <apex:selectOption itemLabel="French" itemValue="fr"/>
+                                        <apex:selectOption itemLabel="Frisian" itemValue="fy"/>
+                                        <apex:selectOption itemLabel="Galician" itemValue="gl"/>
+                                        <apex:selectOption itemLabel="Gaelic " itemValue="gd"/>
+                                        <apex:selectOption itemLabel="Georgian" itemValue="ka"/>
+                                        <apex:selectOption itemLabel="German" itemValue="de"/>
+                                        <apex:selectOption itemLabel="Greek" itemValue="el"/>
+                                        <apex:selectOption itemLabel="Greenlandic" itemValue="kl"/>
+                                        <apex:selectOption itemLabel="Guarani" itemValue="gn"/>
+                                        <apex:selectOption itemLabel="Gujarati" itemValue="gu"/>
+                                        <apex:selectOption itemLabel="Haitian Creole" itemValue="ht"/>
+                                        <apex:selectOption itemLabel="Hausa" itemValue="ha"/>
+                                        <apex:selectOption itemLabel="Hebrew" itemValue="he"/>
+                                        <apex:selectOption itemLabel="Hindi" itemValue="hi"/>
+                                        <apex:selectOption itemLabel="Hungarian" itemValue="hu"/>
+                                        <apex:selectOption itemLabel="Icelandic" itemValue="is"/>
+                                        <apex:selectOption itemLabel="Ido" itemValue="io"/>
+                                        <apex:selectOption itemLabel="Indonesian" itemValue="in"/>
+                                        <apex:selectOption itemLabel="Interlingua" itemValue="ia"/>
+                                        <apex:selectOption itemLabel="Interlingue" itemValue="ie"/>
+                                        <apex:selectOption itemLabel="Inuktitut" itemValue="iu"/>
+                                        <apex:selectOption itemLabel="Inupiak" itemValue="ik"/>
+                                        <apex:selectOption itemLabel="Irish" itemValue="ga"/>
+                                        <apex:selectOption itemLabel="Italian" itemValue="it"/>
+                                        <apex:selectOption itemLabel="Japanese" itemValue="ja"/>
+                                        <apex:selectOption itemLabel="Javanese" itemValue="jv"/>
+                                        <apex:selectOption itemLabel="Kannada" itemValue="kn"/>
+                                        <apex:selectOption itemLabel="Kashmiri" itemValue="ks"/>
+                                        <apex:selectOption itemLabel="Kazakh" itemValue="kk"/>
+                                        <apex:selectOption itemLabel="Kinyarwanda" itemValue="rw"/>
+                                        <apex:selectOption itemLabel="Kirghiz" itemValue="ky"/>
+                                        <apex:selectOption itemLabel="Kirundi" itemValue="rn"/>
+                                        <apex:selectOption itemLabel="Korean" itemValue="ko"/>
+                                        <apex:selectOption itemLabel="Kurdish" itemValue="ku"/>
+                                        <apex:selectOption itemLabel="Laothian" itemValue="lo"/>
+                                        <apex:selectOption itemLabel="Latin" itemValue="la"/>
+                                        <apex:selectOption itemLabel="Latvian" itemValue="lv"/>
+                                        <apex:selectOption itemLabel="Limburgish" itemValue="li"/>
+                                        <apex:selectOption itemLabel="Lingala" itemValue="ln"/>
+                                        <apex:selectOption itemLabel="Lithuanian" itemValue="lt"/>
+                                        <apex:selectOption itemLabel="Macedonian" itemValue="mk"/>
+                                        <apex:selectOption itemLabel="Malagasy" itemValue="mg"/>
+                                        <apex:selectOption itemLabel="Malay" itemValue="ms"/>
+                                        <apex:selectOption itemLabel="Malayalam" itemValue="ml"/>
+                                        <apex:selectOption itemLabel="Maltese" itemValue="mt"/>
+                                        <apex:selectOption itemLabel="Maori" itemValue="mi"/>
+                                        <apex:selectOption itemLabel="Marathi" itemValue="mr"/>
+                                        <apex:selectOption itemLabel="Moldavian" itemValue="mo"/>
+                                        <apex:selectOption itemLabel="Mongolian" itemValue="mn"/>
+                                        <apex:selectOption itemLabel="Nauru" itemValue="na"/>
+                                        <apex:selectOption itemLabel="Nepali" itemValue="ne"/>
+                                        <apex:selectOption itemLabel="Norwegian" itemValue="no"/>
+                                        <apex:selectOption itemLabel="Occitan" itemValue="oc"/>
+                                        <apex:selectOption itemLabel="Oriya" itemValue="or"/>
+                                        <apex:selectOption itemLabel="Oromo" itemValue="om"/>
+                                        <apex:selectOption itemLabel="Pashto" itemValue="ps"/>
+                                        <apex:selectOption itemLabel="Polish" itemValue="pl"/>
+                                        <apex:selectOption itemLabel="Portuguese" itemValue="pt"/>
+                                        <apex:selectOption itemLabel="Punjabi" itemValue="pa"/>
+                                        <apex:selectOption itemLabel="Quechua" itemValue="qu"/>
+                                        <apex:selectOption itemLabel="Rhaeto-Romance" itemValue="rm"/>
+                                        <apex:selectOption itemLabel="Romanian" itemValue="ro"/>
+                                        <apex:selectOption itemLabel="Russian" itemValue="ru"/>
+                                        <apex:selectOption itemLabel="Samoan" itemValue="sm"/>
+                                        <apex:selectOption itemLabel="Sangro" itemValue="sg"/>
+                                        <apex:selectOption itemLabel="Sanskrit" itemValue="sa"/>
+                                        <apex:selectOption itemLabel="Serbian" itemValue="sr"/>
+                                        <apex:selectOption itemLabel="Serbo-Croatian" itemValue="sh"/>
+                                        <apex:selectOption itemLabel="Sesotho" itemValue="st"/>
+                                        <apex:selectOption itemLabel="Setswana" itemValue="tn"/>
+                                        <apex:selectOption itemLabel="Shona" itemValue="sn"/>
+                                        <apex:selectOption itemLabel="Sichuan Yi" itemValue="ii"/>
+                                        <apex:selectOption itemLabel="Sindhi" itemValue="sd"/>
+                                        <apex:selectOption itemLabel="Sinhalese" itemValue="si"/>
+                                        <apex:selectOption itemLabel="Siswati" itemValue="ss"/>
+                                        <apex:selectOption itemLabel="Slovak" itemValue="sk"/>
+                                        <apex:selectOption itemLabel="Slovenian" itemValue="sl"/>
+                                        <apex:selectOption itemLabel="Somali" itemValue="so"/>
+                                        <apex:selectOption itemLabel="Spanish" itemValue="es"/>
+                                        <apex:selectOption itemLabel="Sundanese" itemValue="su"/>
+                                        <apex:selectOption itemLabel="Swahili" itemValue="sw"/>
+                                        <apex:selectOption itemLabel="Swedish" itemValue="sv"/>
+                                        <apex:selectOption itemLabel="Tagalog" itemValue="tl"/>
+                                        <apex:selectOption itemLabel="Tajik" itemValue="tg"/>
+                                        <apex:selectOption itemLabel="Tamil" itemValue="ta"/>
+                                        <apex:selectOption itemLabel="Tatar" itemValue="tt"/>
+                                        <apex:selectOption itemLabel="Telugu" itemValue="te"/>
+                                        <apex:selectOption itemLabel="Thai" itemValue="th"/>
+                                        <apex:selectOption itemLabel="Tibetan" itemValue="bo"/>
+                                        <apex:selectOption itemLabel="Tigrinya" itemValue="ti"/>
+                                        <apex:selectOption itemLabel="Tonga" itemValue="to"/>
+                                        <apex:selectOption itemLabel="Tsonga" itemValue="ts"/>
+                                        <apex:selectOption itemLabel="Turkish" itemValue="tr"/>
+                                        <apex:selectOption itemLabel="Turkmen" itemValue="tk"/>
+                                        <apex:selectOption itemLabel="Twi" itemValue="tw"/>
+                                        <apex:selectOption itemLabel="Uighur" itemValue="ug"/>
+                                        <apex:selectOption itemLabel="Ukrainian" itemValue="uk"/>
+                                        <apex:selectOption itemLabel="Urdu" itemValue="ur"/>
+                                        <apex:selectOption itemLabel="Uzbek" itemValue="uz"/>
+                                        <apex:selectOption itemLabel="Vietnamese" itemValue="vi"/>
+                                        <apex:selectOption itemLabel="Volapuk" itemValue="vo"/>
+                                        <apex:selectOption itemLabel="Wallon" itemValue="wa"/>
+                                        <apex:selectOption itemLabel="Welsh" itemValue="cy"/>
+                                        <apex:selectOption itemLabel="Wolof" itemValue="wo"/>
+                                        <apex:selectOption itemLabel="Xhosa" itemValue="xh"/>
+                                        <apex:selectOption itemLabel="Yiddish" itemValue="yi"/>
+                                        <apex:selectOption itemLabel="Yoruba" itemValue="yo"/>
+                                        <apex:selectOption itemLabel="Zulu" itemValue="zu"/>
+                                        </apex:selectList>
+                                
+                                
+                                
+                                
+                                </td>
+                              </tr>
+                              
+                              <tr> 
+                                <td >Telephone  <font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!conInfo.Telephone}"/> </td>
+                                <td >Telefax</td>
+                                <td  height="2.5px"><apex:inputText value="{!conInfo.Telefax}"/> </td>
+                              </tr>
+                              
+                              <tr>
+                                <th>    Account Information</th>
+                              </tr>
+                              
+                              <tr>
+                                 <td  >Password<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputSecret value="{!customPass}" id="inputPassword"  /></td>
+                                <td  >Currency</td>
+                                <td  height="2.5px">
+                                
+                                    <apex:selectList value="{!acInfo.Currency_x}" multiselect="false" size="1" style="width:180px;">
+                                            
+                                            <apex:selectOption itemLabel="--None--" itemValue=""/>
+                                            <apex:selectOption itemLabel="AFN - Afghanistan Afghani" itemValue="AFN"/>
+                                            <apex:selectOption itemLabel="ALL - Albanian Lek" itemValue="ALL"/>
+                                            <apex:selectOption itemLabel="AMD - Armenian Dram" itemValue="AMD"/>
+                                            <apex:selectOption itemLabel="ANG - Neth Antilles Guilde" itemValue="ANG"/>
+                                            <apex:selectOption itemLabel="AOA - Angola Kwanza" itemValue="AOA"/>
+                                              <apex:selectOption itemLabel="AUD - Australian Dollar" itemValue="AUD"/>
+                                            <apex:selectOption itemLabel="ARS - Argentine Peso" itemValue="ARS"/>
+                                            <apex:selectOption itemLabel="AWG - Aruba Florin" itemValue="AWG"/>
+                                            <apex:selectOption itemLabel="AZN - Azerbaijanian New Manat" itemValue="AZN"/>
+                                            <apex:selectOption itemLabel="BAM - Convertible Marks" itemValue="BAM"/>
+                                            <apex:selectOption itemLabel="BBD - Barbados Dollar" itemValue="BBD"/>
+                                            <apex:selectOption itemLabel="BDT - Bangladesh Taka" itemValue="BDT"/>
+                                            <apex:selectOption itemLabel="BGN - Bulgaria Lev" itemValue="BGN"/>
+                                            <apex:selectOption itemLabel="BHD - Bahraini Dinar" itemValue="BHD"/>
+                                            <apex:selectOption itemLabel="BIF - Burundi Franc" itemValue="BIF"/>
+                                            <apex:selectOption itemLabel="BMD - Bermuda Dollar" itemValue="BMD"/>
+                                            <apex:selectOption itemLabel="BND - Brunei Dollar" itemValue="BND"/>
+                                            <apex:selectOption itemLabel="BOB - Bolivian Boliviano" itemValue="BOB"/>
+                                            <apex:selectOption itemLabel="BOV - Bolivia Mvdol" itemValue="BOV"/>
+                                            <apex:selectOption itemLabel="BRL - Brazilian Real" itemValue="BRL"/>
+                                            <apex:selectOption itemLabel="BSD - Bahamian Dollar" itemValue="BSD"/>
+                                            <apex:selectOption itemLabel="BTN - Bhutan Ngultrum" itemValue="BTN"/>
+                                            <apex:selectOption itemLabel="BWP - Botswana Pula" itemValue="BWP"/>
+                                            <apex:selectOption itemLabel="BYR - Belarussian Ruble" itemValue="BYR"/>
+                                            <apex:selectOption itemLabel="BZD - Belize Dollar" itemValue="BZD"/>
+                                            <apex:selectOption itemLabel="CAD - Canadian Dollar" itemValue="CAD"/>
+                                            <apex:selectOption itemLabel="CDF - Franc Congolais" itemValue="CDF"/>
+                                            <apex:selectOption itemLabel="CHF - Swiss Franc" itemValue="CHF"/>
+                                            <apex:selectOption itemLabel="CLF - Unidades de fomento" itemValue="CLF"/>
+                                            <apex:selectOption itemLabel="CLP - Chilean Peso" itemValue="CLP"/>
+                                            <apex:selectOption itemLabel="CNY - Chinese Yuan" itemValue="CNY"/>
+                                            <apex:selectOption itemLabel="COP - Colombian Peso" itemValue="COP"/>
+                                            <apex:selectOption itemLabel="CRC - Costa Rica Colon" itemValue="CRC"/>
+                                            <apex:selectOption itemLabel="CUP - Cuban Peso" itemValue="CUP"/>
+                                            <apex:selectOption itemLabel="CVE - Cape Verde Escudo" itemValue="CVE"/>
+                                            <apex:selectOption itemLabel="CZK - Czech Koruna" itemValue="CZK"/>
+                                            <apex:selectOption itemLabel="DJF - Dijibouti Franc" itemValue="DJF"/>
+                                            <apex:selectOption itemLabel="DKK - Danish Krone" itemValue="DKK"/>
+                                            <apex:selectOption itemLabel="DOP - Dominican Peso" itemValue="DOP"/>
+                                            <apex:selectOption itemLabel="DZD - Algerian Dinar" itemValue="DZD"/>
+                                            <apex:selectOption itemLabel="EEK - Estonian Kroon" itemValue="EEK"/>
+                                            <apex:selectOption itemLabel="EGP - Egyptian Pound" itemValue="EGP"/>
+                                            <apex:selectOption itemLabel="ERN - Eritrea Nakfa" itemValue="ERN"/>
+                                            <apex:selectOption itemLabel="ETB - Ethiopian Birr" itemValue="ETB"/>
+                                            <apex:selectOption itemLabel="EUR - Euro" itemValue="EUR"/>
+                                            <apex:selectOption itemLabel="FJD - Fiji Dollar" itemValue="FJD"/>
+                                            <apex:selectOption itemLabel="FKP - Falkland Islands Pound" itemValue="FKP"/>
+                                            <apex:selectOption itemLabel="GBP - British Pound" itemValue="GBP"/>
+                                            <apex:selectOption itemLabel="GEL - Georgia Lari" itemValue="GEL"/>
+                                            <apex:selectOption itemLabel="GHS - Ghanian Cedi" itemValue="GHS"/>
+                                            <apex:selectOption itemLabel="GIP - Gibraltar Pound" itemValue="GIP"/>
+                                            <apex:selectOption itemLabel="GMD - Gambian Dalasi" itemValue="GMD"/>
+                                            <apex:selectOption itemLabel="GNF - Guinea Franc" itemValue="GNF"/>
+                                            <apex:selectOption itemLabel="GTQ - Guatemala Quetzal" itemValue="GTQ"/>
+                                            <apex:selectOption itemLabel="GYD - Guyana Dollar" itemValue="GYD"/>
+                                            <apex:selectOption itemLabel="HKD - Hong Kong Dollar" itemValue="HKD"/>
+                                            <apex:selectOption itemLabel="HNL - Honduras Lempira" itemValue="HNL"/>
+                                            <apex:selectOption itemLabel="HRK - Croatian Kuna" itemValue="HRK"/>
+                                            <apex:selectOption itemLabel="HTG - Haiti Gourde" itemValue="HTG"/>
+                                            <apex:selectOption itemLabel="HUF - Hungarian Forint" itemValue="HUF"/>
+                                             <apex:selectOption itemLabel="INR - Indian Rupee" itemValue="INR"/>
+                                            <apex:selectOption itemLabel="IDR - Indonesian Rupiah" itemValue="IDR"/>
+                                            <apex:selectOption itemLabel="ILS - Israeli Shekel" itemValue="ILS"/>
+                                            <apex:selectOption itemLabel="IQD - Iraqi Dinar" itemValue="IQD"/>
+                                            <apex:selectOption itemLabel="IRR - Iranian Rial" itemValue="IRR"/>
+                                            <apex:selectOption itemLabel="ISK - Iceland Krona" itemValue="ISK"/>
+                                            <apex:selectOption itemLabel="JMD - Jamaican Dollar" itemValue="JMD"/>
+                                            <apex:selectOption itemLabel="JOD - Jordanian Dinar" itemValue="JOD"/>
+                                            <apex:selectOption itemLabel="JPY - Japanese Yen" itemValue="JPY"/>
+                                            <apex:selectOption itemLabel="KES - Kenyan Shilling" itemValue="KES"/>
+                                            <apex:selectOption itemLabel="KGS - Kyrgyzstan Som" itemValue="KGS"/>
+                                            <apex:selectOption itemLabel="KHR - Cambodia Riel" itemValue="KHR"/>
+                                            <apex:selectOption itemLabel="KMF - Comoros Franc" itemValue="KMF"/>
+                                            <apex:selectOption itemLabel="KPW - North Korean Won" itemValue="KPW"/>
+                                            <apex:selectOption itemLabel="KRW - Korean Won" itemValue="KRW"/>
+                                            <apex:selectOption itemLabel="KWD - Kuwaiti Dinar" itemValue="KWD"/>
+                                            <apex:selectOption itemLabel="KYD - Cayman Islands Dollar" itemValue="KYD"/>
+                                            <apex:selectOption itemLabel="KZT - Kazakhstan Tenge" itemValue="KZT"/>
+                                            <apex:selectOption itemLabel="LAK - Lao Kip" itemValue="LAK"/>
+                                            <apex:selectOption itemLabel="LBP - Lebanese Pound" itemValue="LBP"/>
+                                            <apex:selectOption itemLabel="LKR - Sri Lanka Rupee" itemValue="LKR"/>
+                                            <apex:selectOption itemLabel="LRD - Liberian Dollar" itemValue="LRD"/>
+                                            <apex:selectOption itemLabel="LSL - Lesotho Loti" itemValue="LSL"/>
+                                            <apex:selectOption itemLabel="LTL - Lithuanian Lita" itemValue="LTL"/>
+                                            <apex:selectOption itemLabel="LVL - Latvian Lat" itemValue="LVL"/>
+                                            <apex:selectOption itemLabel="LYD - Libyan Dinar" itemValue="LYD"/>
+                                            <apex:selectOption itemLabel="MAD - Moroccan Dirham" itemValue="MAD"/>
+                                            <apex:selectOption itemLabel="MDL - Moldovan Leu" itemValue="MDL"/>
+                                            <apex:selectOption itemLabel="MGA - Malagasy Ariary" itemValue="MGA"/>
+                                            <apex:selectOption itemLabel="MKD - Macedonian Denar" itemValue="MKD"/>
+                                            <apex:selectOption itemLabel="MMK - Myanmar Kyat" itemValue="MMK"/>
+                                            <apex:selectOption itemLabel="MNT - Mongolian Tugrik" itemValue="MNT"/>
+                                            <apex:selectOption itemLabel="MOP - Macau Pataca" itemValue="MOP"/>
+                                            <apex:selectOption itemLabel="MRO - Mauritania Ougulya" itemValue="MRO"/>
+                                            <apex:selectOption itemLabel="MUR - Mauritius Rupee" itemValue="MUR"/>
+                                            <apex:selectOption itemLabel="MVR - Maldives Rufiyaa" itemValue="MVR"/>
+                                            <apex:selectOption itemLabel="MWK - Malawi Kwacha" itemValue="MWK"/>
+                                            <apex:selectOption itemLabel="MXN - Mexican Peso" itemValue="MXN"/>
+                                            <apex:selectOption itemLabel="MXV - Mexican Unidad de Inversion (UDI)" itemValue="MXV"/>
+                                            <apex:selectOption itemLabel="MYR - Malaysian Ringgit" itemValue="MYR"/>
+                                            <apex:selectOption itemLabel="MZN - Mozambique New Metical" itemValue="MZN"/>
+                                            <apex:selectOption itemLabel="NAD - Namibian Dollar" itemValue="NAD"/>
+                                            <apex:selectOption itemLabel="NGN - Nigerian Naira" itemValue="NGN"/>
+                                            <apex:selectOption itemLabel="NIO - Nicaragua Cordoba" itemValue="NIO"/>
+                                            <apex:selectOption itemLabel="NOK - Norwegian Krone" itemValue="NOK"/>
+                                            <apex:selectOption itemLabel="NPR - Nepalese Rupee" itemValue="NPR"/>
+                                            <apex:selectOption itemLabel="NZD - New Zealand Dollar" itemValue="NZD"/>
+                                            <apex:selectOption itemLabel="OMR - Omani Rial" itemValue="OMR"/>
+                                            <apex:selectOption itemLabel="PAB - Panama Balboa" itemValue="PAB"/>
+                                            <apex:selectOption itemLabel="PEN - Peruvian Nuevo Sol" itemValue="PEN"/>
+                                            <apex:selectOption itemLabel="PGK - Papua New Guinea Kina" itemValue="PGK"/>
+                                            <apex:selectOption itemLabel="PHP - Philippine Peso" itemValue="PHP"/>
+                                            <apex:selectOption itemLabel="PKR - Pakistani Rupee" itemValue="PKR"/>
+                                            <apex:selectOption itemLabel="PLN - Polish Zloty" itemValue="PLN"/>
+                                            <apex:selectOption itemLabel="PYG - Paraguayan Guarani" itemValue="PYG"/>
+                                             <apex:selectOption itemLabel="USD - U.S. Dollar" itemValue="USD"/>
+                                            <apex:selectOption itemLabel="QAR - Qatar Rial" itemValue="QAR"/>
+                                            <apex:selectOption itemLabel="RON - Romanian Leu" itemValue="RON"/>
+                                            <apex:selectOption itemLabel="RSD - Serbian Dinar" itemValue="RSD"/>
+                                            <apex:selectOption itemLabel="RUB - Russian Rouble" itemValue="RUB"/>
+                                            <apex:selectOption itemLabel="RWF - Rwanda Franc" itemValue="RWF"/>
+                                            <apex:selectOption itemLabel="SAR - Saudi Arabian Riyal" itemValue="SAR"/>
+                                            <apex:selectOption itemLabel="SBD - Solomon Islands Dollar" itemValue="SBD"/>
+                                            <apex:selectOption itemLabel="SCR - Seychelles Rupee" itemValue="SCR"/>
+                                            <apex:selectOption itemLabel="SDG - Sudanese Pound" itemValue="SDG"/>
+                                            <apex:selectOption itemLabel="SEK - Swedish Krona" itemValue="SEK"/>
+                                            <apex:selectOption itemLabel="SGD - Singapore Dollar" itemValue="SGD"/>
+                                            <apex:selectOption itemLabel="SHP - St Helena Pound" itemValue="SHP"/>
+                                            <apex:selectOption itemLabel="SLL - Sierra Leone Leone" itemValue="SLL"/>
+                                            <apex:selectOption itemLabel="SOS - Somali Shilling" itemValue="SOS"/>
+                                            <apex:selectOption itemLabel="SRD - Surinam Dollar" itemValue="SRD"/>
+                                            <apex:selectOption itemLabel="STD - Sao Tome Dobra" itemValue="STD"/>
+                                            <apex:selectOption itemLabel="SYP - Syrian Pound" itemValue="SYP"/>
+                                            <apex:selectOption itemLabel="SZL - Swaziland Lilageni" itemValue="SZL"/>
+                                            <apex:selectOption itemLabel="THB - Thai Baht" itemValue="THB"/>
+                                            <apex:selectOption itemLabel="TJS - Tajik Somoni" itemValue="TJS"/>
+                                            <apex:selectOption itemLabel="TMT - Turkmenistan New Manat" itemValue="TMT"/>
+                                            <apex:selectOption itemLabel="TND - Tunisian Dinar" itemValue="TND"/>
+                                            <apex:selectOption itemLabel="TOP - Tonga Pa'anga" itemValue="TOP"/>
+                                            <apex:selectOption itemLabel="TRY - Turkish Lira" itemValue="TRY"/>
+                                            <apex:selectOption itemLabel="TTD - Trinidad&amp;Tobago Dollar" itemValue="TTD"/>
+                                            <apex:selectOption itemLabel="TWD - Taiwan Dollar" itemValue="TWD"/>
+                                            <apex:selectOption itemLabel="TZS - Tanzanian Shilling" itemValue="TZS"/>
+                                            <apex:selectOption itemLabel="UAH - Ukraine Hryvnia" itemValue="UAH"/>
+                                            <apex:selectOption itemLabel="UGX - Ugandan Shilling" itemValue="UGX"/>
+                                            <apex:selectOption itemLabel="UYU - Uruguayan New Peso" itemValue="UYU"/>
+                                            <apex:selectOption itemLabel="UZS - Uzbekistan Sum" itemValue="UZS"/>
+                                            <apex:selectOption itemLabel="VEF - Venezuelan Bolivar Fuerte" itemValue="VEF"/>
+                                            <apex:selectOption itemLabel="VND - Vietnam Dong" itemValue="VND"/>
+                                            <apex:selectOption itemLabel="VUV - Vanuatu Vatu" itemValue="VUV"/>
+                                            <apex:selectOption itemLabel="WST - Samoa Tala" itemValue="WST"/>
+                                            <apex:selectOption itemLabel="XAF - CFA Franc (BEAC)" itemValue="XAF"/>
+                                            <apex:selectOption itemLabel="XCD - East Caribbean Dollar" itemValue="XCD"/>
+                                            <apex:selectOption itemLabel="XOF - CFA Franc (BCEAO)" itemValue="XOF"/>
+                                            <apex:selectOption itemLabel="XPF - Pacific Franc" itemValue="XPF"/>
+                                            <apex:selectOption itemLabel="YER - Yemen Riyal" itemValue="YER"/>
+                                            <apex:selectOption itemLabel="ZAR - South African Rand" itemValue="ZAR"/>
+                                            <apex:selectOption itemLabel="ZMW - Zambian Kwacha" itemValue="ZMW"/>
+                                            <apex:selectOption itemLabel="ZWL - Zimbabwe Dollar" itemValue="ZWL"/>
+                                    
+                                    
+                                    </apex:selectList>
+                                        
+                                </td>
+                              </tr>
+                              
+                              
+                              <tr>
+                                <th>    Company Information</th>
+                              </tr>
+                              <tr>
+                                <td nowrap="nowrap">Company name 1<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.Name1}" /> </td>
+                                <td  nowrap="nowrap">Company name 2</td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.Name2}"/> </td>
+                              </tr>
+                              <tr>
+                                <td  nowrap="nowrap">Delivery Address Line 1  <font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.DeliveryAddressLine1}"/> </td>
+                              </tr>
+                             <tr>
+                                <td  nowrap="nowrap">Delivery Address Line 2</td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.DeliveryAddressLine2}"/> </td>
+                              </tr>
+                              <tr>
+                                <td nowrap="nowrap">Delivery Address Line 3</td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.DeliveryAddressLine3}"/> </td>
+                              </tr>
+                              
+                              <tr> 
+                                <td  >Postal Code<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.PostalCode}"/> </td>
+                                <td >Locality<font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.Locality}"/> </td>
+                              </tr>
+                              
+                              
+                              <tr> 
+                                <td  >Dep Locality</td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.DepLocality}"/> </td>
+                                <td  >Province  <font color="red">*</font></td>
+                                <td  height="2.5px"><apex:inputText value="{!comInfo.Province}"/> </td>
+                              </tr>
+                              <tr> 
+                                <td  >Country<font color="red">*</font></td>
+                                <td  height="2.5px">    
+                                    <apex:selectList value="{!comInfo.country}" multiselect="false" size="1" style="width:180px;">
+                                    <apex:selectOptions value="{!countries}"/>
+                                    </apex:selectList>
+                                </td>
+                             </tr>
+                             <tr></tr>
+                                
+                             <tr>
+                                <td  align="right" colspan="4"><center>
+                                <!--action="{!registerAccount}" -->
+                                    <apex:commandButton value="" styleClass="register"  id="register" onclick="return ValidateEmail();" action="{!registerAccount}"  /> 
+                                
+                                    <apex:commandButton value=""   styleClass="cancel" immediate="true" action="{!cancleCreateAccPanel}"/></center>
+                                </td>
+                            </tr> 
+                          </table>
+                     </apex:outputPanel>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!readMode}" id="editInformaticaRec">         
+                    <table cellpadding="10" cellspacing="15" border="0"  >
+                 
+                         <tr>
+                            <td align="center" style="height:30px; padding-left:15px; padding-right:10px;font-weight:bold; ">User Name</td>                                    
+                            <td align="left"  height="2.5px"><apex:outputText value="{!setupRecord.INFA_AV__Username__c}" />  </td>
+                            <td align="left"  height="2.5px">  <!--<apex:commandButton value="Edit"  id="editCVS1" action="{!editClick}" style="width:80px;height:22px;background-color:#70D3E4;color:white;border:none;" /> --> </td>
+                        </tr>
+                        <tr> 
+                            <td align="center" style="font-weight:bold;">Password</td>
+                            <td  height="2.5px"><div id="password" align="center">{!setupRecord.Encrypt_Password__c} </div> </td>
+                        </tr>
+                       
+                        <tr >
+                            <td align="right" colspan="2"> 
+                                <apex:commandButton value=""  id="editCVS1" styleClass="edit" action="{!editClick}" reRender="panel1"/>                          
+                            </td>                         
+                                          
+                        
+                            <td align="right" colspan="2">  
+                                    <apex:commandButton value="" id="autoProvisionCVS1" styleClass="createAccountBtn" immediate="true" 
+                                     action="{!togglecreateAccount}" rendered="{!createButton}" />
+                           </td>
+                        </tr>
+                    </table>                    
+                     
+                </apex:outputPanel>
+                   <!-- <p align="left" style="margin-left:22px" >  Don&#39;t have an account?  Start a <a href="https://dqc.addressdoctor.com/AcctMngr/newAccount.aspx?lang=en" target="_blank">free trial</a> or <a href="https://dqc.addressdoctor.com/AcctMngr/login.aspx?lang=en&ref=shopping.aspx" target="_blank">extend</a> your Address Validation for Salesforce </p>-->
+                    
+            </apex:outputPanel>
+            <!----- Fields Mapping for Address Validation-->
+            <apex:outputPanel rendered="{!addmap}" >
+                <apex:pageBlock title="Address Doctor Mapper" >
+                    <apex:pageMessages escape="false"/>
+                    <apex:pageBlockSection columns="3" > 
+                                
+                    <apex:PageBlockSectionItem helptext="Select Object for mapping" dataStyle="width:15%" >
+                    <apex:outputLabel value="Select Object : " for="theobject"/>
+                    <apex:selectList size="1" value="{!objectname}" id="theobject"  >
+                        <apex:selectOptions value="{!objectnames}"/>
+                        <apex:actionSupport event="onchange" action="{!showOption}" />
+                    </apex:selectList>
+                    </apex:pageblocksectionItem>
+                    
+                    <apex:pageblockSectionItem helptext="Select Address for mapping" dataStyle="width:25%"> 
+                    <apex:outputLabel value="Select Address : " for="theoption" />
+                    <apex:selectList size="1" value="{!objectadd}" id="theoption" >
+                        <apex:selectOptions value="{!objectOptions}"/>
+                        <apex:actionSupport event="onchange" action="{!showvalue}"/>
+                    </apex:selectList>
+                    </apex:pageblockSectionItem>
+                    
+                    <apex:pageblockSectionItem helptext="Select Seperator for mapping" dataStyle="width:60%" >
+                    <apex:outputLabel value="Select Seperator : " for="thesep" />
+                    <apex:selectList size="1" value="{!seprator}" id="thesep" style="width:80px" >
+                        <apex:selectOptions value="{!sepOptions}"/>                
+                    </apex:selectList>  
+                  
+                   </apex:pageblockSectionItem>
+                   </apex:pageblockSection>
+                    <!--<div style = "height:415px;width:100%;overflow:auto">-->
+                    <apex:pageBlockSection columns="1" title="Salesforce To Address Doctor" collapsible="false" id="pbs"> 
+                    <apex:pageBlockTable value="{!sobjectMapRecords}" var="wrap" id="thepageblock" >
+                        <apex:column headerValue="Salesforce" width="50%" >
+                                 <apex:selectList size="1" value="{!wrap.fieldapiname}" multiselect="false" >
+                                        <apex:selectOptions value="{!optFields}"/>
+                                </apex:selectList>
+                        </apex:column>
+                        <apex:column headerValue="Address Doctor" width="50%">
+                                 <apex:selectList size="1" value="{!wrap.wsdlfieldname}" multiselect="false" >
+                                        <apex:selectOptions value="{!wsdlobjectnames}"/>
+                                </apex:selectList>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </apex:pageblockSection> 
+                
+                <apex:commandLink value="Add" action="{!addrow}" reRender="thepageblock,rem"/>
+                <apex:outputPanel id="rem">
+                <apex:outputText rendered="{!showremovelink}">
+                     &nbsp; | &nbsp; <apex:commandLink value="Remove" action="{!removerow}" reRender="thepageblock,rem"/>
+                </apex:outputText>
+                </apex:outputPanel>
+                <apex:pageBlockSection columns="1" title="Address Doctor To Salesforce" collapsible="false"> 
+                    <apex:pageBlockTable value="{!sobjectMapRecords2}" var="wrap" id="thepageblock2">
+                        <apex:column headerValue="Address Doctor" width="50%">
+                            <apex:selectList size="1" value="{!wrap.wsdlfieldname}" multiselect="false" >
+                                 <apex:selectOptions value="{!Add2SalesforceWsdlObjectNames}"/>
+                            </apex:selectList>                    
+                        </apex:column>
+                        <apex:column headerValue="Salesforce" width="50%">
+                             <apex:selectList size="1" value="{!wrap.fieldapiname}" multiselect="false" >
+                                 <apex:selectOptions value="{!optFields}"/>
+                             </apex:selectList>
+                        </apex:column>
+                    </apex:pageBlockTable>
+                 </apex:pageBlockSection>
+                 
+                 
+                 <apex:commandLink value="Add" action="{!addrow2}" reRender="thepageblock2,rem2"/>
+                 <apex:outputPanel id="rem2">
+                     <apex:outputText rendered="{!showremovelink2}">
+                          &nbsp; | &nbsp;<apex:commandLink value="Remove" action="{!removerow2}" reRender="thepageblock2,rem2"/>
+                     </apex:outputText>
+                 </apex:outputPanel>
+                <!--</div>-->
+                </apex:pageBlock>
+                <table width="100%">
+                    <tr>
+                        <td align="right" width="49%">
+                            <apex:commandButton value="" id="savemap" action="{!saverecord}" styleClass="save"  />
+                        </td>
+                        <td width="1.5%"/>
+                        <td align="left" width="49%">
+                            <apex:commandButton value=""  id="cancelmap" action="{!cancel}" styleClass="cancel" onclick="return confirm('Are you sure to cancel?');"/>
+                        </td>
+                    </tr>
+                </table>
+        </apex:outputPanel>
+        <!-------------- Setting Section ------------------->
+        <apex:outputPanel rendered="{!showset}">
+            <apex:pageMessages escape="false"/>    
+            <apex:outputpanel rendered="{!NOT(setreadmode)}">
+                <table width="100%">
+                    <tr height="60px"/>
+                    <tr>
+                        <td style="width:49%;" align="right"><b>Time delay (Milliseconds) &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td  style="width:50%;align:left">
+                            <apex:selectList value="{!milisec}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!mslist}"/>
+                            </apex:selectList>
+                        </td>
+                    </tr>
+                    <tr height="15px"/>
+                    <tr>
+                        <td style="width:50%;" align="right"><b>Select default Country &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            <apex:selectList value="{!country}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!countrylist}"/>
+                            </apex:selectList>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr height="15px"/>
+                    <tr>
+                        <td style="width:50%;" align="right"><b>Capitalization &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            <apex:selectList value="{!capitalize}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!capitalizelist}"/>
+                            </apex:selectList>
+                            
+                        </td>
+                    </tr>
+                    
+                    <tr height="15px"/>
+                    <tr>
+                        <td style="width:50%;" align="right"><b>Line Separator &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            <apex:selectList value="{!lineseparator}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!separatorList}"/>
+                            </apex:selectList>
+                            
+                        </td>
+                    </tr>                
+                    <tr height="15px"/> 
+                    <tr>               
+                        <td style="width:50%;" align="right"><b>Country Type &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            <apex:selectList value="{!countryType}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!countryTypeList}"/>
+                            </apex:selectList>
+                        
+                        </td>
+                    </tr>
+                    <tr height="15px"/> 
+                    <tr>               
+                        <td style="width:50%;" align="right"><b>Preferred Locality &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            <apex:selectList value="{!preferredLocalityOption}" multiselect="false" size="1" style="width:180px;">
+                                <apex:selectOptions value="{!preferredLocalityList}"/>
+                            </apex:selectList>
+                        
+                        </td>
+                    </tr>
+                    <tr height="20px"/>
+                    <tr>
+                        <td align="right" width="50%">
+                            <apex:commandButton value="" action="{!savesetting}" styleClass="save"  />
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        
+                        <td style="align:left" width="50%">
+                            <apex:commandButton value="" action="{!cancel}" styleClass="cancel" onclick="return confirm('Are you sure to cancel?');"/>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+            <apex:outputpanel rendered="{!setreadmode}">
+                <table width="100%">
+                    <tr height="60px"/>
+                    <tr>
+                        <td style="width:49%;" align="right"><b>Time delay (Milliseconds)  &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td  style="width:50%;align:left">
+                           {!milisec}
+                        </td>
+                    </tr>
+                    <tr height="15px"/>
+                    <tr>
+                        <td style="width:50%;" align="right"><b>Select default Country &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            {!country}
+                        </td>
+                    </tr>
+                    <tr height="15px"/>
+                    <tr>
+                        <td style="width:50%;" align="right"><b>Capitalization &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            {!capitalize}
+                        </td>
+                    </tr>                    
+                    <tr height="15px"/>
+                     <tr>
+                        <td style="width:50%;" align="right"><b>Line Separator &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            {!lineSeparator}
+                        </td>
+                    </tr>
+                     <tr height="15px"/>
+                     <tr>
+                        <td style="width:50%;" align="right"><b>Country Type &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            {!countryType}
+                        </td>
+                     </tr>
+                     <tr height="15px"/>
+                     <tr>
+                        <td style="width:50%;" align="right"><b>Preferred Locality &nbsp;&nbsp;&nbsp;&nbsp;</b></td>
+                        <td style="width:50%;align:left">
+                            {!preferredLocalityOption}
+                        </td>
+                     </tr>
+                    <tr height="20px"/>
+                    <tr>
+                        <td width="50%" colspan="2">
+                            <center>
+                                <apex:commandButton value="" action="{!editsetting}" styleClass="edit"  />
+                            </center>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputpanel>
+        </apex:outputPanel>
+    </apex:define>
+</apex:composition>
+    
+    <script>
+      function ValidateEmail()
+      {
+        var email= document.getElementById('thePage:theForm:theTemplate:inputEmail');
+        if(email!=null)
+        { 
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(email.value.match(mailformat))
+            {
+               
+               return true;
+            }
+            else
+            {
+                alert("You have entered an invalid email address!");
+                return false;
+            }
+        }
+        return true;
+      }
+    
+    </script>
+</apex:form>
+</apex:page>

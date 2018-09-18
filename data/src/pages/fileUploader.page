@@ -1,0 +1,33 @@
+<apex:page id="fileUploader"   >
+ 
+    <apex:includeScript value="{!$Resource.jq}" />
+ 
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#publisherAttachContentPost').trigger('click');
+            $('#chatterUploadFileAction').trigger('click');
+            $('.uploadFileSizeLimit').hide();          
+            $('.contentPublisherSlideDown.customPanel.alignTop').css('border', '0');
+            $('.clearContentPanelButtonContainer').hide();
+            $('.publisherFeedItemTypeChoices').hide();     
+            $('.cxfeedinnerwrapper').hide();             
+            $('.publisherBottomBarPlaceholder').hide();
+            $('.publisherTextAreaPlaceholder.alignCenter').hide();           
+ 
+             $("#theUploadButton").click(function() {
+                if($('.file')[1].files.length > 0){
+                    $('#publishersharebutton').trigger('click');
+                }
+                else{
+                    alert('Please select a file');
+                } 
+            });
+   
+         });
+       
+    </script>
+ 
+    <chatter:feed entityId="{!$CurrentPage.parameters.Id}" />
+    <button id="theUploadButton">Upload</button>
+   
+</apex:page>

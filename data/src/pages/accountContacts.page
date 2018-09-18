@@ -1,0 +1,81 @@
+<apex:page controller="accountContacts">
+    <apex:form >
+        <apex:pageBlock title="Account Views">
+            <apex:pageBlockTable value="{!accountViews}" var="av">
+                <apex:column headerValue="Names">
+                    <apex:commandLink value="{!av.Name}" rerender="accountlist">
+                        <apex:actionSupport event="onclick" action="{!setAccountViewSOQL}" rerender="accountlist" status="counterStatus">
+                            <apex:param name="x" value="{!av.Name}" assignTo="{!currentAccountViewName}"/>
+                            <apex:param name="y" value="{!av.SOQL}" assignTo="{!currentAccountViewSOQL}"/>
+                        </apex:actionSupport>
+                    </apex:commandLink>
+                    <apex:actionStatus id="counterStatus" startText=" (Fetching...)"/>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+        </apex:pageBlock>
+
+        <apex:outputPanel id="accountlist"> 
+            <apex:outputPanel rendered="{!if(setAcct==null,false,true)}">
+                <apex:pageBlock title="Accounts using View: {!currentAccountViewName}">
+                    <apex:pageBlockTable value="{!accounts}" var="a">
+                        <apex:column headerValue="Name" >
+                            <apex:commandLink value="{!a.Name}" action="{!setCurrentAccountId}" reRender="contactlist, theflow"> 
+                                <apex:param name="x" value="{!a.Id}" assignTo="{!currentAccountId}"/>
+                                <apex:param name="y" value="{!a.Name}" assignTo="{!currentAccountName}"/>
+                            </apex:commandLink>
+                        </apex:column>
+                            
+                        <apex:repeat value="{!currentAccountViewCols}" var="f">
+                            <apex:column value="{!a[f]}" rendered="{!IF(f == 'Name',false,true)}"/>
+                        </apex:repeat>
+                    </apex:pageBlockTable>
+                   
+                    <apex:commandLink rendered="{!setAcct.hasPrevious}" value="First" action="{!setAcct.first}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasPrevious}" value="Previous" action="{!setAcct.previous}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:outputText rendered="{!if(setAcct==null,false,(setAcct.pageNumber * setAcct.pageSize) < setAcct.ResultSize)}" value="{!setAcct.pageNumber * setAcct.pageSize} Of {!setAcct.ResultSize}"></apex:outputText>
+                    <apex:outputText rendered="{!if(setAcct==null,false,(setAcct.pageNumber * setAcct.pageSize) >= setAcct.ResultSize)}" value="{!setAcct.ResultSize} Of {!setAcct.ResultSize}"></apex:outputText>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasNext}" value="Next" action="{!setAcct.next}" reRender="accountlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setAcct.hasNext}" value="Last" action="{!setAcct.last}" reRender="accountlist"/>
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:outputPanel> 
+
+        <apex:outputPanel id="contactlist"> 
+            <apex:outputPanel rendered="{!accountHasContacts}">
+                <apex:pageBlock title="Contacts for {!currentAccountName}" >
+                    <apex:pageBlockTable value="{!contacts}" var="c">
+                        <apex:column value="{!c.name}"/>
+                        <apex:column value="{!c.MobilePhone}"/>
+                    </apex:pageBlockTable>
+                   
+                    <apex:commandLink rendered="{!setCon.hasPrevious}" value="First" action="{!setCon.first}" reRender="contactlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setCon.hasPrevious}" value="Previous" action="{!setCon.previous}" reRender="contactlist"/>
+                    &nbsp;
+                    <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) < setCon.ResultSize}" value="{!setCon.pageNumber * setCon.pageSize} Of {!setCon.ResultSize}"></apex:outputText>
+                    <apex:outputText rendered="{!(setCon.pageNumber * setCon.pageSize) >= setCon.ResultSize}" value="{!setCon.ResultSize} Of {!setCon.ResultSize}"></apex:outputText>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setCon.hasNext}" value="Next" action="{!setCon.next}" reRender="contactlist"/>
+                    &nbsp;
+                    <apex:commandLink rendered="{!setCon.hasNext}" value="Last" action="{!setCon.last}" reRender="contactlist"/>
+                </apex:pageBlock>
+            </apex:outputPanel> 
+        </apex:outputPanel> 
+
+    </apex:form>
+
+    <apex:outputPanel id="theflow" >
+        <apex:outputPanel rendered="{!if(currentAccountId != null,true,false)}">
+            <apex:pageBlock title="The Flow">
+                <flow:interview name="Tip_Calculator">
+                    <apex:param name="varAccountId" value="{!currentAccountId}"/>
+                </flow:interview>            
+            </apex:pageBlock>
+        </apex:outputPanel> 
+    </apex:outputPanel> 
+</apex:page>

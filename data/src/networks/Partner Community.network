@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowMembersToFlag>false</allowMembersToFlag>
+    <branding>
+        <loginFooterText>salesforce.com</loginFooterText>
+        <primaryColor>#837B67</primaryColor>
+        <primaryComplementColor>#FFFFFF</primaryComplementColor>
+        <quaternaryColor>#AAA38B</quaternaryColor>
+        <quaternaryComplementColor>#222222</quaternaryComplementColor>
+        <secondaryColor>#CBC4AD</secondaryColor>
+        <tertiaryColor>#E6E4DC</tertiaryColor>
+        <tertiaryComplementColor>#222222</tertiaryComplementColor>
+        <zeronaryColor>#CBC4AD</zeronaryColor>
+        <zeronaryComplementColor>#222222</zeronaryComplementColor>
+    </branding>
+    <changePasswordTemplate>unfiled$public/CommunityChangePasswordEmailTemplate</changePasswordTemplate>
+    <emailSenderAddress>sriram.venkatraman@salesforce.com</emailSenderAddress>
+    <emailSenderName>Partner Community</emailSenderName>
+    <enableGuestChatter>false</enableGuestChatter>
+    <enableInvitation>false</enableInvitation>
+    <enableKnowledgeable>false</enableKnowledgeable>
+    <enableNicknameDisplay>false</enableNicknameDisplay>
+    <enablePrivateMessages>false</enablePrivateMessages>
+    <enableReputation>false</enableReputation>
+    <forgotPasswordTemplate>unfiled$public/CommunityForgotPasswordEmailTemplate</forgotPasswordTemplate>
+    <networkMemberGroups>
+        <profile>Admin</profile>
+        <profile>Partner Community User</profile>
+    </networkMemberGroups>
+    <selfRegProfile>partner community user</selfRegProfile>
+    <selfRegistration>true</selfRegistration>
+    <sendWelcomeEmail>true</sendWelcomeEmail>
+    <site>Partner_Community</site>
+    <status>DownForMaintenance</status>
+    <tabs>
+        <defaultTab>home</defaultTab>
+        <standardTab>home</standardTab>
+        <standardTab>Chatter</standardTab>
+        <standardTab>Account</standardTab>
+        <standardTab>Contact</standardTab>
+        <standardTab>Lead</standardTab>
+        <standardTab>Opportunity</standardTab>
+        <standardTab>Case</standardTab>
+        <standardTab>ContentSearch</standardTab>
+    </tabs>
+    <urlPathPrefix>partners</urlPathPrefix>
+    <welcomeTemplate>unfiled$public/SriramCommunityWelcomeEmailTemplate</welcomeTemplate>
+</Network>

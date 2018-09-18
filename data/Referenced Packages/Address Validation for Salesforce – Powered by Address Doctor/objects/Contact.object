@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Mailing_Address_Validation_Status__c</fullName>
+        <defaultValue>&quot;Not Verified&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <encrypted>false</encrypted>
+        <externalId>false</externalId>
+        <label>Mailing Address Validation Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Other_Address_Validation_Status__c</fullName>
+        <defaultValue>&quot;Not Verified&quot;</defaultValue>
+        <deprecated>false</deprecated>
+        <encrypted>false</encrypted>
+        <externalId>false</externalId>
+        <label>Other Address Validation Status</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>Verify_Mailing_Address</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify Mailing Address</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if((&apos;{!JSENCODE(Contact.MailingCountry) }&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingCountry)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.MailingStreet)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingStreet)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.MailingCity)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingCity)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.MailingState)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingState)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.MailingPostalCode)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingPostalCode)}&apos;==null)) 
+{ 
+var url=&quot;/apex/INFA_AV__selectaddress?id=&quot;+&quot;{!Contact.Id}&quot;+&quot;&amp;type=&quot;+&quot;contact&quot;+&quot;&amp;mode=1&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100&apos;); 
+//window.top.location.reload(true); 
+} 
+else if(&apos;{!Contact.Mailing_Address_Validation_Status__c}&apos; != &apos;Address Verified&apos;) 
+{ 
+if((&apos;{!JSENCODE(Contact.MailingCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.MailingCountry)}&apos;==null) &amp;&amp;((&apos;{!JSENCODE(Contact.MailingStreet)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.MailingStreet)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.MailingCity)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.MailingCity)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.MailingState)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.MailingState)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.MailingPostalCode)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.MailingPostalCode)}&apos;!=null))) 
+{ 
+alert(&apos;Mailing Country is mandatory&apos;); 
+} 
+else 
+{ 
+var url=&quot;/apex/INFA_AV__verifyAddress?id=&quot;+&quot;{!Contact.Id}&quot;+&quot;&amp;type=&quot;+&quot;contact&quot;+&quot;&amp;mode=1&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100,scrollbars=yes&apos;); 
+//window.top.location.reload(true); 
+} 
+} 
+else if(&apos;{!Contact.Mailing_Address_Validation_Status__c}&apos; == &apos;Address Verified&apos;) 
+{ 
+alert(&apos;Mailing address is already verified&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Verify_Other_Address</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Verify Other Address</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if((&apos;{!JSENCODE(Contact.OtherCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherCountry)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.OtherStreet)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherStreet)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.OtherCity)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherCity)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.OtherState)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherState)}&apos;==null) &amp;&amp;(&apos;{!JSENCODE(Contact.OtherPostalCode)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherPostalCode)}&apos;==null)) 
+{ 
+var url=&quot;/apex/INFA_AV__selectaddress?id=&quot;+&quot;{!Contact.Id}&quot;+&quot;&amp;type=&quot;+&quot;contact&quot;+&quot;&amp;mode=2&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100&apos;); 
+//window.top.location.reload(true); 
+} 
+else if(&apos;{!Contact.Other_Address_Validation_Status__c}&apos;!=&apos;Address Verified&apos;) 
+{ 
+if((&apos;{!JSENCODE(Contact.OtherCountry)}&apos;==&apos;&apos; || &apos;{!JSENCODE(Contact.OtherCountry)}&apos;==null) &amp;&amp;((&apos;{!JSENCODE(Contact.OtherStreet)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.OtherStreet)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.OtherCity)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.OtherCity)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.OtherState)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.OtherState)}&apos;!=null) ||(&apos;{!JSENCODE(Contact.OtherPostalCode)}&apos;!=&apos;&apos; &amp;&amp; &apos;{!JSENCODE(Contact.OtherPostalCode)}&apos;!=null))) 
+{ 
+alert(&apos;Other Country is mandatory&apos;); 
+} 
+else 
+{ 
+var url=&quot;/apex/INFA_AV__verifyAddress?id=&quot;+&quot;{!Contact.Id}&quot;+&quot;&amp;type=&quot;+&quot;contact&quot;+&quot;&amp;mode=2&quot;; 
+var val = window.open(url,&apos;&apos;,&apos;width=850,height=490,left=250,top=100,scrollbars=yes&apos;); 
+//window.top.location.reload(true); 
+} 
+} 
+else if(&apos;{!Contact.Other_Address_Validation_Status__c}&apos;==&apos;Address Verified&apos;) 
+{ 
+alert(&apos;Other address is already verified&apos;); 
+}</url>
+    </webLinks>
+</CustomObject>

@@ -1,0 +1,17 @@
+<design:component>
+    <design:attribute name="debugMode" label="Debug Mode" description="Enable/disable debug mode" required="true"/>
+    <design:attribute name="zoneName" label="Zone Name" description="Ideas Zone Name" required="true"/>
+    <design:attribute name="defaultStatus" label="Default Idea Status" description="The default status that the idea will get created with."/>
+    <design:attribute name="pathToDetail" label="Path To Detail" description="Path to detail page" required="true"/>
+    <design:attribute name="simIdeasSubtitle" label="Similar Ideas Subtitle" description="Similar Ideas Subtitle" required="false"/>
+    <design:attribute name="simIdeasLimit" label="Similar Ideas Limit" description="Number of Similar Ideas to display" required="true"/>
+    <design:attribute name="spinnerImageUrl" label="Spinner Image Url" description="Url for spinner image" required="false"/>
+    <design:attribute name="useTopics" label="Use Topics" description="Enable/disable Adding a topic to the idea" required="true"/>
+
+    
+    <design:attribute name="title" label="Title" description="Title of section" />
+    <design:attribute name="iconPath" label="Icon Path" description="SVG Path for icon" />
+    <design:attribute name="iconCategory" label="Icon Category" description="SVG Icon Category" />
+    <design:attribute name="iconSize" label="Icon Size" description="SVG Icon Size" />
+    <design:attribute name="iconName" label="Icon Name" description="SVG Icon Name" />
+</design:component>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Sample__x$ExternalId</field>
+    </columns>
+    <columns>
+        <field>Sample__x$Account__c</field>
+    </columns>
+    <columns>
+        <field>Sample__x$Name__c</field>
+    </columns>
+    <columns>
+        <field>Sample__x$Id</field>
+    </columns>
+    <currency>USD</currency>
+    <format>Tabular</format>
+    <name>ExternalObjectSampleList</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>ExternalObjectSample__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+</Report>

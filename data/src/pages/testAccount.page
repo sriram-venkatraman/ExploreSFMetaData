@@ -1,0 +1,4 @@
+<apex:page standardController="Account">
+<a href="/apex/canvasTest">Link</a> <br/>
+<apex:detail />
+</apex:page>

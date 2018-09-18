@@ -7,7 +7,7 @@ var outJson = [];
 
 var methods = {
     explorePermissionset: function (permissionset) {
-        var data = fs.readFileSync('/Users/sriram.venkatraman/Documents/workspace/TestCo/src/permissionsets/' + permissionset + '.permissionset');
+        var data = fs.readFileSync('./data/src/permissionsets/' + permissionset + '.permissionset');
         var json = parser.toJson(data);
         // console.log(json);
         var d3j = c2D3js.convert2D3JSONSync(json);

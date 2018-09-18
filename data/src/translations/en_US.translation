@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customApplications>
+        <label><!-- Bootcamp Tracker --></label>
+        <name>Bootcamp_Tracker</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- ChartJS Demo --></label>
+        <name>ChartJS_Demo</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- DreamInvest --></label>
+        <name>DreamInvest</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- In Development --></label>
+        <name>In_Development</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- Lightning --></label>
+        <name>Lightning</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- Utility Bar Demo --></label>
+        <name>UtilityBarDemo</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- Warehouse --></label>
+        <name>Warehouse</name>
+    </customApplications>
+    <customApplications>
+        <label><!-- Lightning --></label>
+        <name>oDataEmployee</name>
+    </customApplications>
+    <customLabels>
+        <label><!-- Display As --></label>
+        <name>PCFL__Display_As</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last Activity --></label>
+        <name>PCFL__Last_Activity</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last Modified --></label>
+        <name>PCFL__Last_Modified</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- List --></label>
+        <name>PCFL__List</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Name --></label>
+        <name>PCFL__Name</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No Items --></label>
+        <name>PCFL__No_Items</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Preview --></label>
+        <name>PCFL__Preview</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Tiles --></label>
+        <name>PCFL__Tiles</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- After --></label>
+        <name>sortablegrid__sdgAfter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- sdgAgo --></label>
+        <name>sortablegrid__sdgAgo</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Before --></label>
+        <name>sortablegrid__sdgBefore</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Contains --></label>
+        <name>sortablegrid__sdgContains</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Ends --></label>
+        <name>sortablegrid__sdgEnds</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Equals --></label>
+        <name>sortablegrid__sdgEquals</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- False --></label>
+        <name>sortablegrid__sdgFalse</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Filtered --></label>
+        <name>sortablegrid__sdgFiltered</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Filtered Of --></label>
+        <name>sortablegrid__sdgFilteredOf</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Greater than --></label>
+        <name>sortablegrid__sdgGreaterThan</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- sdgIn --></label>
+        <name>sortablegrid__sdgIn</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last Month --></label>
+        <name>sortablegrid__sdgLastMonth</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last quarter --></label>
+        <name>sortablegrid__sdgLastQuarter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last Week --></label>
+        <name>sortablegrid__sdgLastWeek</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last Year --></label>
+        <name>sortablegrid__sdgLastYear</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Less than --></label>
+        <name>sortablegrid__sdgLessThan</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next month --></label>
+        <name>sortablegrid__sdgNextMonth</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next Quarter --></label>
+        <name>sortablegrid__sdgNextQuarter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next week --></label>
+        <name>sortablegrid__sdgNextWeek</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next year --></label>
+        <name>sortablegrid__sdgNextYear</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No data --></label>
+        <name>sortablegrid__sdgNoData</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Not Contains --></label>
+        <name>sortablegrid__sdgNotContains</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Not Equals --></label>
+        <name>sortablegrid__sdgNotEquals</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Page --></label>
+        <name>sortablegrid__sdgPage</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Page Size --></label>
+        <name>sortablegrid__sdgPage_Size</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Starts --></label>
+        <name>sortablegrid__sdgStarts</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This Month --></label>
+        <name>sortablegrid__sdgThisMonth</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This quarter --></label>
+        <name>sortablegrid__sdgThisQuarter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This Week --></label>
+        <name>sortablegrid__sdgThisWeek</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This Year --></label>
+        <name>sortablegrid__sdgThisYear</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Today --></label>
+        <name>sortablegrid__sdgToday</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Tomorrow --></label>
+        <name>sortablegrid__sdgTomorrow</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- True --></label>
+        <name>sortablegrid__sdgTrue</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- View All --></label>
+        <name>sortablegrid__sdgView_All</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Yesterday --></label>
+        <name>sortablegrid__sdgYesterday</name>
+    </customLabels>
+    <customPageWebLinks>
+        <label><!-- Create Referral Lead --></label>
+        <name>Create_Referral_Lead</name>
+    </customPageWebLinks>
+    <customTabs>
+        <label><!-- Canvas Test --></label>
+        <name>Canvas_Test</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Collapsible Home --></label>
+        <name>Collapsible_Home</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Data --></label>
+        <name>Data</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Fund Explorer --></label>
+        <name>Fund_Explorer</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- In Development --></label>
+        <name>In_Development</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Interactive --></label>
+        <name>Interactive1</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Multi-view Calendar --></label>
+        <name>Multi_view_Calendar</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- My Account List --></label>
+        <name>My_Account_List</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- My Expenses --></label>
+        <name>My_Expenses</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Real Time --></label>
+        <name>Real_Time</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- Test Ideas --></label>
+        <name>Test_Ideas</name>
+    </customTabs>
+    <customTabs>
+        <label><!-- oDataEmployees --></label>
+        <name>oDataEmployees</name>
+    </customTabs>
+    <quickActions>
+        <label><!-- LogACall --></label>
+        <name>LogACall</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewAccount --></label>
+        <name>NewAccount</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewCase --></label>
+        <name>NewCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewContact --></label>
+        <name>NewContact</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewEvent --></label>
+        <name>NewEvent</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewGroup --></label>
+        <name>NewGroup</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewLead --></label>
+        <name>NewLead</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewNote --></label>
+        <name>NewNote</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewOpportunity --></label>
+        <name>NewOpportunity</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- NewTask --></label>
+        <name>NewTask</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <reportTypes>
+        <description><!-- Accounts with Entitlements with Contacts --></description>
+        <label><!-- Accounts with Entitlements with Contacts --></label>
+        <name>Accounts_with_Entitlements_with_Contacts</name>
+        <sections>
+            <label><!-- Accounts --></label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- Contacts --></label>
+            <name>Contacts</name>
+        </sections>
+        <sections>
+            <label><!-- Entitlements --></label>
+            <name>Entitlements</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Accounts with Sample --></description>
+        <label><!-- Accounts with Sample --></label>
+        <name>Accounts_with_Sample</name>
+        <sections>
+            <label><!-- Accounts --></label>
+            <name>Accounts</name>
+        </sections>
+        <sections>
+            <label><!-- Sample --></label>
+            <name>Sample</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Approval Process --></description>
+        <label><!-- Approval Process --></label>
+        <name>Approval_Process</name>
+        <sections>
+            <label><!-- Process Instance --></label>
+            <name>Process Instance</name>
+        </sections>
+        <sections>
+            <label><!-- Process Instance Node --></label>
+            <name>Process Instance Node</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Bootcamp with Candidates and Reviews --></description>
+        <label><!-- Bootcamp with Candidates and Reviews --></label>
+        <name>Bootcamp_with_Candidates_and</name>
+        <sections>
+            <label><!-- Bootcamps --></label>
+            <name>Bootcamps</name>
+        </sections>
+        <sections>
+            <label><!-- Candidates --></label>
+            <name>Candidates</name>
+        </sections>
+        <sections>
+            <label><!-- Weekly Reviews --></label>
+            <name>Weekly Reviews</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- ExternalObjectSample --></description>
+        <label><!-- ExternalObjectSample --></label>
+        <name>ExternalObjectSample</name>
+        <sections>
+            <label><!-- Sample --></label>
+            <name>Sample</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Insights for Ideas --></description>
+        <label><!-- Insights for Ideas --></label>
+        <name>Insights_for_Ideas</name>
+        <sections>
+            <label><!-- Ideas --></label>
+            <name>Ideas</name>
+        </sections>
+        <sections>
+            <label><!-- Votes --></label>
+            <name>Votes</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Leads (Custom) --></description>
+        <label><!-- Leads (Custom) --></label>
+        <name>Leads_Custom</name>
+        <sections>
+            <label><!-- Leads --></label>
+            <name>Leads</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Opportunities with Historical Trending --></description>
+        <label><!-- Opportunities with Historical Trending --></label>
+        <name>Opportunities_with_Historical_Trending</name>
+        <sections>
+            <label><!-- Opportunities --></label>
+            <name>Opportunities</name>
+        </sections>
+        <sections>
+            <label><!-- Opportunity (Historical) --></label>
+            <name>Opportunity (Historical)</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Opportunities with Sample --></description>
+        <label><!-- Opportunities with Sample --></label>
+        <name>Opportunities_with_Sample</name>
+        <sections>
+            <label><!-- Opportunities --></label>
+            <name>Opportunities</name>
+        </sections>
+        <sections>
+            <label><!-- Sample --></label>
+            <name>Sample</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Service Contracts with Contract Line Items --></description>
+        <label><!-- Service Contracts with Contract Line Items --></label>
+        <name>Service_Contracts_with_Contract_Line_Items</name>
+        <sections>
+            <label><!-- Contract Line Items --></label>
+            <name>Contract Line Items</name>
+        </sections>
+        <sections>
+            <label><!-- Service Contracts --></label>
+            <name>Service Contracts</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Service Contracts with Entitlements --></description>
+        <label><!-- Service Contracts with Entitlements --></label>
+        <name>Service_Contracts_with_Entitlements</name>
+        <sections>
+            <label><!-- Entitlements --></label>
+            <name>Entitlements</name>
+        </sections>
+        <sections>
+            <label><!-- Service Contracts --></label>
+            <name>Service Contracts</name>
+        </sections>
+    </reportTypes>
+    <reportTypes>
+        <description><!-- Users with Manager --></description>
+        <label><!-- Users with Manager --></label>
+        <name>Users_with_Manager</name>
+        <sections>
+            <label><!-- Users --></label>
+            <name>Users</name>
+        </sections>
+        <sections>
+            <label><!-- Users (Manager) --></label>
+            <name>Users (Manager)</name>
+        </sections>
+    </reportTypes>
+</Translations>

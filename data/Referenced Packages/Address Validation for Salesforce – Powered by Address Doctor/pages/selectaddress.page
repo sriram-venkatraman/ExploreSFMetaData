@@ -1,0 +1,253 @@
+<apex:page controller="INFA_AV.selectaddctlr" showheader="false" id="thepage">
+<style type="text/css">
+input.hint {
+    color: grey;
+}
+</style>
+<apex:form >
+    <div align="center">
+       <!-- <image src="{!URLFOR($Resource.AddressDoctor,'SR/images/cloud.png')}"  align="left" alt="Informatica Cloud" height="80px"  />
+        &nbsp; -->
+        <!-- image style="margin:20px 0 0 0" src="{!URLFOR($Resource.AddressDoctor,'SR/images/cloud_logo1.jpg')}"  align="left" alt="Informatica Cloud" height="65px" width="220px"  / -->
+    </div>
+</apex:form>
+<apex:form id="theform">
+    <apex:includeScript value="{!$Resource.INFA_AV__Jquerymin}" />
+    <div align="center"  >
+        <br/>
+        <apex:pageBlock id="pb1" >
+            <apex:outputPanel rendered="{!if(checklogin==true,true,false)}">
+                <table id="theTable" width="100%" cellpadding="0" cellspacing="0" border="0">                   
+                    <tr>
+                        <td width="30%">
+                            <center>                                
+                                <div align="left"><span style="color:red;">* Country is mandatory</span></div>
+                                <div align="left">                                    
+                                    <apex:selectList size="1" value="{!country}" onchange="typewatch(function(){setHidden();}, {!milisec});" style="width:205px;height:25px">
+                                        <apex:selectOptions value="{!countrylist}"/>                                       
+                                    </apex:selectList>
+                                </div>
+                                <br/>
+                                <div align="left">                        
+                                    <input id="postalcode" type="text" style="width:200px;height:20px" class="hint" value="Postal Code"
+                                    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+                                    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Postal Code'; }" onKeyUp="typewatch(function(){setHidden();}, {!milisec} );"/>
+                                    <apex:inputHidden id="hdnpos" value="{!postalcode}"/>
+                                </div>
+                                <br/>
+                                <div align="left">                        
+                                    <input id="locality" type="text" style="width:200px;height:20px" class="hint" value="Locality"
+                                    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+                                    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Locality'; }" onKeyUp="typewatch(function(){setHidden();}, {!milisec} );"/>
+                                    <apex:inputHidden id="hdnloc" value="{!locality}"/>
+                                </div>
+                                <br/>
+                                <div align="left">                        
+                                    <input id="street" type="text" style="width:200px;height:20px" class="hint" value="Street"
+                                    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+                                    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Street'; }" onKeyUp="typewatch(function(){setHidden();}, {!milisec} );"/>
+                                    <apex:inputHidden id="hdnstr" value="{!street}"/>
+                                </div>
+                                <br/>
+                                <div align="left">                        
+                                    <input id="housenumber" type="text" style="width:200px;height:20px" class="hint" value="House Number"
+                                    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+                                    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'House Number'; }" onKeyUp="typewatch(function(){setHidden();}, {!milisec} );"/>
+                                    <apex:inputHidden id="hdnhou" value="{!housenumber}"/>
+                                </div>
+                            </center>
+                        </td>
+                        <td width="70%">    
+                            <apex:outputPanel id="op1">
+                            <div align="left"><span style="color:red;"><apex:outputText rendered="{!(wrapOutput.empty || wrapOutput[0].outputAddress.size==0)}">* Select one address</apex:outputText> <apex:outputText rendered="{!NOT(wrapOutput.empty || wrapOutput[0].outputAddress.size==0)}">* Select any one address out of the {!wrapOutput[0].outputAddress.size}</apex:outputText></span></div>
+                            <table width="100%" style="border:solid 1px">
+                              
+                                <tr><td width="100%">
+                                    <div style="height: 180px;overflow-y: scroll;" align="left">
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" > 
+                                            <tr>
+                                                <td colspan="2" align="left" style="font-size:16px;color:red;">{!validationMsg} </td>
+                                            </tr>                                             
+                                            <tr>
+                                                <td >                                                                   
+                                                <apex:repeat value="{!wrapOutput}"  var="wrapOut" id="theInnerTable" > 
+                                                    <tr height="10px"/>
+                                                    <apex:variable value="{!1}" var="rowNo"/>
+                                                    <apex:repeat value="{!wrapOut.outputAddress}" var="outputAdd" id="theSubInnerTable" rendered="{!if(wrapOut.outputAddress.size>0,true,false)}">
+                                                     
+                                                     <tr class="{!if(mod(rowNo,2)=0,'dataRow even','dataRow odd')}" onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" >
+                                                          <td style="width:4%"><input type="radio" name="{!wrapOut.row}" value='{!wrapOut.row};{!outputAdd.row};{!outputAdd.addressRec.AddHouseNumber}'/></td>    
+                                                          <!--<td>
+                                                          {!outputAdd.output.DeliveryAddressLines}&nbsp;&nbsp;
+                                                          {!outputAdd.output.PostalCode}&nbsp;&nbsp;{!outputAdd.output.Province}&nbsp;&nbsp;{!outputAdd.output.Locality}&nbsp;&nbsp;{!outputAdd.output.Country}
+                                                          </td>-->
+                                                          <td>
+                                                              <table>
+                                                                  <tr><td>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddDeliveryAddressLines))}">{!outputAdd.addressRec.AddDeliveryAddressLines}&nbsp;&nbsp;</apex:outputText>
+                                                                  </td></tr>
+                                                                  <tr><td>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddLocality))}"> {!outputAdd.addressRec.AddLocality}&nbsp;&nbsp;</apex:outputText>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddProvince))}"> {!outputAdd.addressRec.AddProvince}&nbsp;&nbsp;</apex:outputText>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddCounty))}"> {!outputAdd.addressRec.AddCounty}&nbsp;&nbsp;</apex:outputText>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddPostalCode))}">{!outputAdd.addressRec.AddPostalCode}&nbsp;&nbsp;</apex:outputText>
+                                                                      </td>
+                                                                  </tr>
+                                                                  <tr><td>
+                                                                        <apex:outputText rendered="{!(!ISBLANK(outputAdd.addressRec.AddCountry))}">{!outputAdd.addressRec.AddCountry}</apex:outputText>
+                                                                      </td>
+                                                                  </tr>
+                                                              </table>
+                                                          </td>
+                                                          <apex:variable value="{!rowNo+1}" var="rowNo"/>                         
+                                                     </tr>
+                                                      <tr height="10px"><td colspan="2"><hr/></td></tr>
+                                                   </apex:repeat>                               
+                                               </apex:repeat>                                                
+                                               </td>
+                                          </tr>
+                                       </table>
+                                    </div> 
+                                </td></tr>                                
+                            </table>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr height="20px"/>
+                    <tr>
+                        <td colspan="2" width="100%">
+                            <apex:outputPanel id="op4"> 
+                                <center><div><span id="message" style="display:none;color:red;font-size:16px;">Processing.... Please Wait</span></div></center>
+                                <center><div><span id="circle" style="display:none"><apex:image url="/img/loading24.gif" /></span></div></center>
+                            </apex:outputPanel>
+                        </td>
+                    </tr>
+                    <tr>                    
+                        <td colspan="2" width="100%">
+                        <apex:outputPanel id="op2">                           
+                        <center>
+                             <apex:outputPanel rendered="{!if(wrapOutput.empty || wrapOutput[0].outputAddress.size==0,false,true)}"><input type="button" value="Ok" style="width:100px;height:25px" onclick="SelectedRows();" class="btn"/></apex:outputPanel> 
+                             &nbsp; &nbsp;
+                             <input type="button" value="Cancel" onclick="cancel();" class="btn" style="width:100px;height:25px"/>                        
+                        </center>
+                        </apex:outputPanel>
+                        </td>
+                    </tr>
+                </table>
+            </apex:outputPanel>
+        </apex:pageBlock>
+   </div>
+   <apex:actionFunction name="fetchaddress" action="{!fetchaddress}" reRender="op1,op2,op4"/>
+   <apex:actionFunction name="runSaveCtlr" action="{!save}" reRender="theform" oncomplete="javascript:closeWindow();">
+        <apex:param name="key" value="key" assignTo="{!selectedKey}"/>   
+        <apex:param name="newHouse" value="newHouse" assignTo="{!newHouseNumber}"/> 
+        <apex:param name="subBuilding" value="subBuilding" assignTo="{!subBuilding}"/> 
+   </apex:actionFunction>
+   <apex:actionFunction name="cancel" action="{!cancel}" oncomplete="javascript:closeWindow();"/>
+   <apex:pageMessages escape="false" /> 
+</apex:form>
+
+<script>
+   var typewatch = function(){
+   var timer = 0;
+   return function(callback, ms){
+        clearTimeout (timer);
+        timer = setTimeout(callback, ms);
+   }  
+   }();        
+   var $j=jQuery.noConflict();
+   function SelectedRows(){     
+       var selectedRadio,houseNumber;
+       var totalRadio = $j("input:radio").length;
+       var selectdRadio = $j("input:radio:checked").length;
+       $j("input:radio:checked").each(function(){
+           selectedRadio=$j(this).val();        
+       });;
+       if(selectedRadio!=null){
+           houseNumber=selectedRadio.split(';');
+           if(houseNumber[2].indexOf('-') != -1){
+             var temp = houseNumber[2].split('-');
+             var min = temp[0];
+             var max = temp[1];
+             var newHouse=prompt('Enter Exact House Number ranging in ('+houseNumber[2]+')');             
+             var subBuilding;
+             try{
+                 if(newHouse){             
+                     if(newHouse>=min&&newHouse<=max)
+                     {
+                          subBuiling=prompt('Enter Sub-Building');
+                          if(subBuiling){
+                              runSaveCtlr(selectedRadio,newHouse,subBuiling);
+                          }else{
+                              runSaveCtlr(selectedRadio,newHouse,"");
+                          }
+                          document.getElementById("circle").style.display="block";
+                     }else{
+                         alert("Entered Value does not belongs to range ! click Ok and try again.");
+                     }
+                 }else if(newHouse==''){
+                      alert("Enter the value for House Number.");
+                 }
+             }catch(e){
+                alert('----Enter valid Number--');
+             }
+           }else{           
+              subBuiling=prompt('Enter Sub-Building');
+              if(subBuiling){
+                  runSaveCtlr(selectedRadio,"",subBuiling);
+              }else{
+                  runSaveCtlr("","","");
+              }              
+              document.getElementById("circle").style.display="block";
+              return true;
+           }
+       }else{
+          if(totalRadio>0&&selectdRadio<1){
+              alert("Please Choose address");
+          }
+          return false;
+       }
+    }    
+    function closeWindow(){
+       if("{!check}"=='false'){         
+        window.top.returnValue=1;
+        window.opener.location.href="/{!$CurrentPage.parameters.id}";
+        window.top.close();        
+       }
+        return true;
+    }  
+
+    function setHidden(value){        
+        var hiddenRep2 = document.getElementById('thepage:theform:pb1:hdnpos');
+        var check2 = hiddenRep2.value;
+        hiddenRep2.value = document.getElementById('postalcode').value;        
+                         
+        var hiddenRep3 = document.getElementById('thepage:theform:pb1:hdnloc');
+        var check3 = hiddenRep3.value;
+        hiddenRep3.value = document.getElementById('locality').value;
+                
+        var hiddenRep4 = document.getElementById('thepage:theform:pb1:hdnstr');
+        var check4 = hiddenRep4.value;
+        hiddenRep4.value = document.getElementById('street').value;
+                
+        var hiddenRep5 = document.getElementById('thepage:theform:pb1:hdnhou');
+        var check5 = hiddenRep5.value;
+        hiddenRep5.value = document.getElementById('housenumber').value;
+                
+        /*if(hiddenRep1.value=='Country' || hiddenRep1.value=='')
+        {
+            alert('Please Enter Country');
+            return false;
+        }
+        else*/ if(((hiddenRep2.value!='Postal Code' || hiddenRep2.value=='') && hiddenRep2.value.length >= 3) || ((hiddenRep3.value!='Locality' || hiddenRep3.value=='') && hiddenRep3.value.length >= 3))
+        {     
+            if(check2 == hiddenRep2.value && check3 == hiddenRep3.value && check4 == hiddenRep4.value && check5 == hiddenRep5.value)
+            {}else{                
+                fetchaddress();
+                document.getElementById("message").style.display="block";
+            }
+            return true;
+        }
+    }    
+</script>
+</apex:page>

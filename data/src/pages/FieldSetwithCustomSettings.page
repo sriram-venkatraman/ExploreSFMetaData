@@ -1,0 +1,38 @@
+<apex:page standardcontroller="Account" extensions="FieldSetwithCustomSettings">
+
+   <apex:form >
+
+<apex:pageBlock rendered="false" >        
+    <apex:pageBlock title="Personal Info Static">
+        <apex:repeat value="{!$ObjectType.Account.FieldSets.Personal_Info}" var="f">
+            <apex:outputField value="{!Account[f]}" /><br/>
+        </apex:repeat>
+    </apex:pageBlock>
+</apex:pageBlock>
+
+      <apex:actionFunction name="rerenderFieldSetNames" rerender="out" >
+          <apex:param name="firstParam" assignTo="{!StateFieldSet}" value="" />
+      </apex:actionFunction>
+
+   <table><tbody>
+      <tr>
+        <th>State</th>
+          <td>
+             <apex:selectList id="State" styleclass="std" size="1" 
+                value="{!State}" onChange="rerenderFieldSetNames(this.value)">
+                    <apex:selectOptions value="{!StatesSelectList}"/>
+             </apex:selectList>
+          </td>
+      </tr>
+   </tbody></table>
+
+   <apex:outputPanel id="out">
+    <apex:pageBlock title="Personal Info using {!StateFieldSet}">
+        <apex:repeat value="{!Fields}" var="f">
+            <apex:InputText value="{!Account[f]}" /><br/>
+        </apex:repeat>
+    </apex:pageBlock>
+   </apex:outputPanel>
+   </apex:form>
+  
+</apex:page>

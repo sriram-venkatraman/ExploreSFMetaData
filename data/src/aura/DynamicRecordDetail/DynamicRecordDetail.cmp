@@ -1,0 +1,27 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordName" type="String" default="001j000000AzO1zAAF" />
+    <aura:attribute name="objectName" type="String" default="Account" />
+    <aura:attribute name="fieldList" type="String" default="Name,Phone,AnnualRevenue,Industry" />
+   
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="{!v.objectName}">
+        {!v.body}
+	</lightning:recordViewForm>
+
+<!-- model
+    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="{!v.objectName}">
+        <div class="slds-grid" >
+
+            <aura:iteration items="{!v.fieldList}" var="fld">                    
+                <div class="slds-col slds-size_1-of-2">
+                    <lightning:outputField fieldName="{!fld}" />
+                </div>
+            </aura:iteration>
+
+        </div>
+	</lightning:recordViewForm>
+-->
+    
+</aura:component>
