@@ -39,7 +39,7 @@ var xhr = new XMLHttpRequest();
 var profile = $.urlParam('profile');
 var object = $.urlParam('object');
 var permissionset = $.urlParam('permissionset');
-
+console.log("In dndTree");
 if  (profile != "") {
     xhr.open("GET", "/exploreProfile?profile="+profile, true);
 } else if (object != "") {
