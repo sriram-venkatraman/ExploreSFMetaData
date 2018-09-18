@@ -18,7 +18,7 @@ var limitElements = ["aura:application",
 
 var methods = {
     exploreAura: function (auraName) {
-        var data = fs.readFileSync('/Users/sriram.venkatraman/Documents/workspace/SfServices Bedrock/src/aura/RubricEvaluation/' + auraName + '.cmp');
+        var data = fs.readFileSync('./data/src/aura/RubricEvaluation/' + auraName + '.cmp');
         var json = parser.toJson(data);
 
         var jsonP = JSON.parse(json);
