@@ -41,11 +41,11 @@ var object = $.urlParam('object');
 var permissionset = $.urlParam('permissionset');
 
 if  (profile != "") {
-    xhr.open("GET", "http://localhost:8080/exploreProfile?profile="+profile, true);
+    xhr.open("GET", "https://secure-stream-97980.herokuapp.com/exploreProfile?profile="+profile, true);
 } else if (object != "") {
-    xhr.open("GET", "http://localhost:8080/exploreObject?object="+object, true);    
+    xhr.open("GET", "https://secure-stream-97980.herokuapp.com/exploreObject?object="+object, true);    
 } else if (permissionset != "") {
-    xhr.open("GET", "http://localhost:8080/explorePermissionset?permissionset="+permissionset, true);    
+    xhr.open("GET", "https://secure-stream-97980.herokuapp.com/explorePermissionset?permissionset="+permissionset, true);    
 } 
 
 xhr.onload = function (e) {

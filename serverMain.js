@@ -5,7 +5,7 @@ var eo = require('./ExploreObject'),
   eps = require('./ExplorePermissionSet'),
   au = require('./ExploreAura');
 
-// http://localhost:8080/exploreObject/?object=Case
+// https://secure-stream-97980.herokuapp.com/exploreObject/?object=Case
 
 var server = http.createServer().listen(process.env.PORT || 3000);
 
@@ -67,4 +67,4 @@ server.on('request', function (req, res) {
   }
 });
 
-console.log('Listening on port 8080');
+console.log('Listening on port ' + process.env.PORT || 3000);
