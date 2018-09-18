@@ -7,7 +7,7 @@ var eo = require('./ExploreObject'),
 
 // http://localhost:8080/exploreObject/?object=Case
 
-var server = http.createServer().listen(8080);
+var server = http.createServer().listen(process.env.PORT || 3000);
 
 server.on('request', function (req, res) {
   if (req.method == 'GET') {
