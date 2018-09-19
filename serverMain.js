@@ -1,6 +1,7 @@
 var http = require('http');
 var url = require('url');
-var eo = require('./ExploreObject'),
+var fs = require('fs'),
+  eo = require('./ExploreObject'),
   ep = require('./ExploreProfile'),
   eps = require('./ExplorePermissionSet'),
   au = require('./ExploreAura');
@@ -69,7 +70,6 @@ server.on('request', function (req, res) {
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        console.log("howdy");
         fs.readFile("./ExploreMetaData.html", function (error, pgResp) {
             if (error) {
                 res.writeHead(404);
