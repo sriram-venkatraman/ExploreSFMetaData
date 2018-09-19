@@ -29,6 +29,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 // Get JSON data
 // treeJSON = d3.json("out.json", function (error, treeData) {
 
+console.log("In dndTree");
 $.urlParam = function (name) {
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     return (results != null ? results[1] : "");
@@ -39,7 +40,6 @@ var xhr = new XMLHttpRequest();
 var profile = $.urlParam('profile');
 var object = $.urlParam('object');
 var permissionset = $.urlParam('permissionset');
-console.log("In dndTree");
 if  (profile != "") {
     xhr.open("GET", "/exploreProfile?profile="+profile, true);
 } else if (object != "") {

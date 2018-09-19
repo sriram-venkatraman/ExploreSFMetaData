@@ -33,7 +33,9 @@ server.on('request', function (req, res) {
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.writeHead(200, { 'Content-Type': 'application/json' });
+        console.log("sriram 1-start");
         var out = JSON.stringify(eo.exploreObject(query.object));
+        console.log("sriram 1-end")
         res.end(out.substring(1, out.length - 1));
         break;
       case '/exploreProfile':
