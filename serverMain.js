@@ -63,7 +63,7 @@ server.on('request', function (req, res) {
         var out = JSON.stringify(au.exploreAura(query.aura));
         res.end(out.substring(1, out.length - 1));
         break;
-      case '/explore':
+/*      case '/explore':
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Request-Method', '*');
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
@@ -80,7 +80,7 @@ server.on('request', function (req, res) {
             }
           });  
         resp.end();
-        break;
+        break; */
     }
   }
 });
