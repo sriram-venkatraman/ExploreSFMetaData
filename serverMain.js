@@ -70,7 +70,8 @@ server.on('request', function (req, res) {
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        fs.readFile("./ExploreMetaData.html", function (error, pgResp) {
+        fs.readFile("ExploreMetaData.html", function (error, pgResp) {
+          console.log("sriram: " + error + pgResp);
             if (error) {
                 res.writeHead(404);
                 res.write('Contents you are looking are Not Found');
