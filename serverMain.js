@@ -63,14 +63,14 @@ server.on('request', function (req, res) {
         var out = JSON.stringify(au.exploreAura(query.aura));
         res.end(out.substring(1, out.length - 1));
         break;
-/*      case '/explore':
+      case '/exploreMD':
         res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Access-Control-Request-Method', '*');
         res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
         res.setHeader('Access-Control-Allow-Headers', '*');
         res.writeHead(200, { 'Content-Type': 'application/json' });
         console.log("howdy");
-        fs.readFile("ExploreMetaData.html", function (error, pgResp) {
+        fs.readFile("./ExploreMetaData.html", function (error, pgResp) {
             if (error) {
                 resp.writeHead(404);
                 resp.write('Contents you are looking are Not Found');
@@ -80,7 +80,7 @@ server.on('request', function (req, res) {
             }
           });  
         resp.end();
-        break; */
+        break;
     }
   }
 });
