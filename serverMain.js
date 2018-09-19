@@ -77,7 +77,7 @@ server.on('request', function (req, res) {
                 resp.writeHead(200, { 'Content-Type': 'text/html' });
                 resp.write(pgResp);
             }
-          
+          });  
         resp.end();
         break;
     }
