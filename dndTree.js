@@ -41,11 +41,11 @@ var profile = $.urlParam('profile');
 var object = $.urlParam('object');
 var permissionset = $.urlParam('permissionset');
 if  (profile != "") {
-    xhr.open("GET", "/exploreProfile?profile="+profile, true);
+    xhr.open("GET", "exploreProfile?profile="+profile, true);
 } else if (object != "") {
-    xhr.open("GET", "/exploreObject?object="+object, true);    
+    xhr.open("GET", "exploreObject?object="+object, true);    
 } else if (permissionset != "") {
-    xhr.open("GET", "/explorePermissionset?permissionset="+permissionset, true);    
+    xhr.open("GET", "explorePermissionset?permissionset="+permissionset, true);    
 } 
 
 xhr.onload = function (e) {
