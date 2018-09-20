@@ -65,20 +65,7 @@ server.on('request', function (req, res) {
         res.end(out.substring(1, out.length - 1));
         break;
       case '/explore':
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.setHeader('Access-Control-Request-Method', '*');
-        res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET');
-        res.setHeader('Access-Control-Allow-Headers', '*');
-        fs.readFile("ExploreMetaData.html", function (error, pgResp) {
-            if (error) {
-                res.writeHead(404);
-                res.write('Contents you are looking are Not Found');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.write(pgResp);
-            }
-          });  
-        res.end();
+        res.redirect('ExploreMetaData.html');
         break;
       default:
         res.setHeader('Access-Control-Allow-Origin', '*');
